@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  props: [ 'title' ]
+  props: ['title']
 }
 </script>
 
@@ -16,5 +16,9 @@ export default {
   background: #228733;
   color: white;
   text-align: center;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left: 0;
 }
 </style>
