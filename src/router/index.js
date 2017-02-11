@@ -10,23 +10,25 @@ import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
 
+import HomeContent from '../components/home-content/home-content.vue';
+
 Vue.use(Router);
 
-// const scrollBehavior = (to, from, savedPosition) => {
-//   let data = JSON.parse(window.localStorage.getItem(to.name));
-//   if (savedPosition) {
-//     return savedPosition;
-//   } else {
-//     let y = 0;
-//     if (data) {
-//       y = data.y;
-//     }
-//     return {
-//       x: 0,
-//       y: y
-//     };
-//   }
-// };
+const scrollBehavior = (to, from, savedPosition) => {
+  let data = JSON.parse(window.localStorage.getItem(to.name));
+  if (savedPosition) {
+    return savedPosition;
+  } else {
+    let y = 0;
+    if (data) {
+      y = data.y;
+    }
+    return {
+      x: 0,
+      y: y
+    };
+  }
+};
 
 export default new Router({
   mode: 'history',
@@ -42,7 +44,7 @@ export default new Router({
       children: [
         {
           path: '',
-          component: Home
+          redirect: 'home'
         },
         {
           path: 'home',
@@ -85,6 +87,12 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: '/content',
+      name: 'content',
+      component: HomeContent
     }
-  ]
+  ],
+  scrollBehavior
 });

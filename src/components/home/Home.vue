@@ -2,18 +2,28 @@
   <div>
     <head-bar title="首页"></head-bar>
     <!-- <div class="fix-block">{{st}}</div> -->
+    <button type="button" name="button" @click="toContent" class="btn">跳转</button>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
 </template>
 
 <script type="text/javascript">
+import router from '../../router';
+
 import header from '../common/header/header.vue';
 
 export default {
   data() {
     return {
-      st: 0
+
+    }
+  },
+  methods: {
+    toContent() {
+      router.push({
+        name: 'content'
+      });
     }
   },
   components: {
@@ -58,5 +68,10 @@ div > p:nth-child(2){
   padding: .1rem;
   background: red;
   color: white;
+}
+.btn {
+  height: .5rem;
+  width: .5rem;
+  border: 1px solid red;
 }
 </style>
