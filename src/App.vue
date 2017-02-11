@@ -1,39 +1,62 @@
 <template lang="html">
   <div class="wrap">
     <div class="content content-bottom-tab content-border-box">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
     <div class="fixed fixed-bottom nav flex-box">
-      <router-link to="/home" class="item text-center nav-item flex-box">
-        <i class="icon iconfont icon-home"></i>
-        <a class="title">首页</a>
-      </router-link>
-      <router-link to="/member" class="item text-center nav-item flex-box">
-        <i class="icon iconfont icon-member"></i>
-        <a class="title">会员</a>
-      </router-link>
-      <router-link to="/classify" class="item text-center nav-item flex-box">
-        <i class="icon iconfont icon-classify"></i>
-        <a class="title">分类</a>
-      </router-link>
-      <router-link to="/shoppingcar" class="item text-center nav-item flex-box">
-        <i class="icon iconfont icon-shoppingcar"></i>
-        <a class="title">购物车</a>
-      </router-link>
-      <router-link to="/my" class="item text-center nav-item flex-box">
-        <i class="icon iconfont icon-my"></i>
-        <a class="title">我的</a>
-      </router-link>
+      <div v-for="(navItem, index) in navItemList" :to="{name: navItem.to}" class="item text-center nav-item flex-box"  :class="[currentIndex === index ? link_active : link_not_active]" @click="getPosition(navItem,index)">
+        <i class="icon iconfont" :class="navItem.icon"></i>
+        <a class="title">{{navItem.title}}</a>
+      </div>
     </div>
   </div>
 
 </template>
 
 <script type="text/javascript">
+import router from 'router';
 export default {
   data() {
     return {
-
+      navItemList: [
+        {
+          title: '首页',
+          icon: 'icon-home',
+          to: 'home'
+        },
+        {
+          title: '会员',
+          icon: 'icon-member',
+          to: 'member'
+        },
+        {
+          title: '分类',
+          icon: 'icon-classify',
+          to: 'classify'
+        },
+        {
+          title: '购物车',
+          icon: 'icon-shoppingcar',
+          to: 'shoppingcar'
+        },
+        {
+          title: '我的',
+          icon: 'icon-my',
+          to: 'my'
+        }
+      ],
+      currentIndex: 0,
+      link_active: 'router-link-active',
+      link_not_active: 'no-active',
+      indexArr: [
+        'home',
+        'member',
+        'classify',
+        'shoppingcar',
+        'my'
+      ]
     };
   },
   methods: {
@@ -45,6 +68,20 @@ export default {
       //   }, function (err) {
       //     console.log('err:', err);
       //   });
+    },
+    getPosition(navItem, index) {
+      console.log('index:', index);
+      router.push({
+        'name': navItem.to
+      });
+      this.storePosition({
+        y: document.body.scrollTop || document.documentElement.scrollTop,
+        i: this.indexArr[this.currentIndex]
+      });
+      this.currentIndex = index;
+    },
+    storePosition(data) {
+      window.localStorage.setItem(data.i, JSON.stringify(data));
     }
   },
   created() {
