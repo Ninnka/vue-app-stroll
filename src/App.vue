@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="wrap">
-    <div class="content content-bottom-tab content-border-box">
+    <div class="content content-hasheader content-bottom-tab content-border-box">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
@@ -104,7 +104,7 @@ html,
 body,
 .wrap,
 .content {
-  height: 100%;
+  min-height: 100%;
 }
 
 .flex-box {
@@ -117,6 +117,10 @@ body,
 
 .content-bottom-tab {
   padding-bottom: .49rem;
+}
+
+.content-hasheader {
+  padding-top: .44rem;
 }
 
 .fixed {
