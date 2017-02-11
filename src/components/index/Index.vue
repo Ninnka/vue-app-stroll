@@ -6,7 +6,7 @@
       </keep-alive>
     </div>
     <div class="fixed fixed-bottom nav flex-box">
-      <div v-for="(navItem, index) in navItemList" :to="{path: navItem.to}" class="item text-center nav-item flex-box"  :class="[currentIndex === index ? link_active : link_not_active]" @click="getPosition(navItem,index)">
+      <div v-for="(navItem, index) in navItemList" :to="{path: navItem.to}" :key="navItem" class="item text-center nav-item flex-box"  :class="[currentIndex === index ? link_active : link_not_active]" @click="getPosition(navItem,index)">
         <i class="icon iconfont" :class="navItem.icon"></i>
         <a class="title">{{navItem.title}}</a>
       </div>
