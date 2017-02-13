@@ -1,8 +1,10 @@
 <template lang="html">
   <div class="wrap">
+    <transition name="fade">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
+    </transition>
     </div>
   </div>
 
@@ -30,5 +32,15 @@ html,
 body,
 .wrap {
   min-height: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .3s
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
 }
 </style>
