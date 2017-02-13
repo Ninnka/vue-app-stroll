@@ -25,10 +25,6 @@ $maintheme: #228733;
   box-sizing: border-box;
 }
 
-.normal-fontsize {
-  font-size: .16rem;
-}
-
 .home-seperator {
   margin: .1rem 0;
   position: relative;
@@ -67,7 +63,7 @@ $maintheme: #228733;
   > .item {
     box-shadow: 0 0 2px 0 #DADADA;
     color: white;
-    flex-basis: 1.1rem;
+    flex-basis: 1.2rem;
     flex-shrink: 1;
     font-size: .16rem;
     height: .81rem;

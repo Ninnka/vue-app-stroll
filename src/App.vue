@@ -52,6 +52,18 @@ body,
   padding-top: .44rem;
 }
 
+.main-theme-background {
+  background: #F1F1F1;
+}
+
+.normal-fontsize {
+  font-size: .16rem;
+}
+
+.float-right {
+  float: right;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity .3s
