@@ -1,8 +1,7 @@
 <template lang="html">
-  <div>
+  <div class="fullpage">
     <headbar title="分类"></headbar>
   </div>
-
 </template>
 
 <script type="text/javascript">

@@ -2,12 +2,11 @@
   <div class="wrap">
     <transition name="fade">
       <keep-alive>
-        <router-view class="fullpage"></router-view>
+        <router-view></router-view>
       </keep-alive>
     </transition>
     </div>
   </div>
-
 </template>
 
 <script type="text/javascript">
@@ -35,6 +34,22 @@ html,
 body,
 .wrap {
   min-height: 100%;
+}
+
+.fullpage {
+  min-height: 100%;
+}
+
+.content-border-box {
+  box-sizing: border-box;
+}
+
+.content-bottom-tab {
+  padding-bottom: .49rem;
+}
+
+.content-hasheader {
+  padding-top: .44rem;
 }
 
 .fade-enter-active,
