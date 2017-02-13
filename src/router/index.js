@@ -9,6 +9,11 @@ import Member from '../components/member/Member.vue';
 import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
+import MyBaseMsg from '../components/my-base-msg/My-base-msg.vue';
+import MyCollection from '../components/my-collection/My-collection.vue';
+import MyUpgrade from '../components/my-upgrade/My-upgrade.vue';
+import MyRecharge from '../components/my-recharge/My-recharge.vue';
+import MyPaySuccess from '../components/my-pay-success/My-pay-success.vue';
 
 Vue.use(Router);
 
@@ -81,6 +86,31 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: '/basemsg',
+      name: 'baseMsg',
+      component: MyBaseMsg
+    },
+    {
+      path: '/collection',
+      name: 'collection',
+      component: MyCollection
+    },
+    {
+      path: '/upgrade',
+      name: 'myUpgrade',
+      component: MyUpgrade
+    },
+    {
+      path: '/recharge',
+      name: 'myRecharge',
+      component: MyRecharge
+    },
+    {
+      path: '/paySuccess',
+      name: 'myPaySuccess',
+      component: MyPaySuccess
     }
   ],
   scrollBehavior
