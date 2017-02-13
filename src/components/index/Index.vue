@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="wrap">
-    <div class="content content-hasheader content-bottom-tab content-border-box">
+    <div class="content content-hasheader content-bottom-tab content-border-box fullpage">
       <keep-alive>
-        <router-view class="fullpage"></router-view>
+        <router-view></router-view>
       </keep-alive>
     </div>
     <div class="fixed fixed-bottom nav flex-box">
@@ -12,7 +12,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script type="text/javascript">
@@ -92,14 +91,11 @@ export default {
 </script>
 
 <style type="text/css">
-html {
-  font-size: 100px;
-}
-
 .icon.iconfont {
   font-size: .21rem;
 }
 
+/*<<<<<<< HEAD
 .fullpage {
   min-height: 100%;
 }
@@ -112,6 +108,8 @@ body,
   height: 100%;
 }
 
+=======
+>>>>>>> origin/lzx*/
 .flex-box {
   display: flex;
 }

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class="fullpage">
     <headbar title="购物车"></headbar>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class="fullpage">
     <headbar title="我的"></headbar>
     <div>{{msg}}</div>
   </div>

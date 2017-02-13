@@ -1,5 +1,6 @@
 <template lang="html">
-  <div>
+<!-- <<<<<<< HEAD -->
+  <div class="fullpage">
     <headbar title="会员"></headbar>
     <div class="member-content">
       <!-- 轮播图 -->
@@ -26,6 +27,10 @@
         </ul>
       </div>
     </div>
+<!-- =======
+  <div class="fullpage">
+    <headbar title="分类"></headbar>
+>>>>>>> origin/lzx -->
   </div>
 </template>
 
