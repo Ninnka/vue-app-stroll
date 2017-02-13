@@ -73,7 +73,8 @@
 </template>
 
 <script type="text/javascript">
-import header from '../common/header/header.vue';
+<<<<<<< HEAD
+import header from '../common/header/Header.vue';
 import Swiper from './../../../static/js/swiper-3.4.1.min.js';
 require('./../../../static/css/swiper-3.4.1.min.css');
 

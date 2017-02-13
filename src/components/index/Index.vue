@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="content content-hasheader content-bottom-tab content-border-box">
       <keep-alive>
-        <router-view></router-view>
+        <router-view class="fullpage"></router-view>
       </keep-alive>
     </div>
     <div class="fixed fixed-bottom nav flex-box">
@@ -100,6 +100,10 @@ html {
   font-size: .21rem;
 }
 
+.fullpage {
+  min-height: 100%;
+}
+
 html,
 body,
 .wrap,
@@ -170,15 +174,6 @@ body,
 a {
   text-decoration: none;
 }
-
-
-/*.nav-item>a {
-  color: rgba(34, 135, 51, .5);
-}
-
-.nav-item>.router-link-active {
-  color: rgba(34, 135, 51, 1);
-}*/
 
 .nav>item {
   flex-grow: 1;

@@ -5,7 +5,7 @@
 </template>
 
 <script type="text/javascript">
-import header from '../common/header/header.vue';
+import header from '../common/header/Header.vue';
 
 export default {
   data() {
