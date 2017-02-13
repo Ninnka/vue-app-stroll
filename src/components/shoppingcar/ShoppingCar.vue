@@ -8,7 +8,7 @@
 import header from '../common/header/header.vue';
 
 export default {
-  datas() {
+  data() {
     return {
 
     }

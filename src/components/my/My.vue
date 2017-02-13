@@ -1,6 +1,7 @@
 <template lang="html">
   <div>
     <headbar title="我的"></headbar>
+    <div>{{msg}}</div>
   </div>
 </template>
 
@@ -8,9 +9,9 @@
 import header from '../common/header/header.vue';
 
 export default {
-  datas() {
+  data() {
     return {
-
+      msg: 2
     }
   },
   components: {

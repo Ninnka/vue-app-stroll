@@ -105,6 +105,7 @@ body,
 .wrap,
 .content {
   min-height: 100%;
+  height: 100%;
 }
 
 .flex-box {

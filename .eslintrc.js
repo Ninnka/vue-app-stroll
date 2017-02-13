@@ -28,4 +28,7 @@ module.exports = {
     'no-unused-vars': 1,
     'space-before-function-paren': 0
   }
+  // globals:{
+  //   "Swiper": true
+  // }
 }
