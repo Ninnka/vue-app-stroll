@@ -10,8 +10,6 @@ import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
 
-import HomeContent from '../components/home-content/home-content.vue';
-
 Vue.use(Router);
 
 const scrollBehavior = (to, from, savedPosition) => {
@@ -35,17 +33,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/index'
+      redirect: '/index/home'
     },
     {
       path: '/index',
       name: 'index',
       component: Index,
       children: [
-        {
-          path: '',
-          redirect: 'home'
-        },
         {
           path: 'home',
           name: 'home',
@@ -87,11 +81,6 @@ export default new Router({
           }
         }
       ]
-    },
-    {
-      path: '/content',
-      name: 'content',
-      component: HomeContent
     }
   ],
   scrollBehavior
