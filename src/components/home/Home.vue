@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="fullpage">
-    <head-bar title="首页"></head-bar>
+    <head-bar title="首页" :custombg="custombg"></head-bar>
     <!-- <button type="button" name="button" @click="toContent" class="btn">跳转</button> -->
     <div class="home-content">
       <!-- 主页的轮播图 -->
@@ -44,6 +44,7 @@ import Swiper from '../../../static/js/swiper-3.4.1.min.js';
 export default {
   data() {
     return {
+      custombg: 'home-headbar-bg',
       slideImgList: [
         {
           src: require('./images/slide-img1.jpg'),
