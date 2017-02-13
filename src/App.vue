@@ -2,7 +2,7 @@
   <div class="wrap">
     <transition name="fade">
       <keep-alive>
-        <router-view></router-view>
+        <router-view class="fullpage"></router-view>
       </keep-alive>
     </transition>
     </div>
@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style type="text/css">
+@import "assets/css/reset.css";
+@import "assets/css/iconfont.css";
+@import "assets/css/swiper-3.4.1.min.css";
 html {
   font-size: 100px;
 }
