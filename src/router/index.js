@@ -10,6 +10,8 @@ import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
 
+import GoodDetail from '../components/home-good-detail/GoodDetail.vue';
+
 Vue.use(Router);
 
 const scrollBehavior = (to, from, savedPosition) => {
@@ -81,6 +83,11 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: 'good-detail',
+      name: 'good-detail',
+      component: GoodDetail
     }
   ],
   scrollBehavior
