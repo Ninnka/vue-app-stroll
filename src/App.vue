@@ -35,6 +35,7 @@ html,
 body,
 .wrap {
   min-height: 100%;
+  height: 100%;
 }
 
 .fade-enter-active,
