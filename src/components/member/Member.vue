@@ -4,7 +4,7 @@
     <!-- <div> -->
       <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="sItem in swiperItems"><a :href="sItem.url"><img :src="sItem.imgUrl" alt=""></a></div>
+        <div class="swiper-slide" v-for="sItem in swiperItems"><a :href="sItem.url"><img :src="sItem.imgsrc" alt=""></a></div>
         <!-- <div class="swiper-slide"><a :href="swiperData.swiper1.url"><img :src="swiperData.swiper1.path" alt=""></a></div>
         <div class="swiper-slide"><a :href="swiperData.swiper2.url"><img :src="swiperData.swiper2.path" alt=""></a></div>
         <div class="swiper-slide"><a :href="swiperData.swiper3.url"><img :src="swiperData.swiper3.path" alt=""></a></div> -->
@@ -73,7 +73,6 @@
 </template>
 
 <script type="text/javascript">
-<<<<<<< HEAD
 import header from '../common/header/Header.vue';
 import Swiper from './../../../static/js/swiper-3.4.1.min.js';
 require('./../../../static/css/swiper-3.4.1.min.css');
@@ -83,36 +82,36 @@ export default {
     return {
       swiperItems: [{
         url: '##',
-        imgUrl: require('./assets/swiper-test.jpeg')
+        imgsrc: require('./assets/swiper-test.jpeg')
       },
       {
         url: '##',
-        imgUrl: require('./assets/swiper-test1.jpeg')
+        imgsrc: require('./assets/swiper-test1.jpeg')
       },
       {
         url: '##',
-        imgUrl: require('./assets/swiper-test2.jpeg')
+        imgsrc: require('./assets/swiper-test2.jpeg')
       }],
       goodsData: [{
         title: '休闲零食五味园pk脆 独立小包装500g',
         vipPrice: '10.9',
         originPrice: '12.8',
         url: '##',
-        imgUrl: require('./assets/goods1.jpg')
+        imgsrc: require('./assets/goods1.jpg')
       },
       {
         title: '坚果特产山核桃奶油味 碧根果210gx2袋',
         vipPrice: '29.5',
         originPrice: '42.5',
         url: '##',
-        imgUrl: require('./assets/goods2.jpg')
+        imgsrc: require('./assets/goods2.jpg')
       },
       {
         title: '休闲零食五味园pk脆 独立小包装500g',
         vipPrice: '10.9',
         originPrice: '12.8',
         url: '##',
-        imgUrl: require('./assets/goods1.jpg')
+        imgsrc: require('./assets/goods1.jpg')
       }]
     }
   },
