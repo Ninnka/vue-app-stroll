@@ -1,5 +1,4 @@
 <template lang="html">
-<!-- <<<<<<< HEAD -->
   <div class="fullpage">
     <headbar title="会员"></headbar>
     <div class="member-content">
@@ -15,7 +14,7 @@
       <div class="goodsContent">
         <ul class="goodsItems">
           <li class="goodsItem" v-for="gItem in goodsData">
-            <a :href="gItem.url">
+            <a @click="toGoodetail(gItem.goodsID)">
               <img :src="gItem.imgsrc" alt="">
               <h2>{{gItem.title}}</h2>
               <p>
@@ -27,17 +26,15 @@
         </ul>
       </div>
     </div>
-<!-- =======
-  <div class="fullpage">
-    <headbar title="分类"></headbar>
->>>>>>> origin/lzx -->
   </div>
 </template>
 
 <script type="text/javascript">
+import router from '../../router';
+
 import header from '../common/header/Header.vue';
+
 import Swiper from '../../../static/js/swiper-3.4.1.min.js';
-// require('../../../static/css/swiper-3.4.1.min.css');
 
 export default {
   data() {
@@ -83,6 +80,16 @@ export default {
       }]
     }
   },
+  methods: {
+    toGoodetail(id) {
+      router.push({
+        name: 'member-good-detail',
+        params: {
+          goodsId: id
+        }
+      });
+    }
+  },
   components: {
     headbar: header
   },
@@ -102,7 +109,6 @@ export default {
 
 <style lang="css" type="text/css" scoped>
 .member-content{
-  padding-bottom: 0.44rem;
   font-size: .16rem;
 }
 .swiper-wrapper{

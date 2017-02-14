@@ -11,6 +11,7 @@ import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
 
 import GoodDetail from '../components/home-good-detail/GoodDetail.vue';
+import MemberGoodsDetail from '../components/member/components/MemberGoodsDetail.vue';
 
 Vue.use(Router);
 
@@ -88,6 +89,11 @@ export default new Router({
       path: 'good-detail',
       name: 'good-detail',
       component: GoodDetail
+    },
+    {
+      path: 'member-good-detail/:goodsId',
+      name: 'member-good-detail',
+      component: MemberGoodsDetail
     }
   ],
   scrollBehavior
