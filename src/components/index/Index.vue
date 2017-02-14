@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="wrap">
-    <div class="content content-hasheader content-bottom-tab border-box fullpage">
+    <div class="content content-hasheader content-bottom-tab border-box fullpage normal-position">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
@@ -8,7 +8,7 @@
     <div class="fixed fixed-bottom nav flex-box">
       <div v-for="(navItem, index) in navItemList" :to="{path: navItem.to}" :key="navItem" class="item text-center nav-item flex-box"  :class="[currentIndex === index ? link_active : link_not_active]" @click="getPosition(navItem,index)">
         <i class="icon iconfont" :class="navItem.icon"></i>
-        <a class="title">{{navItem.title}}</a>
+        <a class="item-title">{{navItem.title}}</a>
       </div>
     </div>
   </div>
@@ -141,8 +141,15 @@ export default {
   align-items: center;
 }
 
+.nav-item>a {
+  color: rgba(100, 100, 100, .5);
+}
+
 .nav-item {
   color: rgba(100, 100, 100, .5);
+}
+
+.nav-item .item-title {
   font-size: .12rem;
 }
 
@@ -151,7 +158,11 @@ export default {
 }
 
 .nav-item.router-link-active {
-  color: rgba(34, 135, 51, 1);
+  color: rgba(34, 135, 51, 1) !important;
+}
+
+.nav-item.router-link-active>a {
+  color: rgba(34, 135, 51, 1) !important;
 }
 
 a {
@@ -161,9 +172,5 @@ a {
 .nav>item {
   flex-grow: 1;
   flex-shrink: 1;
-}
-
-.text-center {
-  text-align: center;
 }
 </style>
