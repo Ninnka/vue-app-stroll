@@ -104,7 +104,7 @@ export default {
   },
   mounted() {
     console.log('mounted');
-    var mySwiper = new Swiper('.swiper-container', {
+    new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
       autoplay: 2000,
