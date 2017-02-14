@@ -26,7 +26,7 @@
       </div>
       <ul class="home-recommend border-box">
         <li class="item" v-for="recommendItem in recommendList" @click="toGoodetail(recommendItem.id)">
-          <p class="title single-line">{{recommendItem.title}}</p>
+          <p class="item-title single-line">{{recommendItem.title}}</p>
           <img class="img-show" :src="recommendItem.imgsrc" alt="">
         </li>
       </ul>
@@ -107,6 +107,7 @@ export default {
     var mySwiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
+      autoplay: 2000,
 
       // 如果需要分页器
       pagination: '.swiper-pagination'
