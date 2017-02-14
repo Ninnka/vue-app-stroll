@@ -139,12 +139,12 @@
   .good-shoppingcar {
     display: inline-block;
     height: 100%;
-    padding: 0 .2rem;
+    padding: .08rem .2rem 0;
     position: relative;
     text-align: center;
 
     .icon.iconfont.icon-shoppingcar {
-      font-size: .28rem;
+      font-size: .35rem;
     }
 
     > p {
@@ -179,7 +179,7 @@
   line-height: .18rem;
   position: absolute;
   right: 15%;
-  top: 0;
+  top: 10%;
   width: .18rem;
 }
 

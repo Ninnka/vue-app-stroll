@@ -25,7 +25,6 @@
     <div class="good-footbar fixed flex-box">
       <div class="good-shoppingcar border-box">
         <i class="icon iconfont icon-shoppingcar"></i>
-        <p>购物车</p>
         <div class="shopping-point redpoint">10</div>
       </div>
       <div class="good-purchase-add flex-box">
