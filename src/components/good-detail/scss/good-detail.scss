@@ -6,6 +6,10 @@
   position: fixed;
 }
 
+.hasfootbar {
+  padding-bottom: .49rem;
+}
+
 .backward {
   color: white;
   height: .44rem;
@@ -121,4 +125,65 @@
     font-size: .13rem;
     margin-top: .03rem;
   }
+}
+
+.good-footbar {
+  background: #EAEAEA;
+  box-shadow: 0 -1px 1px 0 #DADADA;
+  bottom: 0;
+  justify-content: space-between;
+  height: .49rem;
+  left: 0;
+  width: 100%;
+
+  .good-shoppingcar {
+    display: inline-block;
+    height: 100%;
+    padding: 0 .2rem;
+    position: relative;
+    text-align: center;
+
+    .icon.iconfont.icon-shoppingcar {
+      font-size: .28rem;
+    }
+
+    > p {
+      font-size: .12rem;
+      line-height: 1.2;
+    }
+  }
+
+  .good-purchase-add {
+    align-items: center;
+    padding-right: .1rem;
+
+    .icon.iconfont {
+      font-size: .3rem;
+      margin: 0 .08rem;
+    }
+
+    .icon-addtosc {
+      color: #fb8041;
+    }
+
+    .icon-purchase-imedi {
+      color: #ff0000;
+    }
+  }
+}
+
+.shopping-point {
+  border-radius: .09rem;
+  font-size: .12rem;
+  height: .18rem;
+  line-height: .18rem;
+  position: absolute;
+  right: 15%;
+  top: 0;
+  width: .18rem;
+}
+
+.redpoint {
+  background: red;
+  color: white;
 }

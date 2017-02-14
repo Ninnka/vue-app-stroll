@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage main-theme-background good-main-content normal-fontsize">
+  <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar">
     <head-bar :custombg="headbarbg"></head-bar>
     <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
     <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click="share"></i>
@@ -19,6 +19,18 @@
       <div class="limit border-box">
           <p>限时：2天23分02秒</p>
           <p>限量：{{goodDetail.discountquantity}}件</p>
+      </div>
+    </div>
+
+    <div class="good-footbar fixed flex-box">
+      <div class="good-shoppingcar border-box">
+        <i class="icon iconfont icon-shoppingcar"></i>
+        <p>购物车</p>
+        <div class="shopping-point redpoint">10</div>
+      </div>
+      <div class="good-purchase-add flex-box">
+        <i class="icon iconfont icon-addtosc"></i>
+        <i class="icon iconfont icon-purchase-imedi"></i>
       </div>
     </div>
 
