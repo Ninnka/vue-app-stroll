@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import Hello from 'components/Hello'
-// 直接使用 components路径
 
 import Index from '../components/index/Index.vue';
 import Home from '../components/home/Home.vue';
@@ -9,8 +7,6 @@ import Member from '../components/member/Member.vue';
 import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
-
-import GoodDetail from '../components/home-good-detail/GoodDetail.vue';
 
 Vue.use(Router);
 
@@ -30,7 +26,7 @@ const scrollBehavior = (to, from, savedPosition) => {
   }
 };
 
-export default new Router({
+let routerEntity = {
   mode: 'history',
   routes: [
     {
@@ -83,12 +79,21 @@ export default new Router({
           }
         }
       ]
-    },
-    {
-      path: 'good-detail',
-      name: 'good-detail',
-      component: GoodDetail
     }
   ],
   scrollBehavior
-});
+};
+
+import routerHome from 'components/home/router';
+import routerMember from 'components/member/router';
+import routerClassify from 'components/classify/router';
+import routerShoppingCar from 'components/shoppingcar/router';
+import routerMy from 'components/my/router';
+
+routerEntity.routes = routerEntity.routes.concat(routerHome.routes);
+routerEntity.routes = routerEntity.routes.concat(routerMember.routes);
+routerEntity.routes = routerEntity.routes.concat(routerClassify.routes);
+routerEntity.routes = routerEntity.routes.concat(routerShoppingCar.routes);
+routerEntity.routes = routerEntity.routes.concat(routerMy.routes);
+
+export default new Router(routerEntity);
