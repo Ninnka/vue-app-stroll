@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="wrap">
-    <div class="content content-hasheader content-bottom-tab content-border-box fullpage">
+    <div class="content content-hasheader content-bottom-tab border-box fullpage">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
@@ -98,7 +98,7 @@ export default {
   display: flex;
 }
 
-.content-border-box {
+.border-box {
   box-sizing: border-box;
 }
 
@@ -121,7 +121,7 @@ export default {
 
 .nav {
   width: 100%;
-  background: #EAEAEA;
+  background: #FFFFFF;
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: center;

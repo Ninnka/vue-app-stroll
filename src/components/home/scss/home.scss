@@ -1,5 +1,9 @@
 $maintheme: #228733;
 
+.home-headbar-bg {
+  background: $maintheme;
+}
+
 .home-content {
   background: #F1F1F1;
   font-size: .16rem;
@@ -23,10 +27,6 @@ $maintheme: #228733;
 
 .border-box {
   box-sizing: border-box;
-}
-
-.normal-fontsize {
-  font-size: .16rem;
 }
 
 .home-seperator {
@@ -67,7 +67,7 @@ $maintheme: #228733;
   > .item {
     box-shadow: 0 0 2px 0 #DADADA;
     color: white;
-    flex-basis: 1.1rem;
+    flex-basis: 30%;
     flex-shrink: 1;
     font-size: .16rem;
     height: .81rem;
