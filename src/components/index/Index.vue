@@ -94,22 +94,6 @@ export default {
 .icon.iconfont {
   font-size: .21rem;
 }
-
-/*<<<<<<< HEAD
-.fullpage {
-  min-height: 100%;
-}
-
-html,
-body,
-.wrap,
-.content {
-  min-height: 100%;
-  height: 100%;
-}
-
-=======
->>>>>>> origin/lzx*/
 .flex-box {
   display: flex;
 }
