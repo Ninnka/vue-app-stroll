@@ -52,10 +52,10 @@ export default {
       router.go(-1);
     },
     star() {
-      // todo
+
     },
     share() {
-      // todo
+
     }
   },
   components: {
