@@ -14,6 +14,11 @@ import MyCollection from '../components/my-collection/My-collection.vue';
 import MyUpgrade from '../components/my-upgrade/My-upgrade.vue';
 import MyRecharge from '../components/my-recharge/My-recharge.vue';
 import MyPaySuccess from '../components/my-pay-success/My-pay-success.vue';
+import MyWallet from '../components/my-wallet/My-wallet.vue';
+import MyCharge from '../components/my-charge/My-charge.vue';
+import MyAccount from '../components/my-account/My-account.vue';
+import MyMore from '../components/my-more/My-more.vue';
+import MyOrders from '../components/my-orders/My-orders.vue';
 
 Vue.use(Router);
 
@@ -111,6 +116,31 @@ export default new Router({
       path: '/paySuccess',
       name: 'myPaySuccess',
       component: MyPaySuccess
+    },
+    {
+      path: '/wallet',
+      name: 'myWallet',
+      component: MyWallet
+    },
+    {
+      path: '/charge',
+      name: 'myCharge',
+      component: MyCharge
+    },
+    {
+      path: '/account',
+      name: 'myAccount',
+      component: MyAccount
+    },
+    {
+      path: '/more',
+      name: 'myMore',
+      component: MyMore
+    },
+    {
+      path: '/orders',
+      name: 'myOrders',
+      component: MyOrders
     }
   ],
   scrollBehavior

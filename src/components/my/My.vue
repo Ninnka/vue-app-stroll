@@ -14,14 +14,14 @@
       <ul> 
         <li v-for="item in listDataTop">
         <router-link :to="item.toUrl">
-          <img :src="item.ico" alt="">{{item.text}}
+          {{item.text}}
         </router-link>
         </li>
       </ul>
       <ul> 
         <li v-for="item in listDataBottom">
-          <router-link to="">
-            <img :src="item.ico" alt="">{{item.text}}
+          <router-link :to="item.toUrl">
+            {{item.text}}
           </router-link>
         </li>
       </ul>
@@ -34,14 +34,7 @@ import Header from '../common/header/header.vue';
 import AvatarValue from './assets/avatar.png';
 import GradeVip from './assets/grade_vip.png';
 import GradePartner from './assets/grade_partner.png';
-import IcoBase from './assets/ico_base.png';
-import IcoOrder from './assets/ico_order.png';
-import IcoCollection from './assets/ico_collection.png';
-import IcoWallet from './assets/ico_wallet.png';
-import IcoAddress from './assets/ico_address.png';
-import IcoVip from './assets/ico_vip.png';
-import IcoMore from './assets/ico_more.png';
-import IcoLoginout from './assets/ico_loginout.png';
+import sprite from './assets/sprite.png';
 
 export default {
   data() {
@@ -57,42 +50,34 @@ export default {
       gradePartner: GradePartner,
       listDataTop: [{
         toUrl: '/basemsg',
-        ico: IcoBase,
         text: '基本信息'
       },
       {
-        toUrl: '/basemsg',
-        ico: IcoOrder,
+        toUrl: '/orders',
         text: '我的订单'
       },
       {
         toUrl: '/collection',
-        ico: IcoCollection,
         text: '我的收藏'
       },
       {
-        toUrl: 'my/basemsg',
-        ico: IcoWallet,
+        toUrl: '/wallet',
         text: '我的钱包'
       },
       {
         toUrl: 'my/basemsg',
-        ico: IcoAddress,
         text: '收货地址'
       },
       {
         toUrl: '/upgrade',
-        ico: IcoVip,
         text: '升级会员'
       }],
       listDataBottom: [{
-        toUrl: 'my/basemsg',
-        ico: IcoMore,
+        toUrl: '/more',
         text: '更多'
       },
       {
         toUrl: 'my/basemsg',
-        ico: IcoLoginout,
         text: '注销'
       }]
     }
@@ -164,22 +149,39 @@ ul{
 }
 ul li{
   margin-left: .17rem;
+  padding-left: 40px;
   border-bottom: 1px solid #f5f5f5;
-  background: url('./assets/arrow_left.png') no-repeat 97% 50%;
-  background-size: .08rem .15rem;
   line-height: .4rem;
   font-size: .15rem;
+}
+ul:first-child li:nth-child(1){
+  background: url('./assets/sprite.png') 0 -.25rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(2){
+  background: url('./assets/sprite.png') 0 -.65rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(3){
+  background: url('./assets/sprite.png') 0 -1rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(4){
+  background: url('./assets/sprite.png') 0 -1.35rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(5){
+  background: url('./assets/sprite.png') 0 -1.75rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(6){
+  background: url('./assets/sprite.png') 0 -2.13rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:last-child li:nth-child(1){
+  background: url('./assets/sprite.png') 0 -2.53rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:last-child li:nth-child(2){
+  background: url('./assets/sprite.png') 0 -2.89rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul li router-link{
   display: block;
   width: 100%;
   height: 100%;
   color: #000;
-}
-ul li img{
-  margin-right: .1rem;
-  width: .2rem;
-  height: .2rem;
-  vertical-align: middle;
 }
 </style>
