@@ -1,8 +1,7 @@
 <template lang="html">
-  <div class="fullpage">
+  <div class="fullpage overscroll">
     <head-bar title="首页" :custombg="custombg"></head-bar>
-    <!-- <button type="button" name="button" @click="toContent" class="btn">跳转</button> -->
-    <div class="home-content">
+    <div class="home-content" id="tab-main-content">
       <!-- 主页的轮播图 -->
       <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -26,11 +25,14 @@
       </div>
       <ul class="home-recommend border-box">
         <li class="item" v-for="recommendItem in recommendList" @click="toGoodetail(recommendItem.id)">
-          <p class="title single-line">{{recommendItem.title}}</p>
+          <p class="item-title single-line">{{recommendItem.title}}</p>
           <img class="img-show" :src="recommendItem.imgsrc" alt="">
         </li>
       </ul>
     </div>
+    <transition name="slide-fade">
+      <router-view name="gooddetailcontent" class="content-router-view position-absolute"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -104,9 +106,10 @@ export default {
   },
   mounted() {
     console.log('mounted');
-    var mySwiper = new Swiper('.swiper-container', {
+    new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
+      autoplay: 2000,
 
       // 如果需要分页器
       pagination: '.swiper-pagination'
@@ -114,10 +117,18 @@ export default {
     console.log(mySwiper);
   },
   updated() {
-    console.log('updated');
+    console.log('updated in home');
+    // this.nextIsEnter = this.nextIsEnter ? this.nextIsEnter : !this.nextIsEnter;
+    // if (this.nextIsEnter) {
+    //   let y = JSON.parse(window.localStorage.getItem('home')).y;
+    //   let tab = document.querySelector('#tab-main-content') ? document.querySelector('#tab-main-content') : undefined;
+    //   if (tab) {
+    //     tab.scrollTop = y + 'px';
+    //   }
+    // }
   },
-  destoryed() {
-    console.log('destoryed');
+  beforeDestroy() {
+    console.log('beforeDestroy');
   }
 }
 </script>
