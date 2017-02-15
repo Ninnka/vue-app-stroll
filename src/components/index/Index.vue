@@ -1,8 +1,20 @@
 <template lang="html">
   <div class="wrap">
-    <div class="content content-hasheader content-bottom-tab border-box fullpage normal-position">
+    <div class="content content-hasheader content-bottom-tab border-box fullpage normal-position overscroll">
       <keep-alive>
-        <router-view></router-view>
+        <router-view name="home"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="member"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="classify"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="shoppingcar"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="my"></router-view>
       </keep-alive>
     </div>
     <div class="fixed fixed-bottom nav flex-box">
@@ -73,10 +85,10 @@ export default {
       router.push({
         name: navItem.to
       });
-      this.storePosition({
-        y: document.body.scrollTop || document.documentElement.scrollTop,
-        i: this.indexArr[this.currentIndex]
-      });
+      // this.storePosition({
+      //   y: document.querySelector('#tab-main-content') ? document.querySelector('#tab-main-content').scrollTop : 0,
+      //   i: this.indexArr[this.currentIndex]
+      // });
       this.currentIndex = index;
     },
     storePosition(data) {
@@ -127,6 +139,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  z-index: 200;
 }
 
 .nav-item {
@@ -158,11 +171,11 @@ export default {
 }
 
 .nav-item.router-link-active {
-  color: rgba(34, 135, 51, 1) !important;
+  color: rgba(216, 30, 6, 1) !important;
 }
 
 .nav-item.router-link-active>a {
-  color: rgba(34, 135, 51, 1) !important;
+  color: rgba(216, 30, 6, 1) !important;
 }
 
 a {

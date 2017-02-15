@@ -6,7 +6,7 @@ export default {
       path: 'good-detail',
       name: 'good-detail',
       components: {
-        content: GoodDetail
+        gooddetailcontent: GoodDetail
       }
     }
   ]

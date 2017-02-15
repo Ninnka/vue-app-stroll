@@ -1,9 +1,9 @@
 <template lang="html">
-  <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar">
+  <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box overscroll" @scroll="scrolling">
     <head-bar :custombg="headbarbg"></head-bar>
-    <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
-    <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click="share"></i>
-    <i class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click="star"></i>
+    <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
+    <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
+    <i class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click.stop="star"></i>
     <div class="good-presentation">
       <img class="" :src="goodDetail.imgsrc" alt="">
     </div>
@@ -17,8 +17,8 @@
         </div>
       </div>
       <div class="limit border-box">
-          <p>限时：2天23分02秒</p>
-          <p>限量：{{goodDetail.discountquantity}}件</p>
+        <p>限时：2天23分02秒</p>
+        <p>限量：{{goodDetail.discountquantity}}件</p>
       </div>
     </div>
 
@@ -63,10 +63,6 @@
       </div>
     </div>
 
-    <transition name="slide-fade">
-      <select-specification v-if="showSelectSpec"></select-specification>
-    </transition>
-
     <div class="good-footbar fixed flex-box">
       <div class="good-shoppingcar border-box">
         <i class="icon iconfont icon-shoppingcar"></i>
@@ -78,6 +74,18 @@
       </div>
     </div>
 
+    <transition name="fade">
+      <select-specification v-if="selectSpecStatus" v-on:closeSelectSpec="closeSelectSpec"></select-specification>
+    </transition>
+
+    <transition name="fade">
+      <share v-if="shareContentStatus" v-on:closeShare="closeShare"></share>
+    </transition>
+
+    <transition name="fade">
+      <recharge v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge"></recharge>
+    </transition>
+
   </div>
 </template>
 
@@ -86,17 +94,22 @@ import router from '../../router';
 
 import Header from '../common/header/Header.vue';
 import SelectSpecification from 'components/common/select-specification/SelectSpecification.vue';
+import Share from 'components/common/share/share.vue';
+import Recharge from 'components/common/recharge/Recharge.vue';
 
 export default {
   data() {
     return {
+      contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
       goodDetail: {
+        uservip: false,
+        viponly: true,
         imgsrc: require('./images/goods1.jpg'),
         name: 'Huawei/华为 荣耀7 全网通4G手机',
-        pricediscount: '11.5',
-        pricenormal: '12.8',
-        salequantity: '1235',
+        pricediscount: 1999,
+        pricenormal: 1799,
+        salequantity: 1235,
         discountstarttime: '',
         discountendtime: '',
         discountquantity: '120',
@@ -157,7 +170,13 @@ export default {
       },
       showTab: 'details',
       active: 'active',
-      showSelectSpec: false
+      selectSpecStatus: false,
+      shareContentStatus: false,
+      rechargeContentStatus: false,
+      preloadY: 0,
+      goodMainContent: '',
+      preloader: '',
+      loadingMore: false
     }
   },
   methods: {
@@ -171,17 +190,54 @@ export default {
     star() {
       this.goodDetail.starStatus = '1';
     },
-    share() {
-      // todo
+    shareContent() {
+      this.shareContentStatus = true;
     },
     addToSC() {
-      this.showSelectSpec = !this.showSelectSpec;
+      if (!this.goodDetail.uservip && this.goodDetail.viponly) {
+        this.rechargeContentStatus = true;
+      }
+      else {
+        this.selectSpecStatus = !this.selectSpecStatus;
+      }
     },
     buy() {
-      // todo
+      if (!this.goodDetail.uservip && this.goodDetail.viponly) {
+        this.rechargeContentStatus = true;
+      }
+      else {
+        console.log('buy');
+      }
     },
     closeSelectSpec() {
-      this.showSelectSpec = false;
+      console.log('closeSelectSpec in detail');
+      this.selectSpecStatus = false;
+    },
+    closeShare() {
+      this.shareContentStatus = false;
+    },
+    closeRecharge() {
+      this.rechargeContentStatus = false;
+    },
+    scrolling() {
+      let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      let actualTop = this.preloader.offsetTop;
+      let current = this.preloader.offsetParent;
+      while (current !== null) {
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+      }
+      let elementScrollTop = this.goodMainContent.scrollTop;
+      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * (this.preloader.clientHeight + 20)) && !this.loadingMore) {
+        this.loadingMore = true;
+        // 这里调用加载数据的方法
+        // 模拟加载数据
+        this.goodDetail.commentList = this.goodDetail.commentList.concat(this.goodDetail.commentList);
+        // 模拟结束数据加载后的动作，需要将标识设为false
+        setTimeout(function () {
+          this.loadingMore = false;
+        }.bind(this), 1500);
+      }
     }
   },
   created() {
@@ -189,16 +245,19 @@ export default {
   },
   mounted() {
     console.log('mounted detail');
+    let goodMainContent = document.querySelector('.good-main-content');
+    let preloader = document.querySelector('.infinite-scroll-preloader');
+    this.goodMainContent = goodMainContent;
+    this.preloader = preloader;
   },
-  activated() {
-    console.log('activated detail');
-  },
-  deactivated() {
-    console.log('destoryed detail');
+  beforeDestroy() {
+    console.log('beforeDestroy detail');
   },
   components: {
     headBar: Header,
-    selectSpecification: SelectSpecification
+    selectSpecification: SelectSpecification,
+    share: Share,
+    recharge: Recharge
   }
 }
 </script>
