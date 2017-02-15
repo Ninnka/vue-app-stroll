@@ -1,5 +1,8 @@
 <template>
   <div id="recharge">
+    <transition name="childtranslate">
+      <router-view class="recharge-childview"></router-view>
+    </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="订单详情"></headbar>
@@ -37,12 +40,32 @@ export default {
     },
     // 支付
     toPay() {
-      router.push('/paySuccess');
+      router.push('/upgrade/recharge/paySuccess');
     }
   }
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.recharge-childview{
+  position: fixed;
+  top: 0;
+  z-index: 200;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateX(100%);
+  /*opacity: 0;*/
+  /*width:0;*/
+}
 #recharge {
 	padding-top: .45rem;
 	font-size: .14rem;

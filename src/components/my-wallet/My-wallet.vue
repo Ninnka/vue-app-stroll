@@ -1,5 +1,8 @@
 <template>
   <div id="wallet">
+    <transition name="childtranslate">
+      <router-view class="wallet-childview"></router-view>
+    </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="我的钱包"></headbar>
@@ -59,10 +62,27 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.wallet-childview{
+  position: fixed;
+  top: 0;
+  z-index: 300;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to
+{
+  transform: translateX(100%);
+}
 #wallet {
 	padding-top: .45rem;
 	font-size: .16rem;
-	height: 100%;
 	background: #f5f5f5;
 }
 a{

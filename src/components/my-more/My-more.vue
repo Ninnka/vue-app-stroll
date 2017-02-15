@@ -1,5 +1,8 @@
 <template>
   <div id="more">
+    <transition name="childtranslate">
+      <router-view class="more-childview"></router-view>
+    </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="更多"></headbar>
@@ -7,7 +10,7 @@
     <div class="more-content">
       <ul>
         <li v-for="item in list">
-          <router-link to="" >{{item.text}} <span>{{item.value}}</span></router-link>
+          <router-link :to="item.toUrl" >{{item.text}} <span>{{item.value}}</span></router-link>
         </li>
         <li @click="update">{{updateText.text}} <span>{{updateText.value}}</span></li>
       </ul>
@@ -37,15 +40,15 @@ export default {
       isUpdate: false,
       showToast: false,
       list: [{
-        toUrl: '',
+        toUrl: '/more/aboutUs',
         text: '关于我们'
       },
       {
-        toUrl: '',
+        toUrl: '/more/helpCenter',
         text: '帮助中心'
       },
       {
-        toUrl: '',
+        toUrl: '/more/fedback',
         text: '意见反馈'
       }],
       updateText: {
@@ -77,6 +80,24 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.more-childview{
+  position: fixed;
+  top: 0;
+  z-index: 300;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to
+{
+  transform: translateX(100%);
+}
 #more {
 	padding-top: .45rem;
 	font-size: .16rem;

@@ -8,17 +8,21 @@
     <div class="collection-content">
     	<ul>
         <li v-for="item in listDatas">
-          <input type="checkbox" v-if="isEdit" name="orders" v-model="item.check">
+          <transition name="inputtranslate">
+            <input type="checkbox" v-if="isEdit" name="orders" v-model="item.check">
+          </transition>
           <img :src="item.imgsrc" alt="">
           <p>{{item.title}}</p>
           <p>{{item.money}}</p>
         </li>
       </ul>
     </div>
-    <div class="collection-footer" v-if="isEdit">
-      <input type="checkbox" name="all" @click="selectAll" v-model="isAll">全部
-      <button>删除</button>
-    </div>
+    <transition name="footerShowAnim">
+      <div class="collection-footer" v-if="isEdit">
+        <input type="checkbox" name="all" @click="selectAll" v-model="isAll">全部
+        <button>删除</button>
+      </div>
+    </transition>
   </div>
 </template>
 <script type="text/javascript">
@@ -73,6 +77,31 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.inputtranslate-enter-active {
+  transition: all .3s ease;
+}
+.inputtranslate-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.inputtranslate-enter, .inputtranslate-leave-to, .inputtranslate-leave
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateX(-.4rem);
+  /*opacity: 0;*/
+  /*width:0;*/
+}
+.footerShowAnim-enter-active {
+  transition: all .3s ease;
+}
+.footerShowAnim-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.footerShowAnim-enter, .footerShowAnim-leave-to, .footerShowAnim-leave
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateY(.4rem);
+  /*opacity: 0;*/
+  /*width:0;*/
+}
+
 #collection {
 	padding-top: .45rem;
 	font-size: .16rem;
@@ -110,13 +139,14 @@ ul li input{
   vertical-align: middle;
 }
 ul li img{
+  margin-right: .1rem;
   float: left;
   width: .7rem;
   height: .7rem;
   vertical-align: middle;
 }
 ul li p{
-  margin-left: 1.0rem;
+  /*margin-left: 1.0rem;*/
   color: #606060;
 }
 ul li p:last-child{

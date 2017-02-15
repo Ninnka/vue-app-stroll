@@ -87,7 +87,6 @@ export default {
 #base-msg {
 	padding-top: .45rem;
 	font-size: .16rem;
-	height: 100%;
 	background: #f5f5f5;
 }
 a{

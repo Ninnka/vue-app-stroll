@@ -1,29 +1,28 @@
 <template>
   <div id="orders">
+    <transition name="childtranslate">
+      <router-view class="orders-childview"></router-view>
+    </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="我的订单"></headbar>
     </div>
-    
-
-      <div class="orders-nav">
-        <span v-for="item in navDatas" @click="navClick(item)">{{item}}
-          <transition name="wdisplay" mode="out-in">
-            <i class="uline" v-if="avtiveNav==item"></i>
-          </transition>
-        </span>
-      </div>
-    
-
+    <div class="orders-nav">
+      <span v-for="item in navDatas" @click="navClick(item)">{{item}}
+        <transition name="wdisplay" mode="out-in">
+          <i class="uline" v-if="avtiveNav==item"></i>
+        </transition>
+      </span>
+    </div>
     <div class="orders-content">
     <transition name="fade" mode="out-in">
     <!-- 待付款 -->
       <ul class="no-pay" v-if="avtiveNav==navDatas[0]" key="1">
         <li v-for="item in data1">
-          <router-link to="">
+          <router-link :to="'/orders/detail/' + item.orderId">
             <item :itemdata="item" title="待付款">
               <div slot="btns" class="no-pay-btns">
-                <button @click="cancelOrder(item.orderId)">取消订单</button>
+                <button @click.stop.prevent="cancelOrder(item.orderId)">取消订单</button>
                 <button @click="toPay(item.orderId)">立即支付</button>
               </div>
             </item>
@@ -33,7 +32,7 @@
     <!-- 待发货 -->
       <ul class="wait-send" v-if="avtiveNav==navDatas[1]" key="2">
         <li v-for="item in data2">
-          <router-link to="">
+          <router-link :to="'/orders/detail/' + item.orderId">
             <item :itemdata="item" title="待发货"></item>
           </router-link>
         </li>
@@ -41,7 +40,7 @@
     <!-- 待收货 -->
       <ul class="receving" v-if="avtiveNav==navDatas[2]" key="3">
         <li v-for="item in data3">
-          <router-link to="">
+          <router-link :to="'/orders/detail/' + item.orderId">
             <item :itemdata="item" title="待收货">
               <button slot="btns" class="receving-btn">确定收货</button>  
             </item>
@@ -51,7 +50,7 @@
     <!-- 已完成 -->
       <ul class="finish" v-if="avtiveNav==navDatas[3]" key="4">
         <li v-for="item in data3">
-          <router-link to="">
+          <router-link :to="'/orders/detail/' + item.orderId">
             <item :itemdata="item" title="已完成">
               <div slot="btns" class="finish-btns">
                 <button @click="delOrder(item.orderId)">删除</button>
@@ -64,7 +63,7 @@
     <!-- 退货/售后 -->
       <ul class="service" v-if="avtiveNav==navDatas[4]" key="5">
         <li v-for="item in data4">
-          <router-link to="">
+          <router-link :to="'/orders/detail/' + item.orderId">
             <item :itemdata="item" title="退货中">
               <button @click="delOrder(item.orderId)" slot="btns" class="service-btns">删除</button> 
             </item>
@@ -84,9 +83,37 @@ import OrderImg from '../my/assets/order-img.png';
 export default {
   data() {
     return {
-      avtiveNav: '退货/售后',
+      avtiveNav: '待付款',
       navDatas: ['待付款', '待发货', '待收货', '已完成', '退货/售后'],
       data1: [{
+        orderId: 'SHYJ12552',
+        imgsrc: OrderImg,
+        name: '坚果',
+        money: 29.5,
+        num: 2
+      },
+      {
+        orderId: 'SHYJ12555',
+        imgsrc: OrderImg,
+        name: '坚果',
+        money: 29.5,
+        num: 2
+      },
+      {
+        orderId: 'SHYJ12552',
+        imgsrc: OrderImg,
+        name: '坚果',
+        money: 29.5,
+        num: 2
+      },
+      {
+        orderId: 'SHYJ12555',
+        imgsrc: OrderImg,
+        name: '坚果',
+        money: 29.5,
+        num: 2
+      },
+      {
         orderId: 'SHYJ12552',
         imgsrc: OrderImg,
         name: '坚果',
@@ -162,10 +189,27 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.orders-childview{
+  position: fixed;
+  top: 0;
+  z-index: 250;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to{
+  transform: translateX(100%);
+}
 #orders {
 	padding-top: .45rem;
+  margin-bottom: .45rem;
 	font-size: .16rem;
-	height: 100%;
 	background: #f5f5f5;
 }
 a{
@@ -188,6 +232,7 @@ a{
 }
 .orders-nav{
   position: fixed;
+  z-index: 200;
   top: .43rem;
   display: flex;
   justify-content: space-around;
@@ -201,6 +246,7 @@ a{
   text-align: center;
 }
 .orders-content{
+  margin-bottom: .5rem;
   padding-top: .51rem;
 }
 li{

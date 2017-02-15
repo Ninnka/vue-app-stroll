@@ -1,5 +1,9 @@
 <template lang="html">
-  <div id="my">
+    <div id="my">
+    <transition name="childtranslate">
+      <router-view class="my-childview"></router-view>
+    </transition>
+    <div class="login-mask" v-if="userDatas.username=='登录'" @click="toLogin"></div>
     <div class="header">
       <headbar></headbar>
       <div class="avatar">
@@ -8,7 +12,7 @@
         <img :src="gradePartner" alt="" v-if="userDatas.grade == '股东会员'">
       </div>
       <p class="username">{{userDatas.username}}</p>
-      <p class="grade" v-if="userDatas.grade != '普通会员'">{{userDatas.grade}}</p>
+      <p class="grade" v-if="userDatas.grade!='普通会员'">{{userDatas.grade}}</p>
     </div>
     <div class="my-content">
       <ul> 
@@ -24,30 +28,39 @@
             {{item.text}}
           </router-link>
         </li>
+        <li @click="loginoutEvent">{{loginout}}</li>
       </ul>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
+import router from '../../router/index.js';
 import Header from '../common/header/header.vue';
-import AvatarValue from './assets/avatar.png';
+// import AvatarValue from './assets/avatar.png';
 import GradeVip from './assets/grade_vip.png';
 import GradePartner from './assets/grade_partner.png';
-import sprite from './assets/sprite.png';
+// import sprite from './assets/sprite.png';
+import Nologin from './assets/help-center.png';
 
 export default {
   data() {
     return {
       // 用户信息
+      // userDatas: {
+      //   username: '阿萨德',
+      //   avatar: AvatarValue,
+      //   grade: 'VIP会员'
+      // }
       userDatas: {
-        username: '阿萨德',
-        avatar: AvatarValue,
-        grade: 'VIP会员'
+        username: '登录',
+        avatar: Nologin,
+        grade: '普通会员'
       },
       // 图片资源
       gradeVip: GradeVip,
       gradePartner: GradePartner,
+      loginout: '注销',
       listDataTop: [{
         toUrl: '/basemsg',
         text: '基本信息'
@@ -65,7 +78,7 @@ export default {
         text: '我的钱包'
       },
       {
-        toUrl: 'my/basemsg',
+        toUrl: '/address',
         text: '收货地址'
       },
       {
@@ -75,20 +88,68 @@ export default {
       listDataBottom: [{
         toUrl: '/more',
         text: '更多'
-      },
-      {
-        toUrl: 'my/basemsg',
-        text: '注销'
       }]
     }
   },
   components: {
     headbar: Header
+  },
+  methods: {
+    toLogin() {
+      router.push('/index/my/login');
+    },
+    // 注销
+    loginoutEvent() {
+      localStorage.setItem('username', '登录');
+      localStorage.setItem('avatar', 'http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg');
+      localStorage.setItem('grade', '普通会员');
+      this.$forceUpdate();
+    }
+  },
+  created() {
+    console.log('created');
+  },
+  mounted() {
+    this.userDatas.username = localStorage.getItem('username');
+    this.userDatas.avatar = localStorage.getItem('avatar');
+    this.userDatas.grade = localStorage.getItem('grade');
+    console.log('mounted');
+  },
+  beforeUpdate() {
+    this.userDatas.username = localStorage.getItem('username');
+    this.userDatas.avatar = localStorage.getItem('avatar');
+    this.userDatas.grade = localStorage.getItem('grade');
+    console.log('beforeUpdate');
+  },
+  updated() {
+    console.log('my-updated');
+  },
+  destroyed() {
+    console.log('destroyed');
   }
 }
 </script>
 
 <style lang="css" type="text/css" scoped>
+.my-childview{
+  position: fixed;
+  top: 0;
+  z-index: 250;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to{
+  transform: translateX(100%);
+}
+
+
 a{
   color: #000;
 }
@@ -183,5 +244,13 @@ ul li router-link{
   width: 100%;
   height: 100%;
   color: #000;
+}
+.login-mask{
+  position: fixed;
+  z-index: 150;
+  top: 0;
+  background: rgba(0,0,0,0);
+  width: 100%;
+  height: 100%;
 }
 </style>
