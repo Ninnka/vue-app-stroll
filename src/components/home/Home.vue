@@ -126,8 +126,8 @@ export default {
     //   }
     // }
   },
-  destoryed() {
-    console.log('destoryed');
+  beforeDestroy() {
+    console.log('beforeDestroy');
   }
 }
 </script>

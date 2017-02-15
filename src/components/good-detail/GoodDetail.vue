@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box overscroll" @scroll="scrolling">
     <head-bar :custombg="headbarbg"></head-bar>
-    <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
-    <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click="share"></i>
-    <i class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click="star"></i>
+    <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
+    <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="share"></i>
+    <i class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class.stop="goodDetail.starStatus === '1' ? active : ''" @click="star"></i>
     <div class="good-presentation">
       <img class="" :src="goodDetail.imgsrc" alt="">
     </div>
@@ -63,10 +63,6 @@
       </div>
     </div>
 
-    <transition name="slide-fade">
-      <select-specification v-if="selectSpecStatus"></select-specification>
-    </transition>
-
     <div class="good-footbar fixed flex-box">
       <div class="good-shoppingcar border-box">
         <i class="icon iconfont icon-shoppingcar"></i>
@@ -78,6 +74,10 @@
       </div>
     </div>
 
+    <transition name="fade">
+      <select-specification v-if="selectSpecStatus" v-on:close="closeSelectSpec"></select-specification>
+    </transition>
+
   </div>
 </template>
 
@@ -87,8 +87,6 @@ import router from '../../router';
 import Header from '../common/header/Header.vue';
 import SelectSpecification from 'components/common/select-specification/SelectSpecification.vue';
 
-// import EventHub from 'components/common/event-hub/EventHub-home-goodDetail.js';
-
 export default {
   data() {
     return {
@@ -97,9 +95,9 @@ export default {
       goodDetail: {
         imgsrc: require('./images/goods1.jpg'),
         name: 'Huawei/华为 荣耀7 全网通4G手机',
-        pricediscount: '11.5',
-        pricenormal: '12.8',
-        salequantity: '1235',
+        pricediscount: 1999,
+        pricenormal: 1799,
+        salequantity: 1235,
         discountstarttime: '',
         discountendtime: '',
         discountquantity: '120',
@@ -188,11 +186,11 @@ export default {
       // todo
     },
     closeSelectSpec() {
+      console.log('closeSelectSpec in detail');
       this.selectSpecStatus = false;
     },
     scrolling() {
       let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
-      // console.log('documentHeight:', documentHeight);
       let actualTop = this.preloader.offsetTop;
       let current = this.preloader.offsetParent;
       while (current !== null) {
@@ -200,11 +198,13 @@ export default {
         current = current.offsetParent;
       }
       let elementScrollTop = this.goodMainContent.scrollTop;
-      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * 55) && !this.loadingMore) {
+      console.log('documentHeight:', documentHeight);
+      console.log('actualTop - elementScrollTop:', actualTop - elementScrollTop);
+      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * 60) && !this.loadingMore) {
         this.loadingMore = true;
         console.log('start loadingMore');
         // 这里调用加载数据的方法
-        // todo something
+        // 模拟加载数据
         this.goodDetail.commentList = this.goodDetail.commentList.concat(this.goodDetail.commentList);
         // 模拟结束数据加载后的动作，需要将标识设为false
         setTimeout(function () {
@@ -222,9 +222,10 @@ export default {
     let preloader = document.querySelector('.infinite-scroll-preloader');
     this.goodMainContent = goodMainContent;
     this.preloader = preloader;
-    console.log('preload.offsetTop:', preloader.offsetTop);
+    // SelectSpecification.$on('close', this.closeSelectSpec);
   },
   beforeDestroy() {
+    // SelectSpecification.$off('close', this.closeSelectSpec);
     console.log('beforeDestroy detail');
   },
   components: {
