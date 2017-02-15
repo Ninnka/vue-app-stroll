@@ -1,14 +1,26 @@
 <template lang="html">
   <div class="wrap">
-    <div class="content content-hasheader content-bottom-tab border-box fullpage">
+    <div class="content content-hasheader content-bottom-tab border-box fullpage normal-position overscroll">
       <keep-alive>
-        <router-view></router-view>
+        <router-view name="home"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="member"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="classify"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="shoppingcar"></router-view>
+      </keep-alive>
+      <keep-alive>
+        <router-view name="my"></router-view>
       </keep-alive>
     </div>
     <div class="fixed fixed-bottom nav flex-box">
       <div v-for="(navItem, index) in navItemList" :to="{path: navItem.to}" :key="navItem" class="item text-center nav-item flex-box"  :class="[currentIndex === index ? link_active : link_not_active]" @click="getPosition(navItem,index)">
         <i class="icon iconfont" :class="navItem.icon"></i>
-        <a class="title">{{navItem.title}}</a>
+        <a class="item-title">{{navItem.title}}</a>
       </div>
     </div>
   </div>
@@ -73,10 +85,10 @@ export default {
       router.push({
         name: navItem.to
       });
-      this.storePosition({
-        y: document.body.scrollTop || document.documentElement.scrollTop,
-        i: this.indexArr[this.currentIndex]
-      });
+      // this.storePosition({
+      //   y: document.querySelector('#tab-main-content') ? document.querySelector('#tab-main-content').scrollTop : 0,
+      //   i: this.indexArr[this.currentIndex]
+      // });
       this.currentIndex = index;
     },
     storePosition(data) {
@@ -127,6 +139,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  z-index: 200;
 }
 
 .nav-item {
@@ -141,8 +154,15 @@ export default {
   align-items: center;
 }
 
+.nav-item>a {
+  color: rgba(100, 100, 100, .5);
+}
+
 .nav-item {
   color: rgba(100, 100, 100, .5);
+}
+
+.nav-item .item-title {
   font-size: .12rem;
 }
 
@@ -151,7 +171,11 @@ export default {
 }
 
 .nav-item.router-link-active {
-  color: rgba(34, 135, 51, 1);
+  color: rgba(216, 30, 6, 1) !important;
+}
+
+.nav-item.router-link-active>a {
+  color: rgba(216, 30, 6, 1) !important;
 }
 
 a {
@@ -161,9 +185,5 @@ a {
 .nav>item {
   flex-grow: 1;
   flex-shrink: 1;
-}
-
-.text-center {
-  text-align: center;
 }
 </style>
