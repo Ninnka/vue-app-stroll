@@ -7,6 +7,8 @@
 </template>
 
 <script>
+// import EventHub from 'components/common/event-hub/EventHub-home-goodDetail.js';
+
 export default {
   data() {
     return {
@@ -15,7 +17,8 @@ export default {
   },
   methods: {
     closeSelectSpec() {
-      console.log('closeSelectSpec in subcomponent');
+      console.log('closeSelectSpec in subcomponent event');
+      this.$emit('closeSelectSpec');
     }
   }
 }

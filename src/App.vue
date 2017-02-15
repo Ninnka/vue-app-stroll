@@ -5,9 +5,6 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-    <transition name="slide-fade">
-      <router-view name="content" class="content-router-view position-absolute"></router-view>
-    </transition>
     </div>
   </div>
 </template>
@@ -46,10 +43,12 @@ html,
 body,
 .wrap {
   min-height: 100%;
+  height: 100%;
 }
 
 .fullpage {
   min-height: 100%;
+  height: 100%;
 }
 
 .content-router-view {
@@ -91,6 +90,10 @@ body,
 
 .position-relative {
   position: relative;
+}
+
+.overscroll {
+  overflow: scroll;
 }
 
 .float-right {

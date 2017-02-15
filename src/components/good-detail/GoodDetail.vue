@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar">
+  <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box overscroll" @scroll="scrolling">
     <head-bar :custombg="headbarbg"></head-bar>
     <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
     <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click="share"></i>
@@ -64,7 +64,7 @@
     </div>
 
     <transition name="slide-fade">
-      <select-specification v-if="showSelectSpec"></select-specification>
+      <select-specification v-if="selectSpecStatus"></select-specification>
     </transition>
 
     <div class="good-footbar fixed flex-box">
@@ -87,9 +87,12 @@ import router from '../../router';
 import Header from '../common/header/Header.vue';
 import SelectSpecification from 'components/common/select-specification/SelectSpecification.vue';
 
+// import EventHub from 'components/common/event-hub/EventHub-home-goodDetail.js';
+
 export default {
   data() {
     return {
+      contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
       goodDetail: {
         imgsrc: require('./images/goods1.jpg'),
@@ -157,7 +160,11 @@ export default {
       },
       showTab: 'details',
       active: 'active',
-      showSelectSpec: false
+      selectSpecStatus: false,
+      preloadY: 0,
+      goodMainContent: '',
+      preloader: '',
+      loadingMore: false
     }
   },
   methods: {
@@ -175,13 +182,35 @@ export default {
       // todo
     },
     addToSC() {
-      this.showSelectSpec = !this.showSelectSpec;
+      this.selectSpecStatus = !this.selectSpecStatus;
     },
     buy() {
       // todo
     },
     closeSelectSpec() {
-      this.showSelectSpec = false;
+      this.selectSpecStatus = false;
+    },
+    scrolling() {
+      let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      // console.log('documentHeight:', documentHeight);
+      let actualTop = this.preloader.offsetTop;
+      let current = this.preloader.offsetParent;
+      while (current !== null) {
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+      }
+      let elementScrollTop = this.goodMainContent.scrollTop;
+      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * 55) && !this.loadingMore) {
+        this.loadingMore = true;
+        console.log('start loadingMore');
+        // 这里调用加载数据的方法
+        // todo something
+        this.goodDetail.commentList = this.goodDetail.commentList.concat(this.goodDetail.commentList);
+        // 模拟结束数据加载后的动作，需要将标识设为false
+        setTimeout(function () {
+          this.loadingMore = false;
+        }.bind(this), 1500);
+      }
     }
   },
   created() {
@@ -189,12 +218,14 @@ export default {
   },
   mounted() {
     console.log('mounted detail');
+    let goodMainContent = document.querySelector('.good-main-content');
+    let preloader = document.querySelector('.infinite-scroll-preloader');
+    this.goodMainContent = goodMainContent;
+    this.preloader = preloader;
+    console.log('preload.offsetTop:', preloader.offsetTop);
   },
-  activated() {
-    console.log('activated detail');
-  },
-  deactivated() {
-    console.log('destoryed detail');
+  beforeDestroy() {
+    console.log('beforeDestroy detail');
   },
   components: {
     headBar: Header,

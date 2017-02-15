@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="fullpage">
-    <headbar title="分类"></headbar>
+    <headbar title="会员"></headbar>
   </div>
 </template>
 
