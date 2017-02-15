@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="fullpage">
-    <headbar title="会员"></headbar>
+    <headbar title="会员" :custombg="custombg"></headbar>
     <div class="member-content">
       <!-- 轮播图 -->
       <div class="swiper-container">
@@ -11,7 +11,7 @@
         <div class="swiper-pagination"></div>
       </div>
       <!-- 商品列表 -->
-      <div class="goodsContent">
+      <!-- <div class="goodsContent">
         <ul class="goodsItems">
           <li class="goodsItem" v-for="gItem in goodsData">
             <a @click="toGoodetail(gItem.goodsID)">
@@ -24,74 +24,55 @@
             </a>
           </li>
         </ul>
-      </div>
+      </div> -->
+      <goodsitems></goodsitems>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-import router from '../../router';
+// import router from '../../router';
 
 import header from '../common/header/Header.vue';
 
 import Swiper from '../../../static/js/swiper-3.4.1.min.js';
 
+import GoodsItems from './component/GoodsItems.vue';
+
 export default {
   data() {
     return {
+      custombg: 'member-headbar-bg',
       swiperItems: [{
         id: '1',
         url: '###',
-        imgsrc: require('./assets/swiper-test.jpeg')
+        imgsrc: require('./images/swiper-test.jpeg')
       },
       {
         id: '2',
         url: '##',
-        imgsrc: require('./assets/swiper-test1.jpg')
+        imgsrc: require('./images/swiper-test1.jpg')
       },
       {
         id: '3',
         url: '##',
-        imgsrc: require('./assets/swiper-test2.jpeg')
-      }],
-      goodsData: [{
-        goodsID: '1',
-        title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        url: '##',
-        imgsrc: require('./assets/goods1.jpg')
-      },
-      {
-        goodsID: '2',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        url: '##',
-        imgsrc: require('./assets/goods2.jpg')
-      },
-      {
-        goodsID: '3',
-        title: '休闲零食五味园pk脆 独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        url: '##',
-        imgsrc: require('./assets/goods1.jpg')
+        imgsrc: require('./images/swiper-test2.jpeg')
       }]
     }
   },
   methods: {
-    toGoodetail(id) {
-      router.push({
-        name: 'member-good-detail',
-        params: {
-          goodsId: id
-        }
-      });
-    }
+    // toGoodetail(id) {
+    //   router.push({
+    //     name: 'member-good-detail',
+    //     params: {
+    //       goodsId: id
+    //     }
+    //   });
+    // }
   },
   components: {
-    headbar: header
+    headbar: header,
+    goodsitems: GoodsItems
   },
   mounted() {
     var mySwiper = new Swiper('.swiper-container', {
@@ -108,6 +89,9 @@ export default {
 </script>
 
 <style lang="css" type="text/css" scoped>
+.member-headbar-bg {
+  background: #228733;
+}
 .member-content{
   font-size: .16rem;
 }
@@ -123,7 +107,7 @@ export default {
   height: 100%;
 }
 
-.goodsContent{
+/*.goodsContent{
   background: #f1f1f1;
 }
 .goodsItems{
@@ -154,10 +138,6 @@ export default {
   color: #5a5a5a;
   max-height: 0.34rem;
   line-height: 0.17rem;
- /* display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  word-break: break-all;*/
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -191,5 +171,5 @@ export default {
 .goodsItem a p span:nth-child(2):before{
   content: "原价:￥";
   display: inline-block;
-}
+}*/
 </style>

@@ -11,7 +11,9 @@ import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
 
 import GoodDetail from '../components/home-good-detail/GoodDetail.vue';
-import MemberGoodsDetail from '../components/member/components/MemberGoodsDetail.vue';
+import MemberGoodsDetail from '../components/member/component/MemberGoodsDetail.vue';
+import RefineOrder from '../components/shoppingcar/component/RefineOrder.vue';
+import AddAddress from '../components/shoppingcar/component/AddAddress.vue';
 
 Vue.use(Router);
 
@@ -94,6 +96,16 @@ export default new Router({
       path: 'member-good-detail/:goodsId',
       name: 'member-good-detail',
       component: MemberGoodsDetail
+    },
+    {
+      path: 'refine-order',
+      name: 'refine-order',
+      component: RefineOrder
+    },
+    {
+      path: 'add-address',
+      name: 'add-address',
+      component: AddAddress
     }
   ],
   scrollBehavior

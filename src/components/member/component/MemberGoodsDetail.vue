@@ -3,7 +3,8 @@
     <head-bar title="商品详细"></head-bar>
     <button class="backward" type="button" name="button" @click="backward">返回</button>
     <div>
-      {{ $route.params.goodsId }}
+      {{ id }}
+      {{ this.$route.params.goodsId }}
     </div>
   </div>
 </template>
@@ -16,13 +17,16 @@ import Header from '../../common/header/Header.vue';
 export default {
   data() {
     return {
-      id: 'this is id'
+      // id: 'null'
     }
   },
   methods: {
     backward() {
       router.go(-1);
     }
+  },
+  created() {
+    this.id = this.$route.params.goodsId
   },
   components: {
     headBar: Header
@@ -36,7 +40,7 @@ body {
   min-height: 100%;
 }
 
-.backward {
+/*.backward {
   text-align: center;
   position: fixed;
   z-index: 100;
@@ -46,5 +50,5 @@ body {
   top: 0;
   left: .1rem;
   background: red;
-}
+}*/
 </style>
