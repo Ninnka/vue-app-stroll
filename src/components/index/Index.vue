@@ -171,11 +171,11 @@ export default {
 }
 
 .nav-item.router-link-active {
-  color: rgba(34, 135, 51, 1) !important;
+  color: rgba(216, 30, 6, 1) !important;
 }
 
 .nav-item.router-link-active>a {
-  color: rgba(34, 135, 51, 1) !important;
+  color: rgba(216, 30, 6, 1) !important;
 }
 
 a {

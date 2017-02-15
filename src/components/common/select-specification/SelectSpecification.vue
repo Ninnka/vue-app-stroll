@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="transclubg fixed fullpage border-box" @click.stop.prevent="closeSelectSpec($event)">
-    <div class="select-specification fixed" @click.stop.prevent="nothing($event)">
+    <div class="select-specification fixed" @click.stop.prevent="">
       <div class="specification-about flex-box">
         <img :src="specificationDetail.thumbnail" alt="" class="good-thumbnail">
         <div class="specification-desc-price">
@@ -53,10 +53,7 @@ export default {
   },
   methods: {
     closeSelectSpec(e) {
-      this.$emit('close');
-    },
-    nothing(e) {
-
+      this.$emit('closeSelectSpec');
     }
   }
 }

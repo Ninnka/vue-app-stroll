@@ -2,8 +2,8 @@
   <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box overscroll" @scroll="scrolling">
     <head-bar :custombg="headbarbg"></head-bar>
     <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
-    <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="share"></i>
-    <i class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class.stop="goodDetail.starStatus === '1' ? active : ''" @click="star"></i>
+    <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
+    <i class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click.stop="star"></i>
     <div class="good-presentation">
       <img class="" :src="goodDetail.imgsrc" alt="">
     </div>
@@ -17,8 +17,8 @@
         </div>
       </div>
       <div class="limit border-box">
-          <p>限时：2天23分02秒</p>
-          <p>限量：{{goodDetail.discountquantity}}件</p>
+        <p>限时：2天23分02秒</p>
+        <p>限量：{{goodDetail.discountquantity}}件</p>
       </div>
     </div>
 
@@ -75,7 +75,15 @@
     </div>
 
     <transition name="fade">
-      <select-specification v-if="selectSpecStatus" v-on:close="closeSelectSpec"></select-specification>
+      <select-specification v-if="selectSpecStatus" v-on:closeSelectSpec="closeSelectSpec"></select-specification>
+    </transition>
+
+    <transition name="fade">
+      <share v-if="shareContentStatus" v-on:closeShare="closeShare"></share>
+    </transition>
+
+    <transition name="fade">
+      <recharge v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge"></recharge>
     </transition>
 
   </div>
@@ -86,6 +94,8 @@ import router from '../../router';
 
 import Header from '../common/header/Header.vue';
 import SelectSpecification from 'components/common/select-specification/SelectSpecification.vue';
+import Share from 'components/common/share/share.vue';
+import Recharge from 'components/common/recharge/Recharge.vue';
 
 export default {
   data() {
@@ -93,6 +103,8 @@ export default {
       contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
       goodDetail: {
+        uservip: false,
+        viponly: true,
         imgsrc: require('./images/goods1.jpg'),
         name: 'Huawei/华为 荣耀7 全网通4G手机',
         pricediscount: 1999,
@@ -159,6 +171,8 @@ export default {
       showTab: 'details',
       active: 'active',
       selectSpecStatus: false,
+      shareContentStatus: false,
+      rechargeContentStatus: false,
       preloadY: 0,
       goodMainContent: '',
       preloader: '',
@@ -176,18 +190,34 @@ export default {
     star() {
       this.goodDetail.starStatus = '1';
     },
-    share() {
-      // todo
+    shareContent() {
+      this.shareContentStatus = true;
     },
     addToSC() {
-      this.selectSpecStatus = !this.selectSpecStatus;
+      if (!this.goodDetail.uservip && this.goodDetail.viponly) {
+        this.rechargeContentStatus = true;
+      }
+      else {
+        this.selectSpecStatus = !this.selectSpecStatus;
+      }
     },
     buy() {
-      // todo
+      if (!this.goodDetail.uservip && this.goodDetail.viponly) {
+        this.rechargeContentStatus = true;
+      }
+      else {
+        console.log('buy');
+      }
     },
     closeSelectSpec() {
       console.log('closeSelectSpec in detail');
       this.selectSpecStatus = false;
+    },
+    closeShare() {
+      this.shareContentStatus = false;
+    },
+    closeRecharge() {
+      this.rechargeContentStatus = false;
     },
     scrolling() {
       let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
@@ -198,11 +228,8 @@ export default {
         current = current.offsetParent;
       }
       let elementScrollTop = this.goodMainContent.scrollTop;
-      console.log('documentHeight:', documentHeight);
-      console.log('actualTop - elementScrollTop:', actualTop - elementScrollTop);
-      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * 60) && !this.loadingMore) {
+      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * (this.preloader.clientHeight + 20)) && !this.loadingMore) {
         this.loadingMore = true;
-        console.log('start loadingMore');
         // 这里调用加载数据的方法
         // 模拟加载数据
         this.goodDetail.commentList = this.goodDetail.commentList.concat(this.goodDetail.commentList);
@@ -222,15 +249,15 @@ export default {
     let preloader = document.querySelector('.infinite-scroll-preloader');
     this.goodMainContent = goodMainContent;
     this.preloader = preloader;
-    // SelectSpecification.$on('close', this.closeSelectSpec);
   },
   beforeDestroy() {
-    // SelectSpecification.$off('close', this.closeSelectSpec);
     console.log('beforeDestroy detail');
   },
   components: {
     headBar: Header,
-    selectSpecification: SelectSpecification
+    selectSpecification: SelectSpecification,
+    share: Share,
+    recharge: Recharge
   }
 }
 </script>
