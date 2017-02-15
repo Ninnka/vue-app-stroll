@@ -114,7 +114,6 @@ export default {
       // 如果需要分页器
       pagination: '.swiper-pagination'
     })
-    console.log(mySwiper);
   },
   updated() {
     console.log('updated in home');

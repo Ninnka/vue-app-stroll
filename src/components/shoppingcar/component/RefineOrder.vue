@@ -266,6 +266,7 @@ html,body{
   background: white;
   width: 100%;
   border-top: 1px solid #e1e1e1;
+  z-index: 201;
 }
 .order-foot>span{
   display: inline-block;

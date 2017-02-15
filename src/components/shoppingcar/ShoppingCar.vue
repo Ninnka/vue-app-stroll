@@ -35,6 +35,9 @@
         <button v-else="edit_bol">删除</button>
       </div>
     </div>
+    <transition name="slide-fade">
+      <router-view name="refineordercontent" class="content-router-view position-absolute"></router-view>
+    </transition>
   </div>
 </template>
 

@@ -5,7 +5,7 @@
       <!-- 轮播图 -->
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <a :href="sItem.url" class="swiper-slide" v-for="sItem in swiperItems" :key="sItem.id"><img :src="sItem.imgsrc" alt=""></a>
+          <a class="swiper-slide" v-for="sItem in swiperItems" :key="sItem.id"><img :src="sItem.imgsrc" alt=""></a>
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
@@ -27,6 +27,9 @@
       </div> -->
       <goodsitems></goodsitems>
     </div>
+    <!-- <transition name="slide-fade">
+      <router-view name="gooddetailcontent" class="content-router-view position-absolute"></router-view>
+    </transition> -->
   </div>
 </template>
 
@@ -45,17 +48,14 @@ export default {
       custombg: 'member-headbar-bg',
       swiperItems: [{
         id: '1',
-        url: '###',
         imgsrc: require('./images/swiper-test.jpeg')
       },
       {
         id: '2',
-        url: '##',
         imgsrc: require('./images/swiper-test1.jpg')
       },
       {
         id: '3',
-        url: '##',
         imgsrc: require('./images/swiper-test2.jpeg')
       }]
     }

@@ -117,29 +117,6 @@ let routerEntity = {
           ]
         }
       ]
-// <<<<<<< HEAD
-//     },
-//     {
-//       path: 'good-detail',
-//       name: 'good-detail',
-//       component: GoodDetail
-//     },
-//     {
-//       path: 'member-good-detail/:goodsId',
-//       name: 'member-good-detail',
-//       component: MemberGoodsDetail
-//     },
-//     {
-//       path: 'refine-order',
-//       name: 'refine-order',
-//       component: RefineOrder
-//     },
-//     {
-//       path: 'add-address',
-//       name: 'add-address',
-//       component: AddAddress
-// =======
-// >>>>>>> origin/lzx
     }
   ]
 };

@@ -61,7 +61,7 @@ export default {
   methods: {
     toGoodetail(id) {
       router.push({
-        name: 'member-good-detail',
+        name: 'good-detail',
         params: {
           goodsId: id
         }
@@ -103,10 +103,6 @@ export default {
   color: #5a5a5a;
   max-height: 0.34rem;
   line-height: 0.17rem;
- /* display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  word-break: break-all;*/
   overflow: hidden;
   text-overflow: ellipsis;
 }
