@@ -1,9 +1,11 @@
 <template lang="html">
   <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box overscroll" @scroll="scrolling">
-    <head-bar :custombg="headbarbg"></head-bar>
-    <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
-    <i class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
-    <i class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click.stop="star"></i>
+    <head-bar :custombg="headbarbg">
+      <i slot="backward-icon" class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
+      <i slot="share-icon" class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
+      <i slot="star-icon" class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click.stop="star"></i>
+    </head-bar>
+
     <div class="good-presentation">
       <img class="" :src="goodDetail.imgsrc" alt="">
     </div>
@@ -57,9 +59,7 @@
           </ul>
         </div>
         <!-- 加载提示符 -->
-        <div class="infinite-scroll-preloader">
-          <div class="spinningCircle"></div>
-        </div>
+        <icon-loader></icon-loader>
       </div>
     </div>
 
@@ -75,15 +75,22 @@
     </div>
 
     <transition name="fade">
-      <select-specification v-if="selectSpecStatus" v-on:closeSelectSpec="closeSelectSpec"></select-specification>
+      <mask-bg callback="closeSelectSpec" v-if="selectSpecStatus" v-on:closeSelectSpec="closeSelectSpec">
+        <select-specification v-on:closeSelectSpec="closeSelectSpec"></select-specification>
+      </mask-bg>
+
     </transition>
 
     <transition name="fade">
-      <share v-if="shareContentStatus" v-on:closeShare="closeShare"></share>
+      <mask-bg callback="closeShare" v-if="shareContentStatus" v-on:closeShare="closeShare">
+        <share v-on:closeShare="closeShare"></share>
+      </mask-bg>
     </transition>
 
     <transition name="fade">
-      <recharge v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge"></recharge>
+      <mask-bg callback="closeRecharge" v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge">
+        <recharge></recharge>
+      </mask-bg>
     </transition>
 
   </div>
@@ -93,9 +100,11 @@
 import router from '../../router';
 
 import Header from '../common/header/Header.vue';
+import Mask from 'components/common/mask/Mask.vue';
 import SelectSpecification from 'components/common/select-specification/SelectSpecification.vue';
 import Share from 'components/common/share/share.vue';
 import Recharge from 'components/common/recharge/Recharge.vue';
+import IconLoader from 'components/common/icon-loader/IconLoader.vue';
 
 export default {
   data() {
@@ -104,7 +113,7 @@ export default {
       headbarbg: 'gooddetail-headbar-bg',
       goodDetail: {
         uservip: false,
-        viponly: true,
+        viponly: false,
         imgsrc: require('./images/goods1.jpg'),
         name: 'Huawei/华为 荣耀7 全网通4G手机',
         pricediscount: 1999,
@@ -196,16 +205,14 @@ export default {
     addToSC() {
       if (!this.goodDetail.uservip && this.goodDetail.viponly) {
         this.rechargeContentStatus = true;
-      }
-      else {
+      } else {
         this.selectSpecStatus = !this.selectSpecStatus;
       }
     },
     buy() {
       if (!this.goodDetail.uservip && this.goodDetail.viponly) {
         this.rechargeContentStatus = true;
-      }
-      else {
+      } else {
         console.log('buy');
       }
     },
@@ -228,7 +235,7 @@ export default {
         current = current.offsetParent;
       }
       let elementScrollTop = this.goodMainContent.scrollTop;
-      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * (this.preloader.clientHeight + 20)) && !this.loadingMore) {
+      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * (this.preloader.clientHeight * 2)) && !this.loadingMore) {
         this.loadingMore = true;
         // 这里调用加载数据的方法
         // 模拟加载数据
@@ -255,9 +262,11 @@ export default {
   },
   components: {
     headBar: Header,
+    maskBg: Mask,
     selectSpecification: SelectSpecification,
     share: Share,
-    recharge: Recharge
+    recharge: Recharge,
+    iconLoader: IconLoader
   }
 }
 </script>

@@ -17,15 +17,16 @@ export default {
     };
   },
   methods: {
-
-  },
-  created() {
-    window.addEventListener('resize', function () {
+    onresize() {
       let tmpWidth = document.documentElement.clientWidth || document.body.clientWidth;
       let fs = tmpWidth / 375 * 100;
       fs = fs < 88 ? 88 : fs;
       document.querySelector('html').style['font-size'] = fs + 'px';
-    });
+    }
+  },
+  created() {
+    window.addEventListener('resize', this.onresize);
+    this.onresize();
   }
 }
 </script>
