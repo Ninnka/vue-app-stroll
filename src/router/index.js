@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import Hello from 'components/Hello'
-// 直接使用 components路径
 
 import Index from '../components/index/Index.vue';
 import Home from '../components/home/Home.vue';
@@ -9,51 +7,26 @@ import Member from '../components/member/Member.vue';
 import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
-import MyBaseMsg from '../components/my-base-msg/My-base-msg.vue';
-import MyCollection from '../components/my-collection/My-collection.vue';
-import MyUpgrade from '../components/my-upgrade/My-upgrade.vue';
-import MyRecharge from '../components/my-recharge/My-recharge.vue';
-import MyPaySuccess from '../components/my-pay-success/My-pay-success.vue';
-import MyWallet from '../components/my-wallet/My-wallet.vue';
-import MyCharge from '../components/my-charge/My-charge.vue';
-import MyAccount from '../components/my-account/My-account.vue';
-import MyMore from '../components/my-more/My-more.vue';
-import MyOrders from '../components/my-orders/My-orders.vue';
-import MyAddress from '../components/my-address/My-address.vue';
-import MyHelpCenter from '../components/my-help-center/My-help-center.vue';
-import MyAboutUs from '../components/my-about-us/My-about-us.vue';
-import MyFedback from '../components/my-fedback/My-fedback.vue';
-import MyQuestions from '../components/my-questions/My-questions.vue';
-import MyLogin from '../components/my-login/My-login.vue';
-import MyRegister from '../components/my-register/My-register.vue';
-import MyOrderDetail from '../components/my-order-detail/My-order-detail.vue';
-import MyEditPassword from '../components/my-edit-password/My-edit-password.vue';
-import MyEditWalletPassword from '../components/my-edit-wallet-password/My-edit-wallet-password.vue';
-import MySupplyEnergy from '../components/my-supply-energy/My-supply-energy.vue';
-import MyEditName from '../components/my-edit-name/My-edit-name.vue';
-import MyEditPhone from '../components/my-edit-phone/My-edit-phone.vue';
-import MyComment from '../components/my-comment/My-comment.vue';
-
 Vue.use(Router);
 
-const scrollBehavior = (to, from, savedPosition) => {
-  let data = JSON.parse(window.localStorage.getItem(to.name));
-  if (savedPosition) {
-    return savedPosition;
-  } else {
-    let y = 0;
-    if (data) {
-      y = data.y;
-    }
-    return {
-      x: 0,
-      y: y
-    };
-  }
-};
+// const scrollBehavior = (to, from, savedPosition) => {
+//   let data = JSON.parse(window.localStorage.getItem(to.name));
+//   if (savedPosition) {
+//     return savedPosition;
+//   } else {
+//     let y = 0;
+//     if (data) {
+//       y = data.y;
+//     }
+//     return {
+//       x: 0,
+//       y: y
+//     };
+//   }
+// };
 
-export default new Router({
-  mode: 'history',
+let routerEntity = {
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -67,165 +40,87 @@ export default new Router({
         {
           path: 'home',
           name: 'home',
-          component: Home,
+          // component: Home,
+          components: {
+            home: Home
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'member',
           name: 'member',
-          component: Member,
+          // component: Member,
+          components: {
+            member: Member
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'classify',
           name: 'classify',
-          component: Classify,
+          // component: Classify,
+          components: {
+            classify: Classify
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'shoppingcar',
           name: 'shoppingcar',
-          component: ShoppingCar,
+          // component: ShoppingCar,
+          components: {
+            shoppingcar: ShoppingCar
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'my',
           name: 'my',
-          component: My,
+          // component: My,
+          components: {
+            my: My
+          },
           meta: {
             saved: true
           },
-          children: [{
-            path: 'login',
-            name: 'myLogin',
-            component: MyLogin,
-            children: [{
-              path: '/register/:title',
-              name: 'myRegister',
-              component: MyRegister
-            }]
-          },
-          {
-            path: '/basemsg',
-            name: 'baseMsg',
-            component: MyBaseMsg,
-            children: [{
-              path: 'editPassword',
-              name: 'myEditPassword',
-              component: MyEditPassword
-            },
-            {
-              path: 'editWalletPassword',
-              name: 'myEditWalletPassword',
-              component: MyEditWalletPassword
-            },
-            {
-              path: 'supplyEnergy',
-              name: 'mySupplyEnergy',
-              component: MySupplyEnergy
-            },
-            {
-              path: 'editName',
-              name: 'myEditName',
-              component: MyEditName
-            },
-            {
-              path: 'editPhone',
-              name: 'myEditPhone',
-              component: MyEditPhone
-            }]
-          },
-          {
-            path: '/collection',
-            name: 'collection',
-            component: MyCollection
-          },
-          {
-            path: '/upgrade',
-            name: 'myUpgrade',
-            component: MyUpgrade,
-            children: [{
-              path: 'recharge',
-              name: 'myRecharge',
-              component: MyRecharge,
-              children: [{
-                path: 'paySuccess',
-                name: 'myPaySuccess',
-                component: MyPaySuccess
-              }]
-            }]
-          },
-          {
-            path: '/more',
-            name: 'myMore',
-            component: MyMore,
-            children: [{
-              path: 'aboutUs',
-              name: 'myAboutUs',
-              component: MyAboutUs
-            },
-            {
-              path: 'helpCenter',
-              name: 'myHelpCenter',
-              component: MyHelpCenter,
-              children: [{
-                path: 'question/:question',
-                name: 'myQuestion',
-                component: MyQuestions
-              }]
-            },
-            {
-              path: 'fedback',
-              name: 'myFedback',
-              component: MyFedback
-            }]
-          },
-          {
-            path: '/orders',
-            name: 'myOrders',
-            component: MyOrders,
-            children: [{
-              path: 'detail/:orderId/:tag',
-              name: 'myOrderDetail',
-              component: MyOrderDetail,
-              children: [{
-                path: '/comment/:orderId',
-                name: 'myComment',
-                component: MyComment
-              }]
-            }]
-          },
-          {
-            path: '/address',
-            name: 'myAddress',
-            component: MyAddress
-          },
-          {
-            path: '/wallet',
-            name: 'myWallet',
-            component: MyWallet,
-            children: [{
-              path: '/charge',
-              name: 'myCharge',
-              component: MyCharge
-            },
-            {
-              path: '/account',
-              name: 'myAccount',
-              component: MyAccount
-            }]
-          }]
+          children: [
+          ]
         }
       ]
     }
-  ],
-  scrollBehavior
-});
+  ]
+};
+
+import routerHome from 'components/home/router';
+import routerMember from 'components/member/router';
+import routerClassify from 'components/classify/router';
+import routerShoppingCar from 'components/shoppingcar/router';
+import routerMy from 'components/my/router';
+
+routerEntity.routes[1].children[0].children = routerEntity.routes[1].children[0].children.concat(routerHome.routes);
+routerEntity.routes[1].children[1].children = routerEntity.routes[1].children[1].children.concat(routerMember.routes);
+routerEntity.routes[1].children[2].children = routerEntity.routes[1].children[2].children.concat(routerClassify.routes);
+routerEntity.routes[1].children[3].children = routerEntity.routes[1].children[3].children.concat(routerShoppingCar.routes);
+routerEntity.routes[1].children[4].children = routerEntity.routes[1].children[4].children.concat(routerMy.routes);
+
+export default new Router(routerEntity);

@@ -1,10 +1,37 @@
-$maintheme: #228733;
+$maintheme: #d81e06;
+
+.home-headbar-bg {
+  background: $maintheme;
+}
+
+.location {
+  color: white;
+  height: .44rem;
+  left: .1rem;
+  line-height: .44rem;
+  top: 0;
+  z-index: 100;
+
+  > span {
+    font-size: .14rem;
+    vertical-align: top;
+  }
+}
+
+.search {
+  color: white;
+  height: .44rem;
+  line-height: .44rem;
+  right: .12rem;
+  top: 0;
+  z-index: 100;
+}
 
 .home-content {
-  background: rgb(242,242,242);
+  background: #F1F1F1;
   font-size: .16rem;
   height: 100%;
-  min-height: 100%;
+  overflow: scroll;
 }
 
 .swiper-slide {
@@ -23,10 +50,6 @@ $maintheme: #228733;
 
 .border-box {
   box-sizing: border-box;
-}
-
-.normal-fontsize {
-  font-size: .16rem;
 }
 
 .home-seperator {
@@ -58,16 +81,16 @@ $maintheme: #228733;
 }
 
 .home-classify {
-  margin-top: .06rem;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: .06rem;
   padding: 0 .09rem;
 
   > .item {
     box-shadow: 0 0 2px 0 #DADADA;
     color: white;
-    flex-basis: 1.1rem;
+    flex-basis: 30%;
     flex-shrink: 1;
     font-size: .16rem;
     height: .81rem;
@@ -105,41 +128,27 @@ $maintheme: #228733;
 
   > .item {
     background: white;
-    box-shadow: 0 1px 1px 0 #DADADA;
+    box-shadow: 0 1px 1px 0 #BABABA;
     font-size: 0;
-    margin-top: .07rem;
-    min-height: 1.84rem;
+    height: 1.84rem;
+    margin-top: .1rem;
+    max-height: 1.84rem;
     overflow: hidden;
     width: 100%;
 
-    > .title {
+    > .item-title {
       font-size: .15rem;
-      padding: .12rem;
+      padding: .12rem .24rem .12rem .12rem;
     }
 
     > .img-show {
-      width: 100%;
+      height: 100%;
     }
   }
 }
 
-// .fix-block {
-//   background: red;
-//   bottom: 0;
-//   color: white;
-//   font-size: .3rem;
-//   height: .5rem;
-//   left: 0;
-//   margin: auto;
-//   padding: .1rem;
-//   position: fixed;
-//   right: 0;
-//   top: 0;
-//   width: .8rem;
-// }
-//
-// .btn {
-//   border: 1px solid red;
-//   height: .5rem;
-//   width: .5rem;
-// }
+.single-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

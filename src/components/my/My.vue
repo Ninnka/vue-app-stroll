@@ -5,7 +5,7 @@
     </transition>
     <div class="login-mask" v-if="userDatas.username=='登录'" @click="toLogin"></div>
     <div class="header">
-      <headbar></headbar>
+      <headbar custombg="header-bg"></headbar>
       <div class="avatar">
         <img :src="userDatas.avatar" alt="">
         <img :src="gradeVip" alt="" v-if="userDatas.grade == 'VIP会员'">
@@ -36,22 +36,15 @@
 
 <script type="text/javascript">
 import router from '../../router/index.js';
-import Header from '../common/header/header.vue';
-// import AvatarValue from './assets/avatar.png';
+import Header from '../common/header/Header.vue';
 import GradeVip from './assets/grade_vip.png';
 import GradePartner from './assets/grade_partner.png';
-// import sprite from './assets/sprite.png';
 import Nologin from './assets/help-center.png';
 
 export default {
   data() {
     return {
       // 用户信息
-      // userDatas: {
-      //   username: '阿萨德',
-      //   avatar: AvatarValue,
-      //   grade: 'VIP会员'
-      // }
       userDatas: {
         username: '登录',
         avatar: Nologin,
@@ -131,6 +124,9 @@ export default {
 </script>
 
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .my-childview{
   position: fixed;
   top: 0;
