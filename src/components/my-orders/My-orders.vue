@@ -1,5 +1,5 @@
 <template>
-  <div id="orders">
+  <div id="orders" @touchmove="load($event)">
     <transition name="childtranslate">
       <router-view class="orders-childview"></router-view>
     </transition>
@@ -25,7 +25,7 @@
     <div class="orders-content">
     <transition name="fade" mode="out-in">
     <!-- 待付款 -->
-      <ul class="no-pay" v-if="avtiveNav==navDatas[0]" key="1" @touchmove="load($event)">
+      <ul class="no-pay" v-if="avtiveNav==navDatas[0]" key="1">
         <li v-for="item in data1">
           <router-link :to="'/orders/detail/' + item.orderId + '/待付款'">
             <item :itemdata="item" title="待付款">
@@ -79,7 +79,7 @@
         </li>
       </ul>
     </transition>
-    <span id="testspan"></span>
+    <div class="spinningCircle" v-if="showSpinning"></div>
 
     </div>
   </div>
@@ -96,21 +96,10 @@ export default {
       avtiveNav: '待付款',
       navDatas: ['待付款', '待发货', '待收货', '已完成', '退货/售后'],
       showCancelBox: false,
+      canLoad: true,
+      showSpinning: true,
+      screenHeight: window.screen.height,
       data1: [{
-        orderId: 'SHYJ12552',
-        imgsrc: OrderImg,
-        name: '坚果',
-        money: 29.5,
-        num: 2
-      },
-      {
-        orderId: 'SHYJ12555',
-        imgsrc: OrderImg,
-        name: '坚果',
-        money: 29.5,
-        num: 2
-      },
-      {
         orderId: 'SHYJ12552',
         imgsrc: OrderImg,
         name: '坚果',
@@ -179,6 +168,35 @@ export default {
     },
     navClick(navText) {
       this.avtiveNav = navText;
+      let tempObj = null;
+      switch (this.avtiveNav) {
+        case '待付款': {
+          tempObj = this.data1;
+          break;
+        }
+        case '待发货': {
+          tempObj = this.data2;
+          break;
+        }
+        case '待收货': {
+          tempObj = this.data3;
+          break;
+        }
+        case '已完成': {
+          tempObj = this.data4;
+          break;
+        }
+        case '退货/售后': {
+          tempObj = this.data5;
+          break;
+        }
+      }
+      console.log()
+      if (tempObj.length <= 3) {
+        this.showSpinning = false;
+      } else {
+        this.showSpinning = true;
+      }
     },
     // 取消订单
     cancelOrder(orderId) {
@@ -200,9 +218,67 @@ export default {
     toComment(orderId) {
       alert(orderId + ':comment');
     },
-    // 加载
+    // 懒加载
     load(e) {
-      console.log(document.querySelector('#testspan').pageX);
+      let loadingTop = document.querySelector('.spinningCircle').offsetTop;
+      let orderSTop = document.querySelector('#orders').scrollTop;
+      if (loadingTop <= orderSTop + this.screenHeight + 100 && this.canLoad) {
+        let _this = this;
+        this.canLoad = false;
+        setTimeout(function() {
+          let addData = [{
+            orderId: 'SHYJ12552',
+            imgsrc: OrderImg,
+            name: '坚果',
+            money: 29.5,
+            num: 2
+          },
+          {
+            orderId: 'SHYJ12555',
+            imgsrc: OrderImg,
+            name: '坚果',
+            money: 29.5,
+            num: 2
+          },
+          {
+            orderId: 'SHYJ12552',
+            imgsrc: OrderImg,
+            name: '坚果',
+            money: 29.5,
+            num: 2
+          },
+          {
+            orderId: 'SHYJ12555',
+            imgsrc: OrderImg,
+            name: '坚果',
+            money: 29.5,
+            num: 2
+          }]
+          switch (_this.avtiveNav) {
+            case '待付款': {
+              _this.data1 = _this.data1.concat(addData);
+              break;
+            }
+            case '待发货': {
+              _this.data2 = _this.data2.concat(addData);
+              break;
+            }
+            case '待收货': {
+              _this.data3 = _this.data3.concat(addData);
+              break;
+            }
+            case '已完成': {
+              _this.data4 = _this.data4.concat(addData);
+              break;
+            }
+            case '退货/售后': {
+              _this.data5 = _this.data5.concat(addData);
+              break;
+            }
+          }
+          _this.canLoad = true;
+        }, 1500);
+      }
     }
   }
 }
@@ -226,7 +302,8 @@ export default {
   transform: translateX(100%);
 }
 #orders {
-	padding-top: .45rem;
+  overflow-y: scroll;
+	padding: .45rem 0 .8rem;
   margin-bottom: .45rem;
 	font-size: .16rem;
 	background: #f5f5f5;
@@ -353,4 +430,56 @@ li{
 .cancel-box>div button:last-child{
   background: #DE1F33;
 }
+
+
+
+.spinningCircle {
+     margin:.2rem auto;
+     height: 30px;
+     width: 30px;
+     border-radius: 50%;
+     border: 4px solid rgba(255,255,255,0);
+     border-top-color: 4px solid #7fc4d1;
+     border-right-color: 4px solid #7fc4d1;
+     -webkit-animation: single2 4s infinite linear;
+     animation: single2 4s infinite linear;
+  }
+
+  @-webkit-keyframes single2 {
+     0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        border-top-color: #7fc4d1;
+        border-right-color: #7fc4d1;
+     }
+     50% {
+        border-top-color: #1f4f58;
+        border-right-color: #1f4f58;
+     }
+     100% {
+        -webkit-transform: rotate(720deg);
+        transform: rotate(720deg);
+        border-top-color: #7fc4d1;
+        border-right-color: #7fc4d1;
+     }
+  }
+
+  @keyframes single2 {
+     0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        border-top-color: #7fc4d1;
+        border-right-color: #7fc4d1;
+     }
+     50% {
+        border-top-color: #1f4f58;
+        border-right-color: #1f4f58;
+     }
+     100% {
+        -webkit-transform: rotate(720deg);
+        transform: rotate(720deg);
+        border-top-color: #7fc4d1;
+        border-right-color: #7fc4d1;
+     }
+  }
 </style>

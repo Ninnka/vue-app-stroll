@@ -137,7 +137,8 @@ export default {
   z-index: 250;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
+  overflow: hidden;
 }
 .childtranslate-enter-active {
   transition: all .5s ease;
