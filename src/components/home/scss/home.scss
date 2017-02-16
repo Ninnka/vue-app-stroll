@@ -4,6 +4,29 @@ $maintheme: #d81e06;
   background: $maintheme;
 }
 
+.location {
+  color: white;
+  height: .44rem;
+  left: .1rem;
+  line-height: .44rem;
+  top: 0;
+  z-index: 100;
+
+  > span {
+    font-size: .14rem;
+    vertical-align: top;
+  }
+}
+
+.search {
+  color: white;
+  height: .44rem;
+  line-height: .44rem;
+  right: .12rem;
+  top: 0;
+  z-index: 100;
+}
+
 .home-content {
   background: #F1F1F1;
   font-size: .16rem;
@@ -58,10 +81,10 @@ $maintheme: #d81e06;
 }
 
 .home-classify {
-  margin-top: .06rem;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: .06rem;
   padding: 0 .09rem;
 
   > .item {

@@ -1,6 +1,13 @@
 <template lang="html">
-  <div class="fullpage overscroll">
+  <div class="fullpage overscroll normal-fontsize">
     <head-bar title="首页" :custombg="custombg"></head-bar>
+    <div class="location fixed" @click="locate">
+      <i class="icon iconfont icon-location"></i>
+      <span>{{currentcity}}</span>
+    </div>
+    <div class="search fixed" @click="search">
+      <i class="icon iconfont icon-search"></i>
+    </div>
     <div class="home-content" id="tab-main-content">
       <!-- 主页的轮播图 -->
       <div class="swiper-container">
@@ -33,6 +40,14 @@
     <transition name="slide-fade">
       <router-view name="gooddetailcontent" class="content-router-view position-absolute"></router-view>
     </transition>
+
+    <transition name="slide-fade">
+      <router-view name="selectcitycontent" class="content-router-view position-absolute"></router-view>
+    </transition>
+
+    <transition name="slide-fade">
+      <router-view name="search" class="content-router-view position-absolute"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -47,6 +62,7 @@ export default {
   data() {
     return {
       custombg: 'home-headbar-bg',
+      currentcity: '广州市',
       slideImgList: [
         {
           src: require('./images/slide-img1.jpg'),
@@ -92,6 +108,16 @@ export default {
           id
         }
       });
+    },
+    locate() {
+      router.push({
+        name: 'select-city'
+      })
+    },
+    search() {
+      router.push({
+        name: 'search'
+      })
     }
   },
   components: {
