@@ -1,5 +1,5 @@
 import GoodDetail from 'components/good-detail/GoodDetail.vue';
-import SelectCity from 'components/select-city/SelectCity.vue';
+import Locate from 'components/locate/Locate.vue';
 import Search from 'components/search/Search.vue';
 
 export default {
@@ -15,7 +15,7 @@ export default {
       path: 'select-city',
       name: 'select-city',
       components: {
-        selectcitycontent: SelectCity
+        selectcitycontent: Locate
       }
     },
     {

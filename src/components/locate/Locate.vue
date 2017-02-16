@@ -74,4 +74,4 @@ export default {
 }
 </script>
 
-<style lang="scss">@import "./scss/select-city.scss";</style>
+<style lang="scss">@import "./scss/locate.scss";</style>
