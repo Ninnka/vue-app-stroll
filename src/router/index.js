@@ -27,6 +27,12 @@ import MyQuestions from '../components/my-questions/My-questions.vue';
 import MyLogin from '../components/my-login/My-login.vue';
 import MyRegister from '../components/my-register/My-register.vue';
 import MyOrderDetail from '../components/my-order-detail/My-order-detail.vue';
+import MyEditPassword from '../components/my-edit-password/My-edit-password.vue';
+import MyEditWalletPassword from '../components/my-edit-wallet-password/My-edit-wallet-password.vue';
+import MySupplyEnergy from '../components/my-supply-energy/My-supply-energy.vue';
+import MyEditName from '../components/my-edit-name/My-edit-name.vue';
+import MyEditPhone from '../components/my-edit-phone/My-edit-phone.vue';
+import MyComment from '../components/my-comment/My-comment.vue';
 
 Vue.use(Router);
 
@@ -110,7 +116,32 @@ export default new Router({
           {
             path: '/basemsg',
             name: 'baseMsg',
-            component: MyBaseMsg
+            component: MyBaseMsg,
+            children: [{
+              path: 'editPassword',
+              name: 'myEditPassword',
+              component: MyEditPassword
+            },
+            {
+              path: 'editWalletPassword',
+              name: 'myEditWalletPassword',
+              component: MyEditWalletPassword
+            },
+            {
+              path: 'supplyEnergy',
+              name: 'mySupplyEnergy',
+              component: MySupplyEnergy
+            },
+            {
+              path: 'editName',
+              name: 'myEditName',
+              component: MyEditName
+            },
+            {
+              path: 'editPhone',
+              name: 'myEditPhone',
+              component: MyEditPhone
+            }]
           },
           {
             path: '/collection',
@@ -162,9 +193,14 @@ export default new Router({
             name: 'myOrders',
             component: MyOrders,
             children: [{
-              path: 'detail/:orderId',
+              path: 'detail/:orderId/:tag',
               name: 'myOrderDetail',
-              component: MyOrderDetail
+              component: MyOrderDetail,
+              children: [{
+                path: '/comment/:orderId',
+                name: 'myComment',
+                component: MyComment
+              }]
             }]
           },
           {

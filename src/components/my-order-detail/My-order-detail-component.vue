@@ -5,7 +5,7 @@
       <p>{{orderDatas.address}}</p>
     </div>
     <div class="content-middle">
-      <p>购买商品 <span>{{kind}}</span></p>
+      <p>购买商品 <slot name="rejectGoods"></slot><span>{{kind}}</span></p>
       <div>
         <span>x{{orderDatas.goods[0].num}}</span>
         <img src="http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg" alt="">
@@ -54,9 +54,10 @@ export default {
   margin-left: .15rem;
 }
 .content-middle{
-  margin: .15rem 0;
+  margin: .1rem 0;
 }
 .content-middle>p{
+  position: relative;
   line-height: .4rem;
   border-top: 1px solid #E0E0E1;
 }
@@ -65,7 +66,8 @@ export default {
   border-bottom: 1px solid #E0E0E1;
 }
 .content-middle>p:nth-child(1) span{
-  float: right;
+  position: absolute;
+  right: 0;
 }
 .content-middle div{
   position: relative;

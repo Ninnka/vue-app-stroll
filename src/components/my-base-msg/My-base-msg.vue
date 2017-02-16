@@ -1,5 +1,8 @@
 <template>
   <div id="base-msg">
+    <transition name="childtranslate">
+      <router-view class="base-msg-childview"></router-view>
+    </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="基本信息"></headbar>
@@ -7,7 +10,7 @@
     <div class="base-msg-content">
     	<ul> 
         <li v-for="item in listDataTop">
-        <router-link to="">
+        <router-link :to="item.toUrl">
           {{item.listText}}
           <img :src="item.imgsrc" alt="" v-if="item.imgsrc"><span v-if="item.value">{{item.value}}</span>
         </router-link>
@@ -15,7 +18,7 @@
       </ul>
       <ul> 
         <li v-for="item in listDataBottom">
-          <router-link to="">
+          <router-link :to="item.toUrl">
             {{item.listText}}
           </router-link>
         </li>
@@ -40,7 +43,7 @@ export default {
       {
         listText: '姓名',
         value: '小明',
-        toUrl: ''
+        toUrl: '/basemsg/editName'
       },
       {
         listText: '会员标志',
@@ -50,19 +53,19 @@ export default {
       {
         listText: '联系方式',
         value: '136****1245',
-        toUrl: ''
+        toUrl: '/basemsg/editPhone'
       }],
       listDataBottom: [{
         listText: '修改密码',
-        toUrl: ''
+        toUrl: '/basemsg/editPassword'
       },
       {
         listText: '修改钱包密码',
-        toUrl: ''
+        toUrl: '/basemsg/editWalletPassword'
       },
       {
         listText: '我能供应',
-        toUrl: ''
+        toUrl: '/basemsg/supplyEnergy'
       }],
       userData: {
         username: '小明',
@@ -84,6 +87,23 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.base-msg-childview{
+  position: fixed;
+  top: 0;
+  z-index: 250;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to{
+  transform: translateX(100%);
+}
 #base-msg {
 	padding-top: .45rem;
 	font-size: .16rem;
