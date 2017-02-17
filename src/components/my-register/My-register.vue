@@ -2,7 +2,7 @@
   <div id="register">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar :title="title"></headbar>
+    	<headbar :title="title"  custombg="header-bg"></headbar>
     </div>
     <div class="register-content">
       <ul>
@@ -37,7 +37,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #register {
 	padding-top: .45rem;
 	font-size: .16rem;

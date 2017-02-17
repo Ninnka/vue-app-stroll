@@ -2,7 +2,7 @@
   <div id="aboutus">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="修改密码"></headbar>
+    	<headbar title="修改密码" custombg="header-bg"></headbar>
     </div>
     <div class="aboutus-content">
       <div>当前密码 <input type="password" placeholder="6-20字符" v-model="oldpsw"></div>
@@ -37,7 +37,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #aboutus {
 	padding-top: .45rem;
 	font-size: .16rem;

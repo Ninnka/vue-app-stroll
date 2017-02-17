@@ -2,7 +2,7 @@
   <div id="fedback">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="意见反馈"></headbar>
+    	<headbar title="意见反馈" custombg="header-bg"></headbar>
     </div>
     <div class="fedback-content">
       <textarea id="" cols="30" rows="10" v-model="text"></textarea> 
@@ -32,7 +32,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #fedback {
 	padding-top: .45rem;
 	font-size: .16rem;

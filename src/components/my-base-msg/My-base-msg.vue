@@ -5,7 +5,7 @@
     </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="基本信息"></headbar>
+    	<headbar title="基本信息"  custombg="header-bg"></headbar>
     </div>
     <div class="base-msg-content">
     	<ul> 
@@ -87,6 +87,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .base-msg-childview{
   position: fixed;
   top: 0;

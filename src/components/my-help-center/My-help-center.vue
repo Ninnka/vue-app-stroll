@@ -5,7 +5,7 @@
     </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="帮助中心"></headbar>
+    	<headbar title="帮助中心" custombg="header-bg"></headbar>
     </div>
     <div class="help-center-content">
       <div class="hcc-top">
@@ -53,6 +53,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .helpCenter-childview{
   position: fixed;
   top: 0;

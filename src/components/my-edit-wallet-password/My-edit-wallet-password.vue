@@ -2,7 +2,7 @@
   <div id="walletpsw">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="修改钱包密码"></headbar>
+    	<headbar title="修改钱包密码" custombg="header-bg"></headbar>
     </div>
     <div class="wallet-psw-content">
       <div>新密码 <input type="password" placeholder="6-20字符" v-model="newpsw1"></div>
@@ -39,7 +39,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #walletpsw {
 	padding-top: .45rem;
 	font-size: .16rem;

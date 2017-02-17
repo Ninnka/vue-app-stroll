@@ -2,7 +2,7 @@
   <div id="questions">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="常见问题"></headbar>
+    	<headbar title="常见问题" custombg="header-bg"></headbar>
     </div>
     <div class="questions-content">
       <ul>
@@ -48,7 +48,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #questions {
 	padding-top: .45rem;
 	font-size: .16rem;

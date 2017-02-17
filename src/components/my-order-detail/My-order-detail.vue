@@ -1,5 +1,5 @@
 <template>
-  <div id="orderdetail">
+  <div id="orderdetail" @touchmove.prevent="">
     <transition name="childtranslate">
       <router-view class="orderdetail-childview"></router-view>
     </transition>
@@ -30,7 +30,7 @@
     </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="订单详情"></headbar>
+    	<headbar title="订单详情"  custombg="header-bg"></headbar>
     </div>
     <div class="orderdetail-content">
       <detailcontent :kind="tag" :orderDatas="orderDatas">
@@ -72,6 +72,13 @@ export default {
           money: 29.5,
           num: 2,
           descript: '1盒6片'
+        },
+        {
+          imgsrc: '',
+          name: '坚果',
+          money: 29.5,
+          num: 2,
+          descript: '1盒6片'
         }]
       }
     }
@@ -92,13 +99,15 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .orderdetail-childview{
   position: fixed;
   top: 0;
   z-index: 250;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
 }
 .childtranslate-enter-active {
   transition: all .5s ease;
@@ -110,9 +119,10 @@ export default {
   transform: translateX(100%);
 }
 #orderdetail {
-	padding-top: .45rem;
+	padding-top: .44rem;
 	font-size: .16rem;
 	background: #f5f5f5;
+  overflow: scroll;
 }
 a{
 	color: #a3a3a3
@@ -142,6 +152,9 @@ a{
   border-radius: .05rem;
   color: #fff;
   font-size: .16rem;
+}
+.orderdetail-content{
+  overflow-y: scroll;
 }
 .reject-goods{
   padding:0 .1rem;

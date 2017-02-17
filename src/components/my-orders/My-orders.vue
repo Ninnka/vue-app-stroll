@@ -13,7 +13,7 @@
     </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="我的订单"></headbar>
+    	<headbar title="我的订单"  custombg="header-bg"></headbar>
     </div>
     <div class="orders-nav">
       <span v-for="item in navDatas" @click="navClick(item)">{{item}}
@@ -284,13 +284,15 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .orders-childview{
   position: fixed;
   top: 0;
   z-index: 250;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
 }
 .childtranslate-enter-active {
   transition: all .5s ease;

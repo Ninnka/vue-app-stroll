@@ -133,8 +133,6 @@ export default {
   z-index: 250;
   width: 100%;
   height: 100%;
-  /*overflow-y: scroll;*/
-  overflow: hidden;
 }
 .childtranslate-enter-active {
   transition: all .5s ease;
@@ -162,7 +160,7 @@ a{
     top: .43rem;
     width: 100%;
     height: 1.6rem;
-    background: #228733;
+    background: #D00009;
 }
 .header p{
   color: #fff;

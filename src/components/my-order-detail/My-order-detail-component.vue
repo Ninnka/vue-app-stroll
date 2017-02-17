@@ -6,12 +6,12 @@
     </div>
     <div class="content-middle">
       <p>购买商品 <slot name="rejectGoods"></slot><span>{{kind}}</span></p>
-      <div>
-        <span>x{{orderDatas.goods[0].num}}</span>
+      <div v-for="item in orderDatas.goods" class="goods-box">
+        <span>x{{item.num}}</span>
         <img src="http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg" alt="">
-        <p>{{orderDatas.goods[0].name}}</p>
-        <p>规格：{{orderDatas.goods[0].descript}}</p>
-        <p>￥{{orderDatas.goods[0].money}}</p>
+        <p>{{item.name}}</p>
+        <p>规格：{{item.descript}}</p>
+        <p>￥{{item.money}}</p>
       </div>
       <p>运费：<span>￥{{orderDatas.fare}}</span></p>
       <p>备注：{{orderDatas.remark}}</p>
@@ -38,8 +38,10 @@ export default {
 </script>
 <style lang="css" type="text/css" scoped>
 #detail {
+  margin-bottom: .45rem;
 	font-size: .16rem;
 	background: #f5f5f5;
+  overflow-y: scroll;
 }
 .content-top,.content-middle,.content-bottom{
   position: relative;
@@ -63,16 +65,16 @@ export default {
 }
 .content-middle>p:nth-child(1){
   border-top: none;
-  border-bottom: 1px solid #E0E0E1;
 }
 .content-middle>p:nth-child(1) span{
   position: absolute;
   right: 0;
 }
-.content-middle div{
+.goods-box{
   position: relative;
   padding: .1rem 0;
   overflow: hidden;
+  border-top: 1px solid #D9D9DA;
 }
 .content-middle div span{
   position: absolute;

@@ -2,7 +2,7 @@
   <div id="pay">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="支付成功"></headbar>
+    	<headbar title="支付成功"  custombg="header-bg"></headbar>
     </div>
     <div class="pay-content">
     	<div>恭喜您成为VIP会员</div>
@@ -31,6 +31,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 #pay {
 	padding-top: .45rem;
 	font-size: .16rem;

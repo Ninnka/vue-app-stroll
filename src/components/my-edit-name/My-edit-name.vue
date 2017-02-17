@@ -2,7 +2,7 @@
   <div id="editname">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="姓名"></headbar>
+    	<headbar title="姓名" custombg="header-bg"></headbar>
     </div>
     <div class="editname-content">
       <input type="text" v-model="name">
@@ -32,7 +32,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #editname {
 	padding-top: .45rem;
 	font-size: .16rem;

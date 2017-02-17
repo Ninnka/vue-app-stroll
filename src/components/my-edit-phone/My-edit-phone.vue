@@ -2,7 +2,7 @@
   <div id="phone">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="修改联系方式"></headbar>
+    	<headbar title="修改联系方式" custombg="header-bg"></headbar>
     </div>
     <div class="phone-content">
       <div>手机号码 <input type="text" v-model="phone"></div>
@@ -32,7 +32,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #phone {
 	padding-top: .45rem;
 	font-size: .16rem;

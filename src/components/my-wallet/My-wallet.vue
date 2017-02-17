@@ -5,7 +5,7 @@
     </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="我的钱包"></headbar>
+    	<headbar title="我的钱包" custombg="header-bg"></headbar>
       <span @click="account">{{accountText}}</span>
     </div>
     <div class="wallet-content">
@@ -62,6 +62,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .wallet-childview{
   position: fixed;
   top: 0;

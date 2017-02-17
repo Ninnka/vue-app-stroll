@@ -2,7 +2,7 @@
   <div id="collection">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="我的收藏"></headbar>
+    	<headbar title="我的收藏" custombg="header-bg"></headbar>
       <span @click="edit">{{editText}}</span>
     </div>
     <div class="collection-content">
@@ -77,6 +77,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .inputtranslate-enter-active {
   transition: all .3s ease;
 }

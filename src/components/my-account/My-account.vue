@@ -2,7 +2,7 @@
   <div id="account">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="账单"></headbar>
+    	<headbar title="账单" custombg="header-bg"></headbar>
     </div>
     <div class="account-content">
       <div v-for="item in listDatas">
@@ -60,6 +60,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 #account {
 	padding-top: .45rem;
 	font-size: .16rem;

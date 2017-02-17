@@ -2,7 +2,7 @@
   <div id="comment">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="评价"></headbar>
+    	<headbar title="评价" custombg="header-bg"></headbar>
     </div>
     <div class="comment-content">
     </div>
@@ -29,7 +29,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #comment {
 	padding-top: .45rem;
 	font-size: .16rem;

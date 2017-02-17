@@ -2,7 +2,7 @@
   <div id="energy">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="关于我们"></headbar>
+    	<headbar title="关于我们"  custombg="header-bg"></headbar>
     </div>
     <div class="energy-content">
       <div>行业类型：<input type="text" v-model="kind"></div>
@@ -41,7 +41,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
-
+.header-bg{
+  background:#D00009
+}
 #energy {
 	padding-top: .45rem;
 	font-size: .16rem;

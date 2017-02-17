@@ -8,7 +8,7 @@
     </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="登录"></headbar>
+    	<headbar title="登录" custombg="header-bg"></headbar>
       <span @click="register">{{registerText}}</span>
     </div>
     <div class="login-content">
@@ -88,6 +88,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .register-childview{
   position: fixed;
   top: 0;

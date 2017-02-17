@@ -2,7 +2,7 @@
   <div id="charge">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="充值"></headbar>
+    	<headbar title="充值" custombg="header-bg"></headbar>
     </div>
     <div class="charge-content">
       <div>支付宝</div>
@@ -48,6 +48,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 #charge {
 	padding-top: .45rem;
 	font-size: .16rem;

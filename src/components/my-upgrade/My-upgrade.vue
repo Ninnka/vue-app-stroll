@@ -5,7 +5,7 @@
     </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="升级会员"></headbar>
+    	<headbar title="升级会员" custombg="header-bg"></headbar>
       <span @click="toOrder">充值</span>
     </div>
     <div class="collection-content">
@@ -51,6 +51,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 .upgrade-childview{
   position: fixed;
   top: 0;

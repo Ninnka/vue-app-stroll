@@ -2,7 +2,7 @@
   <div id="address">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="收货地址"></headbar>
+    	<headbar title="收货地址" custombg="header-bg"></headbar>
       <span @click="addAddress">{{addText}}</span>
     </div>
     <div class="address-content">
@@ -55,6 +55,9 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
 #address {
 	padding-top: .43rem;
 	font-size: .16rem;
