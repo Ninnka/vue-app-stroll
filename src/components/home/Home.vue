@@ -22,9 +22,9 @@
         <div class="item">最新</div>
         <div class="item">用品</div>
         <div class="item">食品</div>
-        <div class="item">热门</div>
+        <div class="item">客服</div>
         <div class="item">家居</div>
-        <div class="item">数码</div>
+        <div class="item" @click="viewMerchant('asset')">房产</div>
       </div>
       <!-- 主页专区推荐 -->
       <div class="home-seperator normal-fontsize">
@@ -42,25 +42,30 @@
     </transition>
 
     <transition name="slide-fade">
-      <router-view name="selectcitycontent" class="content-router-view position-absolute"></router-view>
+      <router-view name="locatecontent" class="content-router-view position-absolute"></router-view>
     </transition>
 
     <transition name="slide-fade">
       <router-view name="search" class="content-router-view position-absolute"></router-view>
     </transition>
+
+    <transition name="slide-fade">
+      <router-view name="merchant" class="content-router-view position-absolute"></router-view>
+    </transition>
   </div>
 </template>
 
 <script type="text/javascript">
-import router from '../../router';
+import router from 'src/router';
 
-import Header from '../common/header/Header.vue';
+import Header from 'components/common/header/Header';
 
 import Swiper from '../../../static/js/swiper-3.4.1.min.js';
 
 export default {
   data() {
     return {
+      swiper: '',
       custombg: 'home-headbar-bg',
       currentcity: '广州市',
       slideImgList: [
@@ -84,7 +89,7 @@ export default {
       recommendList: [
         {
           id: 1,
-          title: '【10月抢购预告】 荣耀乐檬大神爆款 惊爆价荣耀乐檬大神爆款 惊爆价',
+          title: '【10月抢购预告】荣耀乐檬大神爆款 惊爆价荣耀乐檬大神爆款 惊爆价',
           imgsrc: require('./images/slide-img1.jpg')
         },
         {
@@ -111,12 +116,20 @@ export default {
     },
     locate() {
       router.push({
-        name: 'select-city'
+        name: 'locate'
       })
     },
     search() {
       router.push({
         name: 'search'
+      })
+    },
+    viewMerchant(type) {
+      router.push({
+        name: 'merchant',
+        params: {
+          merchantType: type
+        }
       })
     }
   },
@@ -124,18 +137,16 @@ export default {
     headBar: Header
   },
   created() {
-    // console.log('created');
-    // window.onscroll = function (e) {
-    //   this.st = document.body.scrollTop || document.documentElement.scrollTop;
-    // }.bind(this);
-    // console.log(this.$route);
+
   },
   mounted() {
     console.log('mounted');
-    new Swiper('.swiper-container', {
+    this.swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
       autoplay: 2000,
+      autoplayDisableOnInteraction: false,
+      observer: true,
 
       // 如果需要分页器
       pagination: '.swiper-pagination'
@@ -143,14 +154,6 @@ export default {
   },
   updated() {
     console.log('updated in home');
-    // this.nextIsEnter = this.nextIsEnter ? this.nextIsEnter : !this.nextIsEnter;
-    // if (this.nextIsEnter) {
-    //   let y = JSON.parse(window.localStorage.getItem('home')).y;
-    //   let tab = document.querySelector('#tab-main-content') ? document.querySelector('#tab-main-content') : undefined;
-    //   if (tab) {
-    //     tab.scrollTop = y + 'px';
-    //   }
-    // }
   },
   beforeDestroy() {
     console.log('beforeDestroy');

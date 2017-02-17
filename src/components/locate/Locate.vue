@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="fullpage main-theme-background select-city-main-content content-hasheader normal-fontsize border-box overscroll">
     <head-bar title="选择城市" :custombg="headbarbg">
-      <i slot="backward-icon" class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
+      <backward slot="backward-icon" v-on:backward="backward"></backward>
     </head-bar>
 
     <search-bar v-on:searchCity="searchCity" callbackEvent="searchCity"></search-bar>
@@ -21,10 +21,11 @@
 </template>
 
 <script>
-import router from '../../router';
+import router from 'src/router';
 
-import Header from '../common/header/Header.vue';
-import SearchBar from 'components/common/search-bar/SearchBar.vue';
+import Header from 'components/common/header/Header';
+import SearchBar from 'components/common/search-bar/SearchBar';
+import Backward from 'components/common/icon-backward/IconBackward';
 
 export default {
   data() {
@@ -69,7 +70,8 @@ export default {
   },
   components: {
     headBar: Header,
-    searchBar: SearchBar
+    searchBar: SearchBar,
+    backward: Backward
   }
 }
 </script>

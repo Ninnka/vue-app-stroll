@@ -1,0 +1,115 @@
+$maintheme: #d81e06;
+
+.life-headbarbg {
+  background: rgba(50, 50, 50, .15);
+}
+
+.share-good {
+  color: white;
+  font-size: .22rem;
+  height: .44rem;
+  line-height: .44rem;
+  right: .1rem;
+  text-align: center;
+  top: 0;
+  width: .44rem;
+  z-index: 100;
+
+  &.icon-in-header {
+    font-size: .22rem;
+  }
+}
+
+.life-content {
+  z-index: 201;
+
+  .asset-presentation {
+    background: white;
+    font-size: 0;
+    height: 3.45rem;
+    overflow: hidden;
+
+    > img {
+      height: 100%;
+    }
+  }
+
+  .asset-desc {
+    background: white;
+    padding: .1rem;
+
+    > p {
+      &:nth-child(1) {
+        color: #141414;
+        margin-bottom: .12rem;
+      }
+
+      &:nth-child(2) {
+        color: #595959;
+        font-size: .15rem;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .asset-hostabout {
+    align-items: center;
+    background: white;
+    height: 1rem;
+    justify-content: flex-start;
+    margin-top: .12rem;
+    padding: 0 .1rem;
+
+    > img {
+      flex-grow: 0;
+      flex-shrink: 1;
+      height: .7rem;
+      width: .7rem;
+    }
+
+    .life-desc-main {
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin-left: .12rem;
+
+      > p {
+        padding-bottom: .1rem;
+
+        &:nth-child(1) {
+          color: #1d1d1d;
+          font-size: .15rem;
+        }
+
+        &:nth-child(2) {
+          color: #514f4f;
+          font-size: .13rem;
+        }
+      }
+
+      i {
+        color: $maintheme;
+      }
+
+      span {
+        color: $maintheme;
+        font-size: .13rem;
+      }
+    }
+  }
+
+  .life-otherinfo {
+    background: white;
+    margin-top: .12rem;
+    padding: .15rem .1rem;
+
+    > img {
+      max-width: 100%;
+    }
+
+    > p {
+      color: #353535;
+      font-size: .16rem;
+      margin-top: .06rem;
+    }
+  }
+}
