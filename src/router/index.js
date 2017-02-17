@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Index from '../components/index/Index.vue';
-import Home from '../components/home/Home.vue';
-import Member from '../components/member/Member.vue';
-import Classify from '../components/classify/Classify.vue';
-import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
-import My from '../components/my/My.vue';
+import Index from 'components/index/Index';
+import Home from 'components/home/Home';
+import Member from 'components/member/Member';
+import Classify from 'components/classify/Classify';
+import ShoppingCar from 'components/shoppingcar/ShoppingCar';
+import My from 'components/my/My.vue';
 
 Vue.use(Router);
 
