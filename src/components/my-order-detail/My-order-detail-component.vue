@@ -6,12 +6,8 @@
     </div>
     <div class="content-middle">
       <p>购买商品 <slot name="rejectGoods"></slot><span>{{kind}}</span></p>
-      <div v-for="item in orderDatas.goods" class="goods-box">
-        <span>x{{item.num}}</span>
-        <img src="http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg" alt="">
-        <p>{{item.name}}</p>
-        <p>规格：{{item.descript}}</p>
-        <p>￥{{item.money}}</p>
+      <div v-for="item in orderDatas.goods">
+        <goods-list-item class="goods-box" :itemDatas="item"></goods-list-item>
       </div>
       <p>运费：<span>￥{{orderDatas.fare}}</span></p>
       <p>备注：{{orderDatas.remark}}</p>
@@ -31,9 +27,13 @@
 <script type="text/javascript">
 import Header from '../common/header/header.vue';
 import router from '../../router/index.js';
+import GoodsListItem from '../common/goods-list-item/Goods-list-item.vue';
 
 export default {
-  props: ['kind', 'orderDatas']
+  props: ['kind', 'orderDatas'],
+  components: {
+    'goods-list-item': GoodsListItem
+  }
 }
 </script>
 <style lang="css" type="text/css" scoped>
@@ -71,34 +71,10 @@ export default {
   right: 0;
 }
 .goods-box{
-  position: relative;
-  padding: .1rem 0;
-  overflow: hidden;
   border-top: 1px solid #D9D9DA;
-}
-.content-middle div span{
-  position: absolute;
-  right: 0;
-  bottom: .1rem;
-}
-.content-middle div img{
-  margin-right: .1rem;
-  float: left;
-  width: .8rem;
-  height: .8rem;
-}
-.content-middle div p{
-  line-height: .27rem;
-}
-.content-middle div p:nth-child(4){
-  color: #828383;
-}
-.content-middle div p:nth-child(5){
-  color: #CB0003;
 }
 .content-bottom h3{
   margin-bottom: .1rem;
-  /*background: red;*/
   line-height: .2rem;
   border-bottom: 1px solid #E6E6E7;
 }

@@ -1,5 +1,6 @@
 <template lang="html">
     <div id="my">
+    <toast content="已退出当前账号" :show="showToast"></toast>
     <transition name="childtranslate">
       <router-view class="my-childview"></router-view>
     </transition>
@@ -40,10 +41,12 @@ import Header from '../common/header/Header.vue';
 import GradeVip from './assets/grade_vip.png';
 import GradePartner from './assets/grade_partner.png';
 import Nologin from './assets/help-center.png';
+import Toast from '../common/toast/Toast.vue';
 
 export default {
   data() {
     return {
+      showToast: false,
       // 用户信息
       userDatas: {
         username: '登录',
@@ -85,7 +88,8 @@ export default {
     }
   },
   components: {
-    headbar: Header
+    headbar: Header,
+    toast: Toast
   },
   methods: {
     toLogin() {
@@ -97,6 +101,12 @@ export default {
       localStorage.setItem('avatar', 'http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg');
       localStorage.setItem('grade', '普通会员');
       this.$forceUpdate();
+      this.showToast = true;
+      let _this = this;
+      setTimeout(function() {
+        _this.showToast = false;
+        // this.$forceUpdate();
+      }, 1500);
     }
   },
   created() {
@@ -146,6 +156,9 @@ export default {
 
 
 a{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
   color: #000;
 }
 #my{
@@ -211,13 +224,13 @@ ul li{
   font-size: .15rem;
 }
 ul:first-child li:nth-child(1){
-  background: url('./assets/sprite.png') 0 -.25rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -.28rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(2){
-  background: url('./assets/sprite.png') 0 -.65rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -.63rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(3){
-  background: url('./assets/sprite.png') 0 -1rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -1.02rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(4){
   background: url('./assets/sprite.png') 0 -1.35rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
@@ -229,10 +242,10 @@ ul:first-child li:nth-child(6){
   background: url('./assets/sprite.png') 0 -2.13rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:last-child li:nth-child(1){
-  background: url('./assets/sprite.png') 0 -2.53rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -2.5rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:last-child li:nth-child(2){
-  background: url('./assets/sprite.png') 0 -2.89rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -2.88rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul li router-link{
   display: block;

@@ -5,12 +5,12 @@
       <img :src="itemdata.imgsrc" alt="">
       <span>x{{itemdata.num}}</span>
       <p>{{itemdata.name}}</p>
-      <p>￥{{itemdata.money}}</p>
+      <p>￥{{itemdata.price}}</p>
 
     </div>
     <div>
       <span>共{{itemdata.num}}件</span>
-      <span>合计：￥{{itemdata.money*itemdata.num}}</span>
+      <span>合计：￥{{itemdata.price*itemdata.num}}</span>
       <slot name="btns"></slot>  
     </div>
   </div>

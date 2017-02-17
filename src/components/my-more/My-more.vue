@@ -24,14 +24,13 @@
         <p>正在查找新版本...</p>
       </div>
     </div>
-    <transition name="fade">
-      <span class="toast" v-if="showToast">{{toastText}}</span>
-    </transition>
+    <toast :content="toastText" :show="showToast"></toast>
   </div>
 </template>
 <script type="text/javascript">
 import Header from '../common/header/header.vue';
 import router from '../../router/index.js';
+import Toast from '../common/toast/Toast.vue';
 
 export default {
   data() {
@@ -58,7 +57,8 @@ export default {
     }
   },
   components: {
-    headbar: Header
+    headbar: Header,
+    toast: Toast
   },
   methods: {
     // 返回上一页
@@ -108,6 +108,9 @@ export default {
 	background: #f5f5f5;
 }
 a{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 	color: #000;
 }
 .header span{
@@ -164,15 +167,6 @@ ul li span{
   font-size: .14rem;
   text-align: center;
   color: #e0e0e0;
-}
-.toast{
-  position: fixed;
-  bottom: .1rem;
-  left: 20%;
-  padding: .1rem;
-  background: rgba(0,0,0,.6);
-  border-radius: .1rem;
-  color: #c0c0c0;
 }
 .mul8 {
   margin-left: .3rem;

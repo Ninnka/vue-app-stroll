@@ -82,6 +82,7 @@ a{
   padding-left: .2rem;
   flex:1 1;
   outline: none;
+  width: 10%;
   font-size: .16rem;
 }
 .wallet-psw-content div:first-child{
@@ -114,6 +115,7 @@ a{
   color: #fff;
   font-size: .12rem;
   border-radius: .05rem;
+  box-sizing: border-box;
 }
 .wallet-psw-content p{
   margin-top: .2rem;

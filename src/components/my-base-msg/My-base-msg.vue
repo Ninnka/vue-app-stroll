@@ -9,6 +9,7 @@
     </div>
     <div class="base-msg-content">
     	<ul> 
+        <li class="avatar">{{avatar.text}} <span><input type="file" accept="image/*"><img :src="avatar.imgsrc" alt=""></span></li>
         <li v-for="item in listDataTop">
         <router-link :to="item.toUrl">
           {{item.listText}}
@@ -35,12 +36,11 @@ import GradeVip from '../my/assets/grade_vip.png';
 export default {
   data() {
     return {
-      listDataTop: [{
-        listText: '头像',
-        imgsrc: AvatarValue,
-        toUrl: ''
+      avatar: {
+        text: '头像',
+        imgsrc: AvatarValue
       },
-      {
+      listDataTop: [{
         listText: '姓名',
         value: '小明',
         toUrl: '/basemsg/editName'
@@ -113,7 +113,10 @@ export default {
 	background: #f5f5f5;
 }
 a{
-	color: #a3a3a3
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+	color: #000;
 }
 .back {
 	position: fixed;
@@ -137,8 +140,32 @@ ul li{
   line-height: .5rem;
   font-size: .15rem;
 }
-ul li:first-child{
+.avatar{
+  position: relative;
   line-height: .68rem;
+}
+.avatar span{
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  width: .6rem;
+  height: .6rem;
+  border-radius: 100%;
+}
+.avatar span img,.avatar span input{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+.avatar span img{
+  left:-.3rem;
+  top: -.05rem;
+}
+.avatar span input{
+  z-index: 200;
+  opacity: 0;
 }
 ul li router-link{
   display: block;

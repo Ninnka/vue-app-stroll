@@ -6,21 +6,23 @@
       <span @click="edit">{{editText}}</span>
     </div>
     <div class="collection-content">
-    	<ul>
-        <li v-for="item in listDatas">
+    <transition-group name="add_del" mode="in-out">
+    	<!-- <ul> -->
+        <div v-for="item in listDatas" class="collection-item" :key="item.key">
           <transition name="inputtranslate">
             <input type="checkbox" v-if="isEdit" name="orders" v-model="item.check">
           </transition>
           <img :src="item.imgsrc" alt="">
           <p>{{item.title}}</p>
           <p>{{item.money}}</p>
-        </li>
-      </ul>
+        </div>
+      <!-- </ul> -->
+      </transition-group>
     </div>
     <transition name="footerShowAnim">
       <div class="collection-footer" v-if="isEdit">
         <input type="checkbox" name="all" @click="selectAll" v-model="isAll">全部
-        <button>删除</button>
+        <button @click="del">删除</button>
       </div>
     </transition>
   </div>
@@ -35,17 +37,26 @@ export default {
     return {
       editText: '编辑',
       listDatas: [{
+        key: 1,
         title: '坚果特产',
         money: '￥29.5',
         imgsrc: OrderImg,
         check: false
-      }, {
+      },
+      {
+        key: 2,
         title: '坚果特产',
         money: '￥29.5',
         imgsrc: OrderImg,
         check: false
-      }
-      ],
+      },
+      {
+        key: 3,
+        title: '坚果特产',
+        money: '￥29.5',
+        imgsrc: OrderImg,
+        check: false
+      }],
       isEdit: false,
       isAll: false
     }
@@ -72,6 +83,18 @@ export default {
       for (let i = 0; i < this.listDatas.length; i++) {
         this.listDatas[i].check = this.isAll;
       }
+    },
+    del() {
+      let delArr = [];
+      for (let i = 0; i < this.listDatas.length; i++) {
+        if (this.listDatas[i].check === true) {
+          delArr.unshift(i);
+        }
+      }
+      for (let j = 0; j < delArr.length; j++) {
+        console.log(delArr[j]);
+        this.listDatas.splice(delArr[j], 1);
+      }
     }
   }
 }
@@ -90,6 +113,18 @@ export default {
 /* .slide-fade-leave-active for <2.1.8 */ {
   transform: translateX(-.4rem);
   /*opacity: 0;*/
+  /*width:0;*/
+}
+.add_del-enter-active {
+  transition: all .5s ease;
+}
+.add_del-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.add_del-leave-to,.add_del-enter,.add_del-leave
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateX(100%);
+  opacity: 0;
   /*width:0;*/
 }
 .footerShowAnim-enter-active {
@@ -129,30 +164,30 @@ a{
 	width: .1rem;
 	height: .18rem;
 }
-ul li{
+.collection-item{
   padding: .1rem;
   overflow: hidden;
   border-bottom: 1px solid #E7E7E7;
 }
-ul li input{
+.collection-item input{
   margin: .23rem .08rem 0 0;
   float: left;
   width: .17rem;
   height: .17rem;
   vertical-align: middle;
 }
-ul li img{
+.collection-item img{
   margin-right: .1rem;
   float: left;
   width: .7rem;
   height: .7rem;
   vertical-align: middle;
 }
-ul li p{
+.collection-item p{
   /*margin-left: 1.0rem;*/
   color: #606060;
 }
-ul li p:last-child{
+.collection-item p:last-child{
   margin-top: .2rem;
   color: red;
 }

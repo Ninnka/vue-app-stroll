@@ -3,9 +3,7 @@
     <transition name="childtranslate">
       <router-view class="register-childview"></router-view>
     </transition>
-    <transition name="fade">
-      <span class="tip-box" v-if="showTip">{{tip}}</span>
-    </transition>
+    <toast :content="tip" :show="showTip"></toast>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="登录" custombg="header-bg"></headbar>
@@ -25,6 +23,7 @@
 import Header from '../common/header/header.vue';
 import router from '../../router/index.js';
 import Logo from '../my/assets/login-logo.png';
+import Toast from '../common/toast/Toast.vue';
 
 export default {
   data() {
@@ -40,7 +39,8 @@ export default {
     }
   },
   components: {
-    headbar: Header
+    headbar: Header,
+    toast: Toast
   },
   methods: {
     // 返回上一页
@@ -176,22 +176,5 @@ a{
   font-size: .18rem;
   color:#fff;
   letter-spacing: .1rem;
-}
-.tip-box{
-  position: fixed;
-  left: 30%;
-  bottom: .15rem;
-  padding: 0 .1rem;
-  background: rgba(0,0,0,.3);
-  line-height: .35rem;
-  border-radius: .2rem;
-  font-size: .14rem;
-  color: #414444;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-to{
-  opacity: 0
 }
 </style>

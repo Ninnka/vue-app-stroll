@@ -1,5 +1,5 @@
 <template>
-  <div id="orderdetail" @touchmove.prevent="">
+  <div id="orderdetail" @touchmove.stop="">
     <transition name="childtranslate">
       <router-view class="orderdetail-childview"></router-view>
     </transition>
@@ -67,18 +67,18 @@ export default {
         remark: '',
         commented: false,
         goods: [{
-          imgsrc: '',
+          imgsrc: 'http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg',
           name: '坚果',
-          money: 29.5,
+          price: 29.5,
           num: 2,
-          descript: '1盒6片'
+          specification: '1盒6片'
         },
         {
-          imgsrc: '',
+          imgsrc: 'http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg',
           name: '坚果',
-          money: 29.5,
+          price: 29.5,
           num: 2,
-          descript: '1盒6片'
+          specification: '1盒6片'
         }]
       }
     }
