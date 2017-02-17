@@ -1,13 +1,17 @@
 <template>
   <div id="base-msg">
+    <transition name="childtranslate">
+      <router-view class="base-msg-childview"></router-view>
+    </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="基本信息"></headbar>
+    	<headbar title="基本信息"  custombg="header-bg"></headbar>
     </div>
     <div class="base-msg-content">
     	<ul> 
+        <li class="avatar">{{avatar.text}} <span><input type="file" accept="image/*"><img :src="avatar.imgsrc" alt=""></span></li>
         <li v-for="item in listDataTop">
-        <router-link to="">
+        <router-link :to="item.toUrl">
           {{item.listText}}
           <img :src="item.imgsrc" alt="" v-if="item.imgsrc"><span v-if="item.value">{{item.value}}</span>
         </router-link>
@@ -15,7 +19,7 @@
       </ul>
       <ul> 
         <li v-for="item in listDataBottom">
-          <router-link to="">
+          <router-link :to="item.toUrl">
             {{item.listText}}
           </router-link>
         </li>
@@ -32,15 +36,14 @@ import GradeVip from '../my/assets/grade_vip.png';
 export default {
   data() {
     return {
-      listDataTop: [{
-        listText: '头像',
-        imgsrc: AvatarValue,
-        toUrl: ''
+      avatar: {
+        text: '头像',
+        imgsrc: AvatarValue
       },
-      {
+      listDataTop: [{
         listText: '姓名',
         value: '小明',
-        toUrl: ''
+        toUrl: '/basemsg/editName'
       },
       {
         listText: '会员标志',
@@ -50,19 +53,19 @@ export default {
       {
         listText: '联系方式',
         value: '136****1245',
-        toUrl: ''
+        toUrl: '/basemsg/editPhone'
       }],
       listDataBottom: [{
         listText: '修改密码',
-        toUrl: ''
+        toUrl: '/basemsg/editPassword'
       },
       {
         listText: '修改钱包密码',
-        toUrl: ''
+        toUrl: '/basemsg/editWalletPassword'
       },
       {
         listText: '我能供应',
-        toUrl: ''
+        toUrl: '/basemsg/supplyEnergy'
       }],
       userData: {
         username: '小明',
@@ -84,14 +87,36 @@ export default {
 }
 </script>
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
+.base-msg-childview{
+  position: fixed;
+  top: 0;
+  z-index: 250;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to{
+  transform: translateX(100%);
+}
 #base-msg {
 	padding-top: .45rem;
 	font-size: .16rem;
-	height: 100%;
 	background: #f5f5f5;
 }
 a{
-	color: #a3a3a3
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+	color: #000;
 }
 .back {
 	position: fixed;
@@ -115,8 +140,32 @@ ul li{
   line-height: .5rem;
   font-size: .15rem;
 }
-ul li:first-child{
+.avatar{
+  position: relative;
   line-height: .68rem;
+}
+.avatar span{
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  width: .6rem;
+  height: .6rem;
+  border-radius: 100%;
+}
+.avatar span img,.avatar span input{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+.avatar span img{
+  left:-.3rem;
+  top: -.05rem;
+}
+.avatar span input{
+  z-index: 200;
+  opacity: 0;
 }
 ul li router-link{
   display: block;

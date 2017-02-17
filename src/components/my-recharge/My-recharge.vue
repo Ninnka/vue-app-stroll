@@ -1,10 +1,13 @@
 <template>
-  <div id="recharge">
+  <div id="myrecharge">
+    <transition name="childtranslate">
+      <router-view class="my-recharge-childview"></router-view>
+    </transition>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="订单详情"></headbar>
+    	<headbar title="订单详情" custombg="header-bg"></headbar>
     </div>
-    <div class="recharge-content">
+    <div class="my-recharge-content">
     	<div class="box">
         <div>购买商品<span>待付款</span></div>
         <div>
@@ -37,13 +40,36 @@ export default {
     },
     // 支付
     toPay() {
-      router.push('/paySuccess');
+      router.push('/upgrade/recharge/paySuccess');
     }
   }
 }
 </script>
 <style lang="css" type="text/css" scoped>
-#recharge {
+.header-bg{
+  background:#D00009
+}
+.my-recharge-childview{
+  position: fixed;
+  top: 0;
+  z-index: 200;
+  width: 100%;
+  height: 100%;
+  /*overflow-y: scroll;*/
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateX(100%);
+  /*opacity: 0;*/
+  /*width:0;*/
+}
+#myrecharge {
 	padding-top: .45rem;
 	font-size: .14rem;
 	height: 100%;
@@ -97,7 +123,7 @@ a{
   font-size: .16rem;
   color: #FF0C00;
 }
-.recharge-content button{
+.my-recharge-content button{
   display: block;
   margin: .4rem auto;
   padding: .08rem;

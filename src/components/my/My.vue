@@ -1,110 +1,164 @@
 <template lang="html">
-  <div id="my">
+    <div id="my">
+    <toast content="已退出当前账号" :show="showToast"></toast>
+    <transition name="childtranslate">
+      <router-view class="my-childview"></router-view>
+    </transition>
+    <div class="login-mask" v-if="userDatas.username=='登录'" @click="toLogin"></div>
     <div class="header">
-      <headbar></headbar>
+      <headbar custombg="header-bg"></headbar>
       <div class="avatar">
         <img :src="userDatas.avatar" alt="">
         <img :src="gradeVip" alt="" v-if="userDatas.grade == 'VIP会员'">
         <img :src="gradePartner" alt="" v-if="userDatas.grade == '股东会员'">
       </div>
       <p class="username">{{userDatas.username}}</p>
-      <p class="grade" v-if="userDatas.grade != '普通会员'">{{userDatas.grade}}</p>
+      <p class="grade" v-if="userDatas.grade!='普通会员'">{{userDatas.grade}}</p>
     </div>
     <div class="my-content">
       <ul> 
         <li v-for="item in listDataTop">
         <router-link :to="item.toUrl">
-          <img :src="item.ico" alt="">{{item.text}}
+          {{item.text}}
         </router-link>
         </li>
       </ul>
       <ul> 
         <li v-for="item in listDataBottom">
-          <router-link to="">
-            <img :src="item.ico" alt="">{{item.text}}
+          <router-link :to="item.toUrl">
+            {{item.text}}
           </router-link>
         </li>
+        <li @click="loginoutEvent">{{loginout}}</li>
       </ul>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
-import AvatarValue from './assets/avatar.png';
+import router from '../../router/index.js';
+import Header from '../common/header/Header.vue';
 import GradeVip from './assets/grade_vip.png';
 import GradePartner from './assets/grade_partner.png';
-import IcoBase from './assets/ico_base.png';
-import IcoOrder from './assets/ico_order.png';
-import IcoCollection from './assets/ico_collection.png';
-import IcoWallet from './assets/ico_wallet.png';
-import IcoAddress from './assets/ico_address.png';
-import IcoVip from './assets/ico_vip.png';
-import IcoMore from './assets/ico_more.png';
-import IcoLoginout from './assets/ico_loginout.png';
+import Nologin from './assets/help-center.png';
+import Toast from '../common/toast/Toast.vue';
 
 export default {
   data() {
     return {
+      showToast: false,
       // 用户信息
       userDatas: {
-        username: '阿萨德',
-        avatar: AvatarValue,
-        grade: 'VIP会员'
+        username: '登录',
+        avatar: Nologin,
+        grade: '普通会员'
       },
       // 图片资源
       gradeVip: GradeVip,
       gradePartner: GradePartner,
+      loginout: '注销',
       listDataTop: [{
         toUrl: '/basemsg',
-        ico: IcoBase,
         text: '基本信息'
       },
       {
-        toUrl: '/basemsg',
-        ico: IcoOrder,
+        toUrl: '/orders',
         text: '我的订单'
       },
       {
         toUrl: '/collection',
-        ico: IcoCollection,
         text: '我的收藏'
       },
       {
-        toUrl: 'my/basemsg',
-        ico: IcoWallet,
+        toUrl: '/wallet',
         text: '我的钱包'
       },
       {
-        toUrl: 'my/basemsg',
-        ico: IcoAddress,
+        toUrl: '/address',
         text: '收货地址'
       },
       {
         toUrl: '/upgrade',
-        ico: IcoVip,
         text: '升级会员'
       }],
       listDataBottom: [{
-        toUrl: 'my/basemsg',
-        ico: IcoMore,
+        toUrl: '/more',
         text: '更多'
-      },
-      {
-        toUrl: 'my/basemsg',
-        ico: IcoLoginout,
-        text: '注销'
       }]
     }
   },
   components: {
-    headbar: Header
+    headbar: Header,
+    toast: Toast
+  },
+  methods: {
+    toLogin() {
+      router.push('/index/my/login');
+    },
+    // 注销
+    loginoutEvent() {
+      localStorage.setItem('username', '登录');
+      localStorage.setItem('avatar', 'http://img0.imgtn.bdimg.com/it/u=3591062166,259933728&fm=21&gp=0.jpg');
+      localStorage.setItem('grade', '普通会员');
+      this.$forceUpdate();
+      this.showToast = true;
+      let _this = this;
+      setTimeout(function() {
+        _this.showToast = false;
+        // this.$forceUpdate();
+      }, 1500);
+    }
+  },
+  created() {
+    console.log('created');
+  },
+  mounted() {
+    this.userDatas.username = localStorage.getItem('username');
+    this.userDatas.avatar = localStorage.getItem('avatar');
+    this.userDatas.grade = localStorage.getItem('grade');
+    console.log('mounted');
+  },
+  beforeUpdate() {
+    this.userDatas.username = localStorage.getItem('username');
+    this.userDatas.avatar = localStorage.getItem('avatar');
+    this.userDatas.grade = localStorage.getItem('grade');
+    console.log('beforeUpdate');
+  },
+  updated() {
+    console.log('my-updated');
+  },
+  destroyed() {
+    console.log('destroyed');
   }
 }
 </script>
 
 <style lang="css" type="text/css" scoped>
+.header-bg{
+  background:#D00009
+}
+.my-childview{
+  position: fixed;
+  top: 0;
+  z-index: 250;
+  width: 100%;
+  height: 100%;
+}
+.childtranslate-enter-active {
+  transition: all .5s ease;
+}
+.childtranslate-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.childtranslate-enter, .childtranslate-leave-to{
+  transform: translateX(100%);
+}
+
+
 a{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
   color: #000;
 }
 #my{
@@ -119,7 +173,7 @@ a{
     top: .43rem;
     width: 100%;
     height: 1.6rem;
-    background: #228733;
+    background: #D00009;
 }
 .header p{
   color: #fff;
@@ -164,11 +218,34 @@ ul{
 }
 ul li{
   margin-left: .17rem;
+  padding-left: 40px;
   border-bottom: 1px solid #f5f5f5;
-  background: url('./assets/arrow_left.png') no-repeat 97% 50%;
-  background-size: .08rem .15rem;
   line-height: .4rem;
   font-size: .15rem;
+}
+ul:first-child li:nth-child(1){
+  background: url('./assets/sprite.png') 0 -.28rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(2){
+  background: url('./assets/sprite.png') 0 -.63rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(3){
+  background: url('./assets/sprite.png') 0 -1.02rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(4){
+  background: url('./assets/sprite.png') 0 -1.35rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(5){
+  background: url('./assets/sprite.png') 0 -1.75rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:first-child li:nth-child(6){
+  background: url('./assets/sprite.png') 0 -2.13rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:last-child li:nth-child(1){
+  background: url('./assets/sprite.png') 0 -2.5rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+}
+ul:last-child li:nth-child(2){
+  background: url('./assets/sprite.png') 0 -2.88rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul li router-link{
   display: block;
@@ -176,10 +253,12 @@ ul li router-link{
   height: 100%;
   color: #000;
 }
-ul li img{
-  margin-right: .1rem;
-  width: .2rem;
-  height: .2rem;
-  vertical-align: middle;
+.login-mask{
+  position: fixed;
+  z-index: 150;
+  top: 0;
+  background: rgba(0,0,0,0);
+  width: 100%;
+  height: 100%;
 }
 </style>

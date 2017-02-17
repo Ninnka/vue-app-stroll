@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import Hello from 'components/Hello'
-// 直接使用 components路径
 
 import Index from '../components/index/Index.vue';
 import Home from '../components/home/Home.vue';
@@ -9,32 +7,26 @@ import Member from '../components/member/Member.vue';
 import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
-import MyBaseMsg from '../components/my-base-msg/My-base-msg.vue';
-import MyCollection from '../components/my-collection/My-collection.vue';
-import MyUpgrade from '../components/my-upgrade/My-upgrade.vue';
-import MyRecharge from '../components/my-recharge/My-recharge.vue';
-import MyPaySuccess from '../components/my-pay-success/My-pay-success.vue';
-
 Vue.use(Router);
 
-const scrollBehavior = (to, from, savedPosition) => {
-  let data = JSON.parse(window.localStorage.getItem(to.name));
-  if (savedPosition) {
-    return savedPosition;
-  } else {
-    let y = 0;
-    if (data) {
-      y = data.y;
-    }
-    return {
-      x: 0,
-      y: y
-    };
-  }
-};
+// const scrollBehavior = (to, from, savedPosition) => {
+//   let data = JSON.parse(window.localStorage.getItem(to.name));
+//   if (savedPosition) {
+//     return savedPosition;
+//   } else {
+//     let y = 0;
+//     if (data) {
+//       y = data.y;
+//     }
+//     return {
+//       x: 0,
+//       y: y
+//     };
+//   }
+// };
 
-export default new Router({
-  mode: 'history',
+let routerEntity = {
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -48,70 +40,87 @@ export default new Router({
         {
           path: 'home',
           name: 'home',
-          component: Home,
+          // component: Home,
+          components: {
+            home: Home
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'member',
           name: 'member',
-          component: Member,
+          // component: Member,
+          components: {
+            member: Member
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'classify',
           name: 'classify',
-          component: Classify,
+          // component: Classify,
+          components: {
+            classify: Classify
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'shoppingcar',
           name: 'shoppingcar',
-          component: ShoppingCar,
+          // component: ShoppingCar,
+          components: {
+            shoppingcar: ShoppingCar
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+
+          ]
         },
         {
           path: 'my',
           name: 'my',
-          component: My,
+          // component: My,
+          components: {
+            my: My
+          },
           meta: {
             saved: true
-          }
+          },
+          children: [
+          ]
         }
       ]
-    },
-    {
-      path: '/basemsg',
-      name: 'baseMsg',
-      component: MyBaseMsg
-    },
-    {
-      path: '/collection',
-      name: 'collection',
-      component: MyCollection
-    },
-    {
-      path: '/upgrade',
-      name: 'myUpgrade',
-      component: MyUpgrade
-    },
-    {
-      path: '/recharge',
-      name: 'myRecharge',
-      component: MyRecharge
-    },
-    {
-      path: '/paySuccess',
-      name: 'myPaySuccess',
-      component: MyPaySuccess
     }
-  ],
-  scrollBehavior
-});
+  ]
+};
+
+import routerHome from 'components/home/router';
+import routerMember from 'components/member/router';
+import routerClassify from 'components/classify/router';
+import routerShoppingCar from 'components/shoppingcar/router';
+import routerMy from 'components/my/router';
+
+routerEntity.routes[1].children[0].children = routerEntity.routes[1].children[0].children.concat(routerHome.routes);
+routerEntity.routes[1].children[1].children = routerEntity.routes[1].children[1].children.concat(routerMember.routes);
+routerEntity.routes[1].children[2].children = routerEntity.routes[1].children[2].children.concat(routerClassify.routes);
+routerEntity.routes[1].children[3].children = routerEntity.routes[1].children[3].children.concat(routerShoppingCar.routes);
+routerEntity.routes[1].children[4].children = routerEntity.routes[1].children[4].children.concat(routerMy.routes);
+
+export default new Router(routerEntity);
