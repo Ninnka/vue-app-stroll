@@ -1,0 +1,116 @@
+{
+  "infoList": [
+    {
+      "id": 1,
+      "name": "星河单提银行",
+      "avatar": "/static/images/life-detail-hostavatar.png",
+      "address": [
+        "惠阳",
+        "淡水"
+      ],
+      "assetType": [
+        "2室",
+        "3室",
+        "4室"
+      ],
+      "price": 8500,
+      "discountType": ""
+    },
+    {
+      "id": 2,
+      "name": "真不知道什么银行",
+      "avatar": "/static/images/life-detail-hostavatar.png",
+      "address": [
+        "惠阳",
+        "淡水"
+      ],
+      "assetType": [
+        "2室",
+        "3室",
+        "4室"
+      ],
+      "price": 8500,
+      "discountType": "元旦优惠价"
+    },
+    {
+      "id": 3,
+      "name": "随便起名银行",
+      "avatar": "/static/images/life-detail-hostavatar.png",
+      "address": [
+        "惠阳",
+        "淡水"
+      ],
+      "assetType": [
+        "2室",
+        "3室",
+        "4室"
+      ],
+      "price": 8500,
+      "discountType": ""
+    },
+    {
+      "id": 4,
+      "name": "编不下去了银行",
+      "avatar": "/static/images/life-detail-hostavatar.png",
+      "address": [
+        "惠阳",
+        "淡水"
+      ],
+      "assetType": [
+        "2室",
+        "3室",
+        "4室"
+      ],
+      "price": 8500,
+      "discountType": "元旦优惠价"
+    },
+    {
+      "id": 5,
+      "name": "星河单提银行",
+      "avatar": "/static/images/life-detail-hostavatar.png",
+      "address": [
+        "惠阳",
+        "淡水"
+      ],
+      "assetType": [
+        "2室",
+        "3室",
+        "4室"
+      ],
+      "price": 8500,
+      "discountType": "元旦优惠价"
+    },
+    {
+      "id": 6,
+      "name": "星河单提银行",
+      "avatar": "/static/images/life-detail-hostavatar.png",
+      "address": [
+        "惠阳",
+        "淡水"
+      ],
+      "assetType": [
+        "2室",
+        "3室",
+        "4室"
+      ],
+      "price": 8500,
+      "discountType": "元旦优惠价"
+    },
+    {
+      "id": 7,
+      "name": "反正名字差不多银行",
+      "avatar": "/static/images/life-detail-hostavatar.png",
+      "address": [
+        "惠阳",
+        "淡水"
+      ],
+      "assetType": [
+        "2室",
+        "3室",
+        "4室"
+      ],
+      "price": 8500,
+      "discountType": "元旦优惠价"
+    }
+  ]
+}
