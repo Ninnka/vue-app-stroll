@@ -11,7 +11,7 @@
         </ul>
       </div>
 
-      <div class="merchant-infolist-wrapper overscroll">
+      <div class="merchant-infolist-wrapper overscroll" @scroll="scrolling">
         <asset-item :infoList="infoList" v-on:viewDetail="viewDetail"></asset-item>
         <icon-loader></icon-loader>
       </div>
@@ -43,10 +43,10 @@ export default {
       navList: {
 
       },
-      infoList: {
-
-      },
-      infoListWrapper: ''
+      infoList: [],
+      infoListWrapper: '',
+      preloader: '',
+      loadingMore: false
     }
   },
   methods: {
@@ -73,6 +73,32 @@ export default {
           id_asset: id
         }
       });
+    },
+    scrolling() {
+      let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      let actualTop = this.preloader.offsetTop;
+      let current = this.preloader.offsetParent;
+      while (current !== null) {
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+      }
+      let elementScrollTop = this.infoListWrapper.scrollTop;
+      if ((actualTop - elementScrollTop < documentHeight) && !this.loadingMore) {
+        this.loadingMore = true;
+        // 这里调用加载数据的方法
+        // 模拟加载数据
+        this.$http.get(this.navList[this.currentNav].api)
+          .then(function (res) {
+            this.infoList = this.infoList.concat(res.body.infoList);
+            this.loadingMore = false;
+          }, function (err) {
+            console.log('err:', err);
+          });
+        // 模拟结束数据加载后的动作，需要将标识设为false
+        // setTimeout(function () {
+        //   this.loadingMore = false;
+        // }.bind(this), 1500);
+      }
     }
   },
   created() {
@@ -94,15 +120,16 @@ export default {
   },
   mounted() {
     this.infoListWrapper = document.querySelector('.merchant-infolist-wrapper');
+    this.preloader = document.querySelector('.infinite-scroll-preloader');
     this.navPromise
       .then(function (res) {
         this.navList = res.body.navList;
         this.$http.get(this.navList[0].api)
           .then(function (res) {
-            this.infoList = res.body.infoList;
+            this.infoList = this.infoList.concat(res.body.infoList);
           }, function (err) {
             console.log('err:', err);
-          })
+          });
       }, function (err) {
         console.log('err:', err);
       });
