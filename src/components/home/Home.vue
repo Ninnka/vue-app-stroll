@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage overscroll normal-fontsize">
+  <div class="fullpage overscroll normal-fontsize" id="home-content-scrollwrapper">
     <head-bar title="首页" :custombg="custombg"></head-bar>
     <div class="location fixed" @click="locate">
       <i class="icon iconfont icon-location"></i>
@@ -12,19 +12,43 @@
       <!-- 主页的轮播图 -->
       <div class="swiper-container">
         <div class="swiper-wrapper">
-            <img class="swiper-slide" v-for="slideImg in slideImgList" :key="slideImg.id" :src="slideImg.src" alt="">
+            <img class="swiper-slide" v-for="slideImg in slideImgList" :key="slideImg.id" :src="slideImg.src" alt="" @click="toGoodetail">
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination main-theme"></div>
       </div>
       <!-- 主页导航分类 -->
       <div class="home-classify flex-box border-box">
-        <div class="item">最新</div>
-        <div class="item">用品</div>
-        <div class="item">食品</div>
-        <div class="item">客服</div>
-        <div class="item">家居</div>
-        <div class="item" @click="viewMerchant('asset')">房产</div>
+        <div class="item">
+          <!-- 最新 -->
+          <i class="icon iconfont icon-new"></i>
+          <p>最新热门</p>
+        </div>
+        <div class="item">
+          <!-- 用品 -->
+          <i class="icon iconfont icon-appliance"></i>
+          <p>生活用具</p>
+        </div>
+        <div class="item" @click="viewMerchant('food')">
+          <!-- 食品 -->
+          <i class="icon iconfont icon-food"></i>
+          <p>食品</p>
+        </div>
+        <div class="item">
+          <!-- 客服 -->
+          <i class="icon iconfont icon-customer-service"></i>
+          <p>客服服务</p>
+        </div>
+        <div class="item">
+          <!-- 家居 -->
+          <i class="icon iconfont icon-furniture"></i>
+          <p>家居用品</p>
+        </div>
+        <div class="item" @click="viewMerchant('asset')">
+          <!-- 房产 -->
+          <i class="icon iconfont icon-asset"></i>
+          <p>房产银行</p>
+        </div>
       </div>
       <!-- 主页专区推荐 -->
       <div class="home-seperator normal-fontsize">
@@ -62,9 +86,12 @@ import Header from 'components/common/header/Header';
 
 import Swiper from '../../../static/js/swiper-3.4.1.min.js';
 
+import indexNavHook from 'src/Hook/indexNavHook';
+
 export default {
   data() {
     return {
+      scrollWrapper: '',
       swiper: '',
       custombg: 'home-headbar-bg',
       currentcity: '广州市',
@@ -136,11 +163,10 @@ export default {
   components: {
     headBar: Header
   },
-  created() {
-
-  },
+  created() {},
   mounted() {
     console.log('mounted');
+    this.scrollWrapper = document.querySelector('#tab-main-content');
     this.swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
@@ -152,12 +178,17 @@ export default {
       pagination: '.swiper-pagination'
     })
   },
+  beforeUpdate() {
+    console.log('before update in home');
+  },
   updated() {
     console.log('updated in home');
   },
   beforeDestroy() {
     console.log('beforeDestroy');
-  }
+  },
+  beforeRouteEnter: indexNavHook.beforeRouteEnter,
+  beforeRouteLeave: indexNavHook.beforeRouteLeave
 }
 </script>
 
