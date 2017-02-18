@@ -7,6 +7,7 @@ import Member from '../components/member/Member.vue';
 import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
+
 Vue.use(Router);
 
 // const scrollBehavior = (to, from, savedPosition) => {
@@ -104,6 +105,7 @@ let routerEntity = {
             saved: true
           },
           children: [
+
           ]
         }
       ]
