@@ -74,24 +74,9 @@ export default {
       mask_bol: false,
       password: '',
       pwd_wrong_bol: false,
-      pick: '',
+      pick: 'my',
       fare: 10,
-      goodsItems: [{
-        id: '1',
-        imgsrc: require('../images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '1',
-        imgsrc: require('../images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      }]
+      goodsItems: []
     }
   },
   methods: {
@@ -109,9 +94,7 @@ export default {
       this.mask_bol = false;
     },
     toaddress() {
-      router.push({
-        name: 'my-address'
-      })
+      router.push('refine-order/my-address')
     },
     paySuccess() {
       if (this.password === '666666') {
@@ -127,7 +110,10 @@ export default {
     }
   },
   created() {
-    this.id = this.$route.params.goodsId
+    // console.log('获取的个数=> ' + this.$route.params)
+    // console.log('在列表中有得个数=> ' + this.goodsItems)
+    this.goodsItems = [];
+    this.goodsItems = this.$route.params;
   },
   components: {
     headBar: Header

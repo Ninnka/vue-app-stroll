@@ -31,9 +31,9 @@
       <div class="pay-bar">
         <div><input type="checkbox" v-model="allChecked">全选</div>
         <div v-if="edit_bol">
-          <div>合计: <span>￥{{totalMoney}}</span></div>
+          <div>合计: <span>￥{{total.totalMoney}}</span></div>
         </div>
-        <button v-if="edit_bol" @click="refine">结算 <span>({{totalCount}})</span></button>
+        <button v-if="edit_bol" @click="refine">结算 <span>({{total.totalCount}})</span></button>
         <button v-else="edit_bol" @click="removeGoods">删除</button>
       </div>
     </div>
@@ -56,6 +56,7 @@ export default {
       checked: [],
       buyData: [],
       edit_bol: true,
+      goodsOrder: [],
       goodsItems: [{
         id: '1',
         imgsrc: require('./images/goods2.jpg'),
@@ -122,9 +123,22 @@ export default {
       this.checked = [];
     },
     refine() {
-      router.push({
-        name: 'refine-order'
-      })
+      console.log(this.checked.length)
+      if (this.checked.length) {
+        this.goodsOrder = [];
+        for (var i = 0; i < this.checked.length; i++) {
+          for (var j = 0; j < this.goodsItems.length; j++) {
+            if (this.checked[i] === this.goodsItems[j].id) {
+              this.goodsOrder.push(this.goodsItems[j]);
+            }
+          }
+        }
+        // console.log('传递的个数=> ' + this.goodsOrder);
+        router.push({
+          name: 'refine-order',
+          params: this.goodsOrder
+        })
+      }
     },
     reduceCount(index) {
       if (this.goodsItems[index].amount > 1) {
@@ -152,39 +166,23 @@ export default {
     this.getData();
   },
   computed: {
-    totalMoney: {
+    total: {
       get() {
-        var total = 0;
+        var totalMoney = 0;
+        var totalCount = 0;
         if (this.checked.length > 0) {
           for (var i = 0; i < this.checked.length; i++) {
             for (var j = 0; j < this.goodsItems.length; j++) {
-              console.log(this.checked[i], this.goodsItems[j].id, this.goodsItems.length);
+              // console.log(this.checked, this.goodsItems);
               if (this.checked[i] === this.goodsItems[j].id) {
-                total += this.goodsItems[j].price * this.goodsItems[j].amount;
+                totalCount += this.goodsItems[j].amount
+                totalMoney += this.goodsItems[j].price * this.goodsItems[j].amount;
               }
             }
           }
-          return total.toFixed(2)
+          return { 'totalMoney': totalMoney.toFixed(2), 'totalCount': totalCount }
         } else {
-          return (0).toFixed(2)
-        }
-      }
-    },
-    totalCount: {
-      get() {
-        var total = 0;
-        if (this.checked.length > 0) {
-          for (var i = 0; i < this.checked.length; i++) {
-            for (var j = 0; j < this.goodsItems.length; j++) {
-              console.log(this.checked[i], this.goodsItems[j].id, this.goodsItems.length);
-              if (this.checked[i] === this.goodsItems[j].id) {
-                total += this.goodsItems[j].amount
-              }
-            }
-          }
-          return total
-        } else {
-          return 0
+          return { 'totalMoney': (0).toFixed(2), 'totalCount': 0 }
         }
       }
     },
