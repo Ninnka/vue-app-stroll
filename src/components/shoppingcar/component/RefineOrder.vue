@@ -11,7 +11,7 @@
       <ul class="order-detail list">
         <li>购买商品</li>
         <li v-for="data in goodsItems" class="carItem orderList">
-          <div @click="togoodsDetail(data.id)">
+          <div>
             <img :src="data.imgsrc" alt="">
             <div>
               <p>{{data.title}}</p>
@@ -76,7 +76,8 @@ export default {
       pwd_wrong_bol: false,
       pick: 'my',
       fare: 10,
-      goodsItems: []
+      goodsItems: [],
+      addressRoute: ''
     }
   },
   methods: {
@@ -94,7 +95,9 @@ export default {
       this.mask_bol = false;
     },
     toaddress() {
-      router.push('refine-order/my-address')
+      router.push({
+        name: this.addressRoute
+      })
     },
     paySuccess() {
       if (this.password === '666666') {
@@ -107,21 +110,16 @@ export default {
           this.pwd_wrong_bol = false;
         }, 2000)
       }
-    },
-    togoodsDetail(id) {
-      router.push({
-        name: 'order-good-detail',
-        params: {
-          goodsid: id
-        }
-      })
     }
   },
   created() {
     // console.log('获取的个数=> ' + this.$route.params)
     // console.log('在列表中有得个数=> ' + this.goodsItems)
-    this.goodsItems = [];
-    this.goodsItems = this.$route.params;
+    if (this.$route.params.goodsOrder) {
+      this.goodsItems = [];
+      this.goodsItems = this.$route.params.goodsOrder;
+    }
+    this.addressRoute = this.$route.params.addressRoute;
   },
   components: {
     headBar: Header

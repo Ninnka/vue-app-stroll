@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box ">
-    <div class="fullpage overscroll" @scroll="scrolling">
+    <div class="fullpage overscroll" id="goodScrollWrapper" @scroll="scrolling">
       <head-bar :custombg="headbarbg">
         <backward slot="backward-icon" v-on:backward="backward"></backward>
         <i slot="share-icon" class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
@@ -67,7 +67,7 @@
       <div class="good-footbar fixed flex-box">
         <div class="good-shoppingcar border-box">
           <i class="icon iconfont icon-shoppingcar"></i>
-          <div class="shopping-point redpoint">{{goodDetail.inShoppingCar}}</div>
+          <div class="shopping-point redpoint">{{orderDetail.amount}}</div>
         </div>
         <div class="good-purchase-add flex-box">
           <i class="icon iconfont icon-addtosc" @click="addToSC"></i>
@@ -77,7 +77,7 @@
 
       <transition name="fade">
         <mask-bg callback="closeSelectSpec" v-if="selectSpecStatus" v-on:closeSelectSpec="closeSelectSpec">
-          <select-specification v-on:closeSelectSpec="closeSelectSpec"></select-specification>
+          <select-specification v-on:closeSelectSpec="closeSelectSpec" v-on:closeAndConfirmSelectSpec="closeAndConfirmSelectSpec"></select-specification>
         </mask-bg>
 
       </transition>
@@ -117,6 +117,14 @@ export default {
     return {
       contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
+      orderDetail: {
+        id: '',
+        imgsrc: '',
+        title: '',
+        spec: '',
+        price: '',
+        amount: 0
+      },
       goodDetail: {
         uservip: false,
         viponly: false,
@@ -140,7 +148,6 @@ export default {
           }
         ],
         starStatus: '0',
-        inShoppingCar: 0,
         commentList: [
           {
             avatar: require('./images/avatar.png'),
@@ -219,14 +226,29 @@ export default {
     buy() {
       if (!this.goodDetail.uservip && this.goodDetail.viponly) {
         this.rechargeContentStatus = true;
-      } else {
+      } else if (this.orderDetail.amount > 0) {
+        this.orderDetail.id = this.goodDetail.id;
+        this.orderDetail.title = this.goodDetail.name;
+        this.orderDetail.imgsrc = this.goodDetail.imgsrc;
+        let orderArr = [];
+        orderArr.push(this.orderDetail);
         router.push({
           name: 'good-buy-imedi',
           params: {
-            id: this.goodDetail.id
+            goodsOrder: orderArr,
+            addressRoute: 'buy-imedi-config-address'
           }
         })
+      } else {
+        alert('商品数量不能为0');
       }
+    },
+    closeAndConfirmSelectSpec(spec) {
+      this.orderDetail.amount = spec.amount;
+      this.orderDetail.spec = spec.spec;
+      this.orderDetail.price = spec.price;
+      this.selectSpecStatus = false;
+      console.log('orderdetail:', this.orderDetail);
     },
     closeSelectSpec() {
       console.log('closeSelectSpec in detail');
@@ -264,7 +286,7 @@ export default {
   },
   mounted() {
     console.log('mounted detail');
-    let goodMainContent = document.querySelector('.good-main-content');
+    let goodMainContent = document.querySelector('#goodScrollWrapper');
     let preloader = document.querySelector('.infinite-scroll-preloader');
     this.goodMainContent = goodMainContent;
     this.preloader = preloader;
