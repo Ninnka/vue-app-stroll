@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage order-content">
+  <div class="fullpage order-content position-absolute">
     <head-bar title="确认下单" :custombg="custombg"></head-bar>
     <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
     <div class="order-main">
@@ -142,6 +142,9 @@ export default {
 
 <style lang="css">
 .order-content{
+  top: 0;
+  left: 0;
+  width: 100%;
   font-size: .16rem;
   z-index: 201;
   box-sizing: border-box;
