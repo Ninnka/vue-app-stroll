@@ -97,6 +97,10 @@ body,
   overflow: scroll;
 }
 
+.overhidden {
+  overflow: hidden;
+}
+
 .float-right {
   float: right;
 }
@@ -119,11 +123,11 @@ body,
 }
 
 .slide-fade-enter-active {
-  transition: all .5s linear;
+  transition: all .4s linear;
 }
 
 .slide-fade-leave-active {
-  transition: all .5s linear;
+  transition: all .4s linear;
 }
 
 .slide-fade-enter,
