@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage overscroll">
+  <div class="fullpage overscroll classify-page" @scroll="scrolling">
     <headbar title="分类" :custombg="custombg"></headbar>
     <div class="classify-content">
       <!-- 类别筛选 -->
@@ -20,10 +20,11 @@
       <ul class="sortList" v-if="sort_bol">
         <li v-for="sData in sortData"><span @click="sortSelected">{{sData.title}}</span></li>
       </ul>
-      <!-- 商品列表 -->
-      <!-- /index/classify/class-good-detail -->
-      <goodsitems tag="class-good-detail"></goodsitems>
+      <goodsitems tag="class-good-detail" :goodsItems="goodsItems"></goodsitems>
     </div>
+    
+    <icon-loader></icon-loader>
+
     <transition name="slide-fade">
       <router-view name="classgooddetailcontent" class="content-router-view position-absolute"></router-view>
     </transition>
@@ -31,13 +32,13 @@
 </template>
 
 <script type="text/javascript">
-// import router from '../../router';
-
 import header from '../common/header/Header.vue';
 
-import Swiper from '../../../static/js/swiper-3.4.1.min.js';
-
 import GoodsItems from './../member/component/GoodsItems.vue';
+
+import IconLoader from 'components/common/icon-loader/IconLoader';
+
+import indexNavHook from 'src/Hook/indexNavHook';
 
 export default {
   data() {
@@ -47,6 +48,9 @@ export default {
       price_bol: false,
       sales_bol: false,
       sort_bol: false,
+      goodMainContent: '',
+      preloader: '',
+      loadingMore: false,
       sortType: '生活食品',
       sortData: [{
         type: 'food',
@@ -79,19 +83,52 @@ export default {
       {
         type: 'jewel',
         title: '珠宝'
+      }],
+      goodsItems: [{
+        goodsID: '1',
+        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
+        vipPrice: '29.5',
+        originPrice: '42.5',
+        imgsrc: require('components/member/images/goods2.jpg')
+      },
+      {
+        goodsID: '2',
+        title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
+        vipPrice: '10.9',
+        originPrice: '12.8',
+        imgsrc: require('components/member/images/goods1.jpg')
+      },
+      {
+        goodsID: '3',
+        title: '休闲零食五味园pk脆 独立小包装500g',
+        vipPrice: '10.9',
+        originPrice: '12.8',
+        imgsrc: require('components/member/images/goods1.jpg')
+      },
+      {
+        goodsID: '4',
+        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
+        vipPrice: '29.5',
+        originPrice: '42.5',
+        imgsrc: require('components/member/images/goods2.jpg')
+      },
+      {
+        goodsID: '6',
+        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
+        vipPrice: '29.5',
+        originPrice: '42.5',
+        imgsrc: require('components/member/images/goods2.jpg')
+      },
+      {
+        goodsID: '5',
+        title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
+        vipPrice: '10.9',
+        originPrice: '12.8',
+        imgsrc: require('components/member/images/goods1.jpg')
       }]
     }
   },
   methods: {
-    // getData() {
-    //   // 获取数据
-    //   this.$http.get('static/json.json')
-    //     .then(function (res) {
-    //       console.log('res:', res);
-    //     }, function (err) {
-    //       console.log('err:', err);
-    //     });
-    // },
     listShow() {
       this.sort_bol = !this.sort_bol;
     },
@@ -123,25 +160,39 @@ export default {
       }
       this.sortType = event.target.innerText;
       this.sort_bol = false;
+    },
+    scrolling() {
+      let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      let actualTop = this.preloader.offsetTop;
+      let current = this.preloader.offsetParent;
+      while (current !== null) {
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+      }
+      let elementScrollTop = this.goodMainContent.scrollTop;
+      if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * (this.preloader.clientHeight * 2)) && !this.loadingMore) {
+        this.loadingMore = true;
+        // 这里调用加载数据的方法
+        // 模拟加载数据
+        this.goodsItems = this.goodsItems.concat(this.goodsItems);
+        // 模拟结束数据加载后的动作，需要将标识设为false
+        setTimeout(function () {
+          this.loadingMore = false;
+        }.bind(this), 1500);
+      }
     }
   },
   components: {
     headbar: header,
-    goodsitems: GoodsItems
-  },
-  created() {
-    // this.getData();
+    goodsitems: GoodsItems,
+    iconLoader: IconLoader
   },
   mounted() {
-    var mySwiper = new Swiper('.swiper-container', {
-      direction: 'horizontal',
-      loop: true,
-      autoplay: 3000,
-      pagination: '.swiper-pagination',
-      paginationClickable: true,
-      autoplayDisableOnInteraction: false
-    })
-    console.log(mySwiper)
+    this.scrollWrapper = document.querySelector('.classify-page');
+    let goodMainContent = document.querySelector('.classify-page');
+    let preloader = document.querySelector('.infinite-scroll-preloader');
+    this.goodMainContent = goodMainContent;
+    this.preloader = preloader;
   },
   updated() {
     this.sort_bol = false;
@@ -151,13 +202,18 @@ export default {
         selected[i].className = 'type-selected';
       }
     }
-  }
+  },
+  beforeRouteEnter: indexNavHook.beforeRouteEnter,
+  beforeRouteLeave: indexNavHook.beforeRouteLeave
 }
 </script>
 
 <style lang="css" type="text/css" scoped>
 .classify-headbar-bg {
   background: #d81e06;
+}
+.classify-page{
+  background: #f1f1f1;
 }
 .classify-content{
   padding-top: .42rem;

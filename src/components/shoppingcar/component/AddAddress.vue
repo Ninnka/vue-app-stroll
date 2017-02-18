@@ -37,7 +37,7 @@
               <button @click="cityCancal">取消</button>
               <button @click="citySelected">确认</button>
             </p>
-            <div class="city-list">
+            <div class="city-List">
               <span></span>
               <ul @touchstart="moveSelect" @touchend="moveSelect1" class="province">
                 <li v-for="a in provinceList">{{a}}</li>
@@ -253,12 +253,12 @@ export default {
 .city-mask>div>p button:last-child{
   float: right;
 }
-.city-list{
+.city-List{
   padding: 0 .09rem;
   height: 2.13rem;
   position: relative;
 }
-.city-list span{
+.city-List span{
   position: absolute;
   display: block;
   width: 3.45rem;
@@ -268,13 +268,13 @@ export default {
   top: .88rem; 
   z-index: -1;
 }
-.city-list ul{
+.city-List ul{
   display: inline-block;
   height: 100%;
   vertical-align: middle;
   overflow: scroll;
 }
-.city-list div{
+.city-List div{
   display: inline-block;
   height: 2.14rem;
   line-height: 2.14rem;
@@ -282,10 +282,10 @@ export default {
   color: #f29004;
   vertical-align: middle;
 }
-.city-list div:last-child{
+.city-List div:last-child{
   padding-right: 0; 
 }
-.city-list ul li{
+.city-List ul li{
   padding: .1339rem .21rem;
 }
 </style>

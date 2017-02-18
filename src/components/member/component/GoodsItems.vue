@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="goodsContent">
 		<ul class="goodsItems">
-		  <li class="goodsItem" v-for="gItem in goodsData">
+		  <li class="goodsItem" v-for="gItem in goodsItems">
         <router-link :to="{name: tag,params: {goodsid: gItem.goodsID}}">
 		      <img :src="gItem.imgsrc" alt="">
 		      <h2>{{gItem.title}}</h2>
@@ -19,55 +19,14 @@
 // import router from '../../../router';
 
 export default {
-  props: ['tag'],
+  props: ['tag', 'goodsItems'],
   data() {
     return {
-      goodsData: [{
-        goodsID: '1',
-        title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        imgsrc: require('./../images/goods1.jpg')
-      },
-      {
-        goodsID: '2',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('./../images/goods2.jpg')
-      },
-      {
-        goodsID: '3',
-        title: '休闲零食五味园pk脆 独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        imgsrc: require('./../images/goods1.jpg')
-      },
-      {
-        goodsID: '4',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('./../images/goods2.jpg')
-      },
-      {
-        goodsID: '5',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('./../images/goods2.jpg')
-      }]
+      //
     }
   },
   methods: {
-    // toGoodetail(id) {
-    //   router.push({
-    //     name: this.tag,
-    //     params: {
-    //       goodsId: id
-    //     }
-    //   });
-    // }
+    //
   }
 }
 </script>
