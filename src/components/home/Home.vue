@@ -137,7 +137,9 @@ export default {
       router.push({
         name: 'good-detail',
         params: {
-          id
+          id,
+          viponly: false,
+          buyRouteName: 'good-buy-imedi'
         }
       });
     },
