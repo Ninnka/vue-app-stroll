@@ -1,5 +1,19 @@
 <template>
   <div id="orders" @touchmove="load($event)">
+    <div class="pay-mask" v-if="mask_bol" @touchmove.prevent="">
+      <div class="pay-wrap">
+        <p>钱包密码</p>
+        <p>￥{{totalMoney}}</p>
+        <p>
+          <input id="pay-password" type="password" class="pay-password" maxlength="6" v-model="password">
+          <label for="pay-password"><span v-for="i in password"></span></label>
+        </p>
+        <p>
+          <button class="pay-cancal" @click="cancelPay">取消</button> 
+          <button class="pay-refine">付款</button>
+        </p>
+      </div>
+    </div>
     <transition name="childtranslate">
       <router-view class="orders-childview"></router-view>
     </transition>
@@ -28,7 +42,7 @@
             <item :itemdata="item" title="待付款">
               <div slot="btns" class="no-pay-btns">
                 <button @click.stop.prevent="cancelOrder(item.orderId)">取消订单</button>
-                <button @click.stop.prevent="toPay(item.orderId)">立即支付</button>
+                <button @click.stop.prevent="toPay(item.price)">立即支付</button>
               </div>
             </item>
           </router-link>
@@ -90,6 +104,9 @@ import Alert from '../common/alert/Alert.vue';
 export default {
   data() {
     return {
+      mask_bol: false,
+      password: '',
+      totalMoney: '123',
       alertText: '确定取消订单？',
       btnText1: '去意已决',
       btnText2: '再考虑一下',
@@ -225,9 +242,15 @@ export default {
     noCancel() {
       this.showCancelBox = false;
     },
+    // 取消支付
+    cancelPay() {
+      this.mask_bol = false;
+      this.password = '';
+    },
     // 立即支付
-    toPay(orderId) {
-      alert(orderId + ':pay');
+    toPay(money) {
+      this.totalMoney = money;
+      this.mask_bol = true;
     },
     // 删除订单
     delOrder(orderId) {

@@ -65,23 +65,44 @@ export default {
           _this.showTip = false;
         }, 1500);
       } else {
-        if (this.loginData.username !== 'admin' || this.loginData.password !== 'admin') {
-          this.tip = '密码错误!';
-          this.showTip = true;
-          setTimeout(function() {
-            _this.showTip = false;
-          }, 1500);
-        } else {
-          var userData = {
-            username: this.loginData.username,
-            avatar: 'http://pic2.cxtuku.com/00/02/31/b945758fd74d.jpg',
-            grade: '股东会员'
-          };
-          localStorage.setItem('username', userData.username);
-          localStorage.setItem('avatar', userData.avatar);
-          localStorage.setItem('grade', userData.grade);
-          router.push('/index/my');
+        let localData = [{
+          username: localStorage.getItem('username2'),
+          password: localStorage.getItem('password2'),
+          avatar: 'http://pic2.cxtuku.com/00/02/31/b945758fd74d.jpg',
+          grade: localStorage.getItem('grade')
+        },
+        {
+          username: 'admin',
+          password: 'admin',
+          avatar: 'http://pic2.cxtuku.com/00/02/31/b945758fd74d.jpg',
+          grade: '股东会员'
+        }];
+        for (let i = 0; i < localData.length; i++) {
+          if (this.loginData.username === localData[i].username || this.loginData.password === localData[i].password) {
+            localStorage.setItem('username', localData[i].username);
+            localStorage.setItem('avatar', localData[i].avatar);
+            localStorage.setItem('grade', localData[i].grade);
+            router.go(-1);
+            return;
+          }
         }
+        // if (this.loginData.username !== 'admin' || this.loginData.password !== 'admin') {
+        this.tip = '密码错误!';
+        this.showTip = true;
+        setTimeout(function() {
+          _this.showTip = false;
+        }, 1500);
+        // } else {
+        //   var userData = {
+        //     username: this.loginData.username,
+        //     avatar: 'http://pic2.cxtuku.com/00/02/31/b945758fd74d.jpg',
+        //     grade: '股东会员'
+        //   };
+        //   localStorage.setItem('username', userData.username);
+        //   localStorage.setItem('avatar', userData.avatar);
+        //   localStorage.setItem('grade', userData.grade);
+        //   router.push('/index/my');
+        // }
       }
     }
   }
