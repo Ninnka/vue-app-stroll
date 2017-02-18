@@ -181,7 +181,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/index/My');
+      router.go(-1);
     },
     navClick(navText) {
       this.avtiveNav = navText;

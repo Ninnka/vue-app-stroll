@@ -36,7 +36,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/upgrade');
+      router.go(-1);
     },
     // 支付
     toPay() {

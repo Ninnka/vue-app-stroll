@@ -45,7 +45,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/index/my');
+      router.go(-1);
     },
     // 注册
     register() {

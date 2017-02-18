@@ -26,7 +26,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
     }
   }
 }
