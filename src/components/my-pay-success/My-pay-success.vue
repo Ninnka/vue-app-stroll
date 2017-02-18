@@ -1,17 +1,16 @@
 <template>
   <div id="pay">
     <div class="header">
-      <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="支付成功"  custombg="header-bg"></headbar>
     </div>
     <div class="pay-content">
     	<div>恭喜您成为VIP会员</div>
-      <button>继续购物</button>
+      <button>继续购物</button><button>查看订单</button>
     </div>
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 
 export default {
@@ -21,12 +20,6 @@ export default {
   },
   components: {
     headbar: Header
-  },
-  methods: {
-    // 返回上一页
-    back() {
-      router.push('/index/My');
-    }
   }
 }
 </script>
@@ -61,11 +54,15 @@ a{
 .pay-content button{
   padding:.1rem .2rem;
   display: block;
-  margin: .5rem auto;
+  margin: .5rem auto 0;
   border:none;
   outline: none;
   background: #E42837;
   color: #fff;font-size: .14rem;
   border-radius: 5px;
+}
+.pay-content button:last-child{
+  margin: .3rem auto 0;
+  background: #FF5636;
 }
 </style>

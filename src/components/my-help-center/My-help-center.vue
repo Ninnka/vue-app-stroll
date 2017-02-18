@@ -26,7 +26,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import HelpCenterImg from '../my/assets/help-center.png';
 
@@ -47,7 +47,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/more');
+      router.go(-1);
     }
   }
 }

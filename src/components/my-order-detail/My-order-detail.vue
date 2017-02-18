@@ -43,7 +43,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import ContentComponent from './My-order-detail-component.vue';
 
@@ -90,7 +90,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/orders');
+      router.go(-1);
     },
     toComment() {
       router.push('/comment/12');

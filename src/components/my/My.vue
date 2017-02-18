@@ -74,7 +74,7 @@ export default {
         text: '我的钱包'
       },
       {
-        toUrl: '/address',
+        toUrl: '/address/my',
         text: '收货地址'
       },
       {
@@ -224,28 +224,28 @@ ul li{
   font-size: .15rem;
 }
 ul:first-child li:nth-child(1){
-  background: url('./assets/sprite.png') 0 -.28rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -24px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(2){
-  background: url('./assets/sprite.png') 0 -.63rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -63px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(3){
-  background: url('./assets/sprite.png') 0 -1.02rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -98px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(4){
-  background: url('./assets/sprite.png') 0 -1.35rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -135px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(5){
-  background: url('./assets/sprite.png') 0 -1.75rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -175px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:first-child li:nth-child(6){
-  background: url('./assets/sprite.png') 0 -2.13rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -213px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:last-child li:nth-child(1){
-  background: url('./assets/sprite.png') 0 -2.5rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -250px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul:last-child li:nth-child(2){
-  background: url('./assets/sprite.png') 0 -2.88rem no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
+  background: url('./assets/sprite.png') 0 -288px no-repeat,url('./assets/arrow_left.png') no-repeat 97% 50%;
 }
 ul li router-link{
   display: block;

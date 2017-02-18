@@ -22,7 +22,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import Wallet from '../my/assets/wallet.png';
 
@@ -34,7 +34,7 @@ export default {
       money: 88.50,
       list: [{
         text: '支付宝',
-        check: false
+        check: true
       },
       {
         text: '微信支付',
@@ -48,7 +48,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/index/My');
+      router.go(-1);
     },
     // 账单
     account() {
@@ -146,10 +146,10 @@ a{
 }
 .select-pay li:first-child{
   border-bottom: 1px solid #E6E7E9;
-  background: url(../my/assets/pay_sprite.png) 0 -.04rem no-repeat;
+  background: url(../my/assets/pay_sprite.png) 0 -5px no-repeat;
 }
 .select-pay li:last-child{
-  background: url(../my/assets/pay_sprite.png) 0 -.5rem no-repeat;
+  background: url(../my/assets/pay_sprite.png) 0 -50px no-repeat;
 }
 .wallet-content button{
   margin: 0 auto;

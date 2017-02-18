@@ -14,7 +14,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 
 export default {
@@ -31,14 +31,14 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
     }
   }
 }
 </script>
 <style lang="css" type="text/css" scoped>
 .header-bg{
-  background:#D00009
+  background:#D00009;
 }
 #aboutus {
 	padding-top: .45rem;
@@ -102,9 +102,9 @@ a{
   color: #7C7D7E;
 }
 .aboutus-content button{
-  position: fixed;
-  bottom: .3rem;
-  left: 10%;
+  position: absolute;
+  bottom: .8rem;
+  left:10%;
   width: 80%;
   line-height: .4rem;
   background: #D0700C;

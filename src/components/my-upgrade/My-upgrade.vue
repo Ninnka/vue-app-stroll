@@ -25,7 +25,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 
 export default {
@@ -41,7 +41,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/index/My');
+      router.go(-1);
     },
     // 充值订单详情
     toOrder() {

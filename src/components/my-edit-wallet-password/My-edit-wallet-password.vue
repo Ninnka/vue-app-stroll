@@ -15,7 +15,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 
 export default {
@@ -33,7 +33,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
     }
   }
 }
@@ -123,8 +123,8 @@ a{
   color: #7C7D7E;
 }
 .wallet-psw-content button{
-  position: fixed;
-  bottom: .3rem;
+  position: absolute;
+  bottom: .8rem;
   left: 10%;
   width: 80%;
   line-height: .4rem;
