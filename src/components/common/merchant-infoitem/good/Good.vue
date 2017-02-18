@@ -5,8 +5,8 @@
       <div>
         <p class="merchant-name">{{infoItem.name}}</p>
         <p class="merchant-price">
-          <span>{{infoItem.discountType === '' ? normalType : infoItem.discountType}}￥ </span>
-          <span>{{infoItem.price}}</span>
+          <span v-if="infoItem.discountPrice != ''" class="discount-price">{{infoItem.discountPrice}}</span>
+          <span :class="infoItem.discountPrice != '' ? hasDiscount : ''">￥ {{infoItem.price}}</span>
         </p>
       </div>
     </li>
@@ -17,7 +17,7 @@
 export default {
   data() {
     return {
-      normalType: '价格'
+      hasDiscount: 'line-through'
     }
   },
   props: [
