@@ -76,6 +76,7 @@ export default {
       pwd_wrong_bol: false,
       pick: 'my',
       fare: 10,
+<<<<<<< HEAD
       goodsItems: [
         {
           id: '1',
@@ -94,6 +95,10 @@ export default {
           amount: 2
         }
       ]
+=======
+      goodsItems: [],
+      addressRoute: ''
+>>>>>>> 574b24f26d342b36239b93803de26897e58b5924
     }
   },
   methods: {
@@ -111,7 +116,9 @@ export default {
       this.mask_bol = false;
     },
     toaddress() {
-      router.push('refine-order/my-address')
+      router.push({
+        name: this.addressRoute
+      })
     },
     paySuccess() {
       if (this.password === '666666') {
@@ -133,6 +140,7 @@ export default {
       this.goodsItems = [];
       this.goodsItems = this.$route.params.goodsOrder;
     }
+    this.addressRoute = this.$route.params.addressRoute;
   },
   components: {
     headBar: Header
