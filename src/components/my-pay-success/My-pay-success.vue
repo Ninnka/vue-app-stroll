@@ -1,6 +1,7 @@
 <template>
   <div id="pay">
     <div class="header">
+      <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="支付成功"  custombg="header-bg"></headbar>
     </div>
     <div class="pay-content">
@@ -10,8 +11,8 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/Header.vue';
-// import router from '../../router/index.js';
+import Header from '../common/header/header.vue';
+import router from '../../router/index.js';
 
 export default {
   data() {
@@ -20,6 +21,12 @@ export default {
   },
   components: {
     headbar: Header
+  },
+  methods: {
+    // 返回上一页
+    back() {
+      router.push('/index/My');
+    }
   }
 }
 </script>

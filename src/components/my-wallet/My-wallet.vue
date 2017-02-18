@@ -22,7 +22,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/Header.vue';
+import Header from '../common/header/header.vue';
 import router from '../../router/index.js';
 import Wallet from '../my/assets/wallet.png';
 
@@ -48,7 +48,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.go(-1);
+      router.push('/index/My');
     },
     // 账单
     account() {
