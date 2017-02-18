@@ -18,9 +18,7 @@ export default {
         {
           path: 'good-buy-imedi',
           name: 'good-buy-imedi',
-          components: {
-            goodBuyImedi: RefineOrder
-          },
+          component: RefineOrder,
           children: [
             {
               path: 'buy-imedi-config-address',
