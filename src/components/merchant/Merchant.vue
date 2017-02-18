@@ -12,7 +12,8 @@
       </div>
 
       <div class="merchant-infolist-wrapper overscroll" @scroll="scrolling">
-        <asset-item :infoList="infoList" v-on:viewDetail="viewDetail"></asset-item>
+        <asset-info-list :infoList="infoList" v-on:viewDetail="viewDetail" v-if="listType === 'asset'"></asset-info-list>
+        <good-info-list :infoList="infoList" v-on:viewDetail="viewDetail" v-if="listType === 'good'"></good-info-list>
         <icon-loader></icon-loader>
       </div>
     </div>
@@ -29,7 +30,8 @@ import router from 'src/router';
 
 import Header from 'components/common/header/Header';
 import Backward from 'components/common/icon-backward/IconBackward';
-import AssetItem from 'components/common/merchant-infoitem/asset/Asset';
+import AssetInfoList from 'components/common/merchant-infoitem/asset/Asset';
+import GoodInfoList from 'components/common/merchant-infoitem/good/Good';
 import IconLoader from 'components/common/icon-loader/IconLoader';
 
 export default {
@@ -46,7 +48,8 @@ export default {
       infoList: [],
       infoListWrapper: '',
       preloader: '',
-      loadingMore: false
+      loadingMore: false,
+      listType: ''
     }
   },
   methods: {
@@ -107,9 +110,11 @@ export default {
     switch (this.$route.params.merchantType) {
       case 'asset':
         navApi = '../../../static/js/asset.json';
+        this.listType = 'asset';
         break;
       case 'food':
         navApi = '../../../static/js/food.json';
+        this.listType = 'good';
         break;
       default:
         console.log('api not found');
@@ -126,6 +131,7 @@ export default {
         this.navList = res.body.navList;
         this.$http.get(this.navList[0].api)
           .then(function (res) {
+            console.log('res:', res.body);
             this.infoList = this.infoList.concat(res.body.infoList);
           }, function (err) {
             console.log('err:', err);
@@ -137,7 +143,8 @@ export default {
   components: {
     headBar: Header,
     backward: Backward,
-    assetItem: AssetItem,
+    assetInfoList: AssetInfoList,
+    goodInfoList: GoodInfoList,
     iconLoader: IconLoader
   }
 }

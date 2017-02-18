@@ -21,7 +21,7 @@
       <div class="home-classify flex-box border-box">
         <div class="item">最新</div>
         <div class="item">用品</div>
-        <div class="item">食品</div>
+        <div class="item" @click="viewMerchant('food')">食品</div>
         <div class="item">客服</div>
         <div class="item">家居</div>
         <div class="item" @click="viewMerchant('asset')">房产</div>
