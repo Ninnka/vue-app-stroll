@@ -33,7 +33,9 @@
         <li><span></span>微信支付 <input type="radio" name="payType" id="wx" v-model="pick" value="wx"/><label for="wx" :class="pick=='wx'?'selectedType':''"></label></li>
       </ul>
     </div>
-    
+    <transition name="fade">
+      <div class="pwd-wrong" v-if="pwd_wrong_bol">密码错误</div>
+    </transition>
     <div class="order-foot">
       <span>合计: <span>￥{{totalMoney}}</span></span>
       <button @click="payNow">立即支付</button>
@@ -49,13 +51,13 @@
         </p>
         <p>
           <button class="pay-cancal" @click="payCancal">取消</button> 
-          <button class="pay-refine">付款</button>
+          <button class="pay-refine" @click="paySuccess">付款</button>
         </p>
       </div>
     </div>
     </transition>
     <transition name="slide-fade">
-      <router-view name="addaddresscontent" class="content-router-view position-absolute" id="testid"></router-view>
+      <router-view class="content-router-view position-absolute my-address border-box"></router-view>
     </transition>
   </div>
 </template>
@@ -71,6 +73,7 @@ export default {
       custombg: 'order-headbar-bg',
       mask_bol: false,
       password: '',
+      pwd_wrong_bol: false,
       pick: '',
       fare: 10,
       goodsItems: [{
@@ -107,8 +110,20 @@ export default {
     },
     toaddress() {
       router.push({
-        name: 'add-address'
+        name: 'my-address'
       })
+    },
+    paySuccess() {
+      if (this.password === '666666') {
+        router.push({
+          name: 'pay-success'
+        })
+      } else {
+        this.pwd_wrong_bol = true;
+        setTimeout(() => {
+          this.pwd_wrong_bol = false;
+        }, 2000)
+      }
     }
   },
   created() {
@@ -154,6 +169,11 @@ export default {
 }
 .icon-in-header {
   font-size: .3rem;
+}
+.my-address{
+  z-index: 205;
+  height: 100%;
+  overflow: scroll;
 }
 .order-main{
   background: #f1f1f1;
@@ -417,6 +437,22 @@ export default {
   background: #f29004;
   border: none;
   color: white;
+}
+.pwd-wrong{
+  width: 1.3rem;
+  height: .5rem;
+  position: absolute;
+  top: 2.2rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  font-size: .17rem;
+  line-height: .5rem;
+  text-align: center;
+  z-index: 203;
+  border-radius: 10px;
 }
 #testid{
   height: 100%;
