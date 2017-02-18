@@ -33,12 +33,15 @@ import GoodsItems from './component/GoodsItems.vue';
 
 import IconLoader from 'components/common/icon-loader/IconLoader';
 
+import indexNavHook from 'src/Hook/indexNavHook';
+
 export default {
   data() {
     return {
       custombg: 'member-headbar-bg',
       goodMainContent: '',
       preloader: '',
+      swiper: '',
       loadingMore: false,
       swiperItems: [{
         id: '1',
@@ -132,7 +135,7 @@ export default {
     iconLoader: IconLoader
   },
   mounted() {
-    this.mySwiper = new Swiper('.swiper-container', {
+    this.swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
       autoplay: 2500,
@@ -142,17 +145,17 @@ export default {
       observer: true,
       observeParents: true
     });
+    this.scrollWrapper = document.querySelector('.member-page');
     let goodMainContent = document.querySelector('.member-page');
     let preloader = document.querySelector('.infinite-scroll-preloader');
     this.goodMainContent = goodMainContent;
     this.preloader = preloader;
   },
   updated() {
-    console.log('swiper updated');
-    this.mySwiper.update();
-    this.mySwiper.stopAutoplay();
-    this.mySwiper.startAutoplay();
-  }
+    // console.log('member updated');
+  },
+  beforeRouteEnter: indexNavHook.beforeRouteEnter,
+  beforeRouteLeave: indexNavHook.beforeRouteLeave
 }
 </script>
 

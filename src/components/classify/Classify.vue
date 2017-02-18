@@ -38,6 +38,8 @@ import GoodsItems from './../member/component/GoodsItems.vue';
 
 import IconLoader from 'components/common/icon-loader/IconLoader';
 
+import indexNavHook from 'src/Hook/indexNavHook';
+
 export default {
   data() {
     return {
@@ -127,15 +129,6 @@ export default {
     }
   },
   methods: {
-    // getData() {
-    //   // 获取数据
-    //   this.$http.get('static/json.json')
-    //     .then(function (res) {
-    //       console.log('res:', res);
-    //     }, function (err) {
-    //       console.log('err:', err);
-    //     });
-    // },
     listShow() {
       this.sort_bol = !this.sort_bol;
     },
@@ -194,10 +187,8 @@ export default {
     goodsitems: GoodsItems,
     iconLoader: IconLoader
   },
-  created() {
-    // this.getData();
-  },
   mounted() {
+    this.scrollWrapper = document.querySelector('.classify-page');
     let goodMainContent = document.querySelector('.classify-page');
     let preloader = document.querySelector('.infinite-scroll-preloader');
     this.goodMainContent = goodMainContent;
@@ -211,7 +202,9 @@ export default {
         selected[i].className = 'type-selected';
       }
     }
-  }
+  },
+  beforeRouteEnter: indexNavHook.beforeRouteEnter,
+  beforeRouteLeave: indexNavHook.beforeRouteLeave
 }
 </script>
 

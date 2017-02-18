@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage overscroll">
+  <div class="fullpage overscroll shoppingcar-page">
     <div class="header">
       <headbar title="购物车" :custombg="custombg"></headbar>
       <span class="edit" @click="edit">{{edit_bol?"编辑":"完成"}}</span>
@@ -8,8 +8,8 @@
       <ul>
         <transition-group name="add_del">
           <li v-for="(data,index) in goodsItems" class="carItem" :key="data">
-            <div>
-              <input type="checkbox" v-model="checked" :value="data.id"/>
+            <input type="checkbox" v-model="checked" :value="data.id"/>
+            <div @click="togoodsDetail(data.id)">
               <img :src="data.imgsrc" alt="">
               <div>
                 <p>{{data.title}}</p>
@@ -38,7 +38,7 @@
       </div>
     </div>
     <transition name="slide-fade">
-      <router-view name="refineordercontent" class="content-router-view position-absolute"></router-view>
+      <router-view class="content-router-view position-absolute"></router-view>
     </transition>
   </div>
 </template>
@@ -47,6 +47,8 @@
 import router from '../../router';
 
 import header from '../common/header/Header.vue';
+
+import indexNavHook from 'src/Hook/indexNavHook';
 
 export default {
   data() {
@@ -108,16 +110,6 @@ export default {
     }
   },
   methods: {
-    getData() {
-      // 获取数据
-      // this.$http.get('static/json.json')
-      //   .then(function (res) {
-      //     this.goodsItems = res.body;
-      //     console.log(this.goodsItems);
-      //   }, function (err) {
-      //     console.log('err:', err);
-      //   });
-    },
     edit() {
       this.edit_bol = !this.edit_bol;
       this.checked = [];
@@ -157,13 +149,18 @@ export default {
         }
       }
       this.checked = [];
+    },
+    togoodsDetail(id) {
+      router.push({
+        name: 'car-good-detail',
+        params: {
+          goodsid: id
+        }
+      })
     }
   },
   components: {
     headbar: header
-  },
-  created() {
-    this.getData();
   },
   computed: {
     total: {
@@ -205,7 +202,12 @@ export default {
         return this.checked.length;
       }
     }
-  }
+  },
+  mounted() {
+    this.scrollWrapper = document.querySelector('.shoppingcar-page');
+  },
+  beforeRouteEnter: indexNavHook.beforeRouteEnter,
+  beforeRouteLeave: indexNavHook.beforeRouteLeave
 }
 </script>
 
@@ -307,13 +309,16 @@ input[type="checkbox"]:checked{
   background: url(images/selected.png) no-repeat;
   background-size: 100% 100%;
 }
-.carItem>div img{
+.carItem img{
   width: .69rem;
   height: .68.5rem;
   vertical-align: middle;
 }
-.carItem>div{
+.carItem{
   vertical-align: middle;
+}
+.carItem>div{
+  display: inline-block;
 }
 .carItem>div>div{
   display: inline-block;

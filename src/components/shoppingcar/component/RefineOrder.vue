@@ -11,7 +11,7 @@
       <ul class="order-detail list">
         <li>购买商品</li>
         <li v-for="data in goodsItems" class="carItem orderList">
-          <div>
+          <div @click="togoodsDetail(data.id)">
             <img :src="data.imgsrc" alt="">
             <div>
               <p>{{data.title}}</p>
@@ -107,6 +107,14 @@ export default {
           this.pwd_wrong_bol = false;
         }, 2000)
       }
+    },
+    togoodsDetail(id) {
+      router.push({
+        name: 'order-good-detail',
+        params: {
+          goodsid: id
+        }
+      })
     }
   },
   created() {
