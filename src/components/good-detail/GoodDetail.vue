@@ -70,7 +70,7 @@
       </div>
       <div class="good-purchase-add flex-box">
         <i class="icon iconfont icon-addtosc" @click="addToSC"></i>
-        <i class="icon iconfont icon-purchase-imedi"></i>
+        <i class="icon iconfont icon-purchase-imedi" @click="buy"></i>
       </div>
     </div>
 
@@ -91,6 +91,10 @@
       <mask-bg callback="closeRecharge" v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge">
         <recharge></recharge>
       </mask-bg>
+    </transition>
+
+    <transition name="slide-fade">
+      <router-view name="goodBuyImedi"></router-view>
     </transition>
 
   </div>
@@ -116,6 +120,7 @@ export default {
         uservip: false,
         viponly: false,
         imgsrc: require('./images/goods1.jpg'),
+        id: 9061,
         name: 'Huawei/华为 荣耀7 全网通4G手机',
         pricediscount: 1999,
         pricenormal: 1799,
@@ -214,7 +219,12 @@ export default {
       if (!this.goodDetail.uservip && this.goodDetail.viponly) {
         this.rechargeContentStatus = true;
       } else {
-        console.log('buy');
+        router.push({
+          name: 'good-buy-imedi',
+          params: {
+            id: this.goodDetail.id
+          }
+        })
       }
     },
     closeSelectSpec() {
