@@ -17,21 +17,20 @@
     <div class="select-spec block-title-left">
       <p>规格</p>
       <div class="spec-checkbox flex-box">
-        <span>600g</span>
-        <span>800g</span>
+        <span v-for="(spec, index) in specificationDetail.spec" @click="selectSpec(index)" :class="currentSpecIndex === index ? active : ''">{{spec}}</span>
       </div>
     </div>
 
     <div class="select-quantity block-title-left">
       <p>数量</p>
       <div class="quantity-ctrl">
-        <span>-</span>
-        <span>1</span>
-        <span>+</span>
+        <span @click="sub">-</span>
+        <span>{{amount}}</span>
+        <span @click="add">+</span>
       </div>
     </div>
 
-    <div class="button button-confirm button-addtosc" @click="closeSelectSpec">
+    <div class="button button-confirm button-addtosc" @click="closeAndConfirmSelectSpec">
       确认
     </div>
   </div>
@@ -41,17 +40,40 @@
 export default {
   data() {
     return {
+      currentSpecIndex: 0,
+      active: 'active',
+      amount: 1,
       specificationDetail: {
         thumbnail: require('components/good-detail/images/good-detail-large.jpg'),
         desctitle: 'Huawei/华为 荣耀7 全网通4G手机',
         pricediscount: 1999,
-        pricenormal: 1799
+        pricenormal: 1799,
+        spec: [
+          '官方套装',
+          '官方升级套装(含耳机)'
+        ]
       }
     }
   },
   methods: {
+    selectSpec(index) {
+      this.currentSpecIndex = index;
+    },
+    closeAndConfirmSelectSpec() {
+      this.$emit('closeAndConfirmSelectSpec', {
+        amount: this.amount,
+        price: this.specificationDetail.pricediscount !== '' ? this.specificationDetail.pricediscount : this.specificationDetail.pricenormal,
+        spec: this.specificationDetail.spec[this.currentSpecIndex]
+      });
+    },
     closeSelectSpec(e) {
       this.$emit('closeSelectSpec');
+    },
+    add() {
+      this.amount++;
+    },
+    sub() {
+      this.amount = this.amount > 1 ? this.amount - 1 : 1;
     }
   }
 }

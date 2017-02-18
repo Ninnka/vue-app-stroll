@@ -90,6 +90,11 @@
       flex-shrink: 1;
       margin-right: .12rem;
       padding: .05rem .08rem;
+
+      &.active {
+        border-color: red;
+        color: red;
+      }
     }
   }
 }

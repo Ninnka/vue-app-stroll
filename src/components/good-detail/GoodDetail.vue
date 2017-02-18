@@ -1,98 +1,103 @@
 <template lang="html">
-  <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box overscroll" @scroll="scrolling">
-    <head-bar :custombg="headbarbg">
-      <backward slot="backward-icon" v-on:backward="backward"></backward>
-      <i slot="share-icon" class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
-      <i slot="star-icon" class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click.stop="star"></i>
-    </head-bar>
+  <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box ">
+    <div class="fullpage overscroll" id="goodScrollWrapper" @scroll="scrolling">
+      <head-bar :custombg="headbarbg">
+        <backward slot="backward-icon" v-on:backward="backward"></backward>
+        <i slot="share-icon" class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
+        <i slot="star-icon" class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click.stop="star"></i>
+      </head-bar>
 
-    <div class="good-presentation">
-      <img class="" :src="goodDetail.imgsrc" alt="">
-    </div>
-    <div class="good-detail border-box">
-      <div class="price border-box">
-        <p>{{goodDetail.name}}</p>
-        <div>
-          <span class="price-discount">￥ {{goodDetail.pricediscount}}</span>
-          <span class="price-normal">原价：<span>￥ {{goodDetail.pricenormal}}</span></span>
-          <span class="sale-quantity float-right">销量：{{goodDetail.salequantity}}</span>
-        </div>
+      <div class="good-presentation">
+        <img class="" :src="goodDetail.imgsrc" alt="">
       </div>
-      <div class="limit border-box">
-        <p>限时：2天23分02秒</p>
-        <p>限量：{{goodDetail.discountquantity}}件</p>
-      </div>
-    </div>
-
-    <div class="good-tab flex-box">
-      <a class="tab-link button border-box" :class="showTab === 'details' ? active : ''" id="good-tab-detail" @click="changeTab">商品详情</a>
-      <a class="tab-link button border-box" :class="showTab === 'comments' ? active : ''" @click="changeTab">用户评价</a>
-    </div>
-
-    <div class="tabs">
-      <div class="tab" v-show="showTab === 'details'">
-        <div class="content-block">
-          <div class="details-item" v-for="item in goodDetail.gooddetaillist">
-            <img :src="item.imgsrc" alt="">
-            <p>{{item.description}}</p>
+      <div class="good-detail border-box">
+        <div class="price border-box">
+          <p>{{goodDetail.name}}</p>
+          <div>
+            <span class="price-discount">￥ {{goodDetail.pricediscount}}</span>
+            <span class="price-normal">原价：<span>￥ {{goodDetail.pricenormal}}</span></span>
+            <span class="sale-quantity float-right">销量：{{goodDetail.salequantity}}</span>
           </div>
         </div>
-      </div>
-      <div class="tab infinite-scroll" v-show="showTab === 'comments'">
-        <div class="list-block">
-          <ul class="list-container">
-            <li class="normal-fontsize comment-container" v-for="commentItem in goodDetail.commentList">
-              <div class="comment-about flex-box">
-                <img :src="commentItem.avatar" alt="" class="avatar">
-                <span class="name">{{commentItem.name}}</span>
-                <span class="member-level">{{commentItem.memberLevel}}</span>
-                <span class="timestamp">{{commentItem.timestamp}}</span>
-              </div>
-              <div class="comment-score">
-                <i class="icon iconfont icon-comment-star active" v-for="s in commentItem.score"></i>
-                <!-- {{commentItem.score}} -->
-              </div>
-              <div class="comment-content">
-                {{commentItem.content}}
-              </div>
-            </li>
-          </ul>
+        <div class="limit border-box">
+          <p>限时：2天23分02秒</p>
+          <p>限量：{{goodDetail.discountquantity}}件</p>
         </div>
-        <!-- 加载提示符 -->
-        <icon-loader></icon-loader>
       </div>
+
+      <div class="good-tab flex-box">
+        <a class="tab-link button border-box" :class="showTab === 'details' ? active : ''" id="good-tab-detail" @click="changeTab">商品详情</a>
+        <a class="tab-link button border-box" :class="showTab === 'comments' ? active : ''" @click="changeTab">用户评价</a>
+      </div>
+
+      <div class="tabs">
+        <div class="tab" v-show="showTab === 'details'">
+          <div class="content-block">
+            <div class="details-item" v-for="item in goodDetail.gooddetaillist">
+              <img :src="item.imgsrc" alt="">
+              <p>{{item.description}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab infinite-scroll" v-show="showTab === 'comments'">
+          <div class="list-block">
+            <ul class="list-container">
+              <li class="normal-fontsize comment-container" v-for="commentItem in goodDetail.commentList">
+                <div class="comment-about flex-box">
+                  <img :src="commentItem.avatar" alt="" class="avatar">
+                  <span class="name">{{commentItem.name}}</span>
+                  <span class="member-level">{{commentItem.memberLevel}}</span>
+                  <span class="timestamp">{{commentItem.timestamp}}</span>
+                </div>
+                <div class="comment-score">
+                  <i class="icon iconfont icon-comment-star active" v-for="s in commentItem.score"></i>
+                  <!-- {{commentItem.score}} -->
+                </div>
+                <div class="comment-content">
+                  {{commentItem.content}}
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- 加载提示符 -->
+          <icon-loader></icon-loader>
+        </div>
+      </div>
+
+      <div class="good-footbar fixed flex-box">
+        <div class="good-shoppingcar border-box">
+          <i class="icon iconfont icon-shoppingcar"></i>
+          <div class="shopping-point redpoint">{{orderDetail.amount}}</div>
+        </div>
+        <div class="good-purchase-add flex-box">
+          <i class="icon iconfont icon-addtosc" @click="addToSC"></i>
+          <i class="icon iconfont icon-purchase-imedi" @click="buy"></i>
+        </div>
+      </div>
+
+      <transition name="fade">
+        <mask-bg callback="closeSelectSpec" v-if="selectSpecStatus" v-on:closeSelectSpec="closeSelectSpec">
+          <select-specification v-on:closeSelectSpec="closeSelectSpec" v-on:closeAndConfirmSelectSpec="closeAndConfirmSelectSpec"></select-specification>
+        </mask-bg>
+
+      </transition>
+
+      <transition name="fade">
+        <mask-bg callback="closeShare" v-if="shareContentStatus" v-on:closeShare="closeShare">
+          <share v-on:closeShare="closeShare"></share>
+        </mask-bg>
+      </transition>
+
+      <transition name="fade">
+        <mask-bg callback="closeRecharge" v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge">
+          <recharge></recharge>
+        </mask-bg>
+      </transition>
+
     </div>
-
-    <div class="good-footbar fixed flex-box">
-      <div class="good-shoppingcar border-box">
-        <i class="icon iconfont icon-shoppingcar"></i>
-        <div class="shopping-point redpoint">{{goodDetail.inShoppingCar}}</div>
-      </div>
-      <div class="good-purchase-add flex-box">
-        <i class="icon iconfont icon-addtosc" @click="addToSC"></i>
-        <i class="icon iconfont icon-purchase-imedi"></i>
-      </div>
-    </div>
-
-    <transition name="fade">
-      <mask-bg callback="closeSelectSpec" v-if="selectSpecStatus" v-on:closeSelectSpec="closeSelectSpec">
-        <select-specification v-on:closeSelectSpec="closeSelectSpec"></select-specification>
-      </mask-bg>
-
+    <transition name="slide-fade">
+      <router-view></router-view>
     </transition>
-
-    <transition name="fade">
-      <mask-bg callback="closeShare" v-if="shareContentStatus" v-on:closeShare="closeShare">
-        <share v-on:closeShare="closeShare"></share>
-      </mask-bg>
-    </transition>
-
-    <transition name="fade">
-      <mask-bg callback="closeRecharge" v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge">
-        <recharge></recharge>
-      </mask-bg>
-    </transition>
-
   </div>
 </template>
 
@@ -112,10 +117,19 @@ export default {
     return {
       contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
+      uservip: false,
+      viponly: '',
+      orderDetail: {
+        id: '',
+        imgsrc: '',
+        title: '',
+        spec: '',
+        price: '',
+        amount: 0
+      },
       goodDetail: {
-        uservip: false,
-        viponly: false,
         imgsrc: require('./images/goods1.jpg'),
+        id: 9061,
         name: 'Huawei/华为 荣耀7 全网通4G手机',
         pricediscount: 1999,
         pricenormal: 1799,
@@ -134,7 +148,6 @@ export default {
           }
         ],
         starStatus: '0',
-        inShoppingCar: 0,
         commentList: [
           {
             avatar: require('./images/avatar.png'),
@@ -186,7 +199,8 @@ export default {
       preloadY: 0,
       goodMainContent: '',
       preloader: '',
-      loadingMore: false
+      loadingMore: false,
+      buyRouteName: ''
     }
   },
   methods: {
@@ -211,11 +225,31 @@ export default {
       }
     },
     buy() {
-      if (!this.goodDetail.uservip && this.goodDetail.viponly) {
+      if (!this.uservip && this.viponly) {
         this.rechargeContentStatus = true;
+      } else if (this.orderDetail.amount > 0) {
+        this.orderDetail.id = this.goodDetail.id;
+        this.orderDetail.title = this.goodDetail.name;
+        this.orderDetail.imgsrc = this.goodDetail.imgsrc;
+        let orderArr = [];
+        orderArr.push(this.orderDetail);
+        router.push({
+          name: this.buyRouteName,
+          params: {
+            goodsOrder: orderArr,
+            addressRoute: 'buy-imedi-config-address'
+          }
+        })
       } else {
-        console.log('buy');
+        alert('商品数量不能为0');
       }
+    },
+    closeAndConfirmSelectSpec(spec) {
+      this.orderDetail.amount = spec.amount;
+      this.orderDetail.spec = spec.spec;
+      this.orderDetail.price = spec.price;
+      this.selectSpecStatus = false;
+      console.log('orderdetail:', this.orderDetail);
     },
     closeSelectSpec() {
       console.log('closeSelectSpec in detail');
@@ -250,10 +284,16 @@ export default {
   },
   created() {
     console.log('created detail');
+    if (this.$route.params.viponly !== undefined) {
+      this.viponly = this.$route.params.viponly;
+    }
+    if (this.$route.params.buyRouteName !== undefined) {
+      this.buyRouteName = this.$route.params.buyRouteName
+    }
   },
   mounted() {
     console.log('mounted detail');
-    let goodMainContent = document.querySelector('.good-main-content');
+    let goodMainContent = document.querySelector('#goodScrollWrapper');
     let preloader = document.querySelector('.infinite-scroll-preloader');
     this.goodMainContent = goodMainContent;
     this.preloader = preloader;

@@ -106,7 +106,6 @@ export default {
 .icon.iconfont {
   font-size: .21rem;
 }
-
 .flex-box {
   display: flex;
 }
