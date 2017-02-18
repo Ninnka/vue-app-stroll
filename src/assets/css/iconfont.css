@@ -1,98 +1,71 @@
-@font-face {
-  font-family: "iconfont";
-  src: url('iconfont.eot?t=1487321232341');
-  /* IE9*/
-  src: url('iconfont.eot?t=1487321232341#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1487321232341') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1487321232341') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1487321232341#iconfont') format('svg');
-  /* iOS 4.1- */
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1487385132292'); /* IE9*/
+  src: url('iconfont.eot?t=1487385132292#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1487385132292') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1487385132292') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1487385132292#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-backward:before {
-  content: "\e600";
-}
+.icon-backward:before { content: "\e600"; }
 
-.icon-location:before {
-  content: "\e602";
-}
+.icon-location:before { content: "\e602"; }
 
-.icon-shoppingcar:before {
-  content: "\e6e4";
-}
+.icon-shoppingcar:before { content: "\e6e4"; }
 
-.icon-share:before {
-  content: "\e601";
-}
+.icon-share:before { content: "\e601"; }
 
-.icon-classify:before {
-  content: "\e612";
-}
+.icon-classify:before { content: "\e612"; }
 
-.icon-star:before {
-  content: "\e892";
-}
+.icon-customer-service:before { content: "\e611"; }
 
-.icon-home:before {
-  content: "\e63d";
-}
+.icon-star:before { content: "\e892"; }
 
-.icon-my:before {
-  content: "\e628";
-}
+.icon-home:before { content: "\e63d"; }
 
-.icon-comment-star:before {
-  content: "\e61b";
-}
+.icon-my:before { content: "\e628"; }
 
-.icon-addtosc:before {
-  content: "\e63e";
-}
+.icon-comment-star:before { content: "\e61b"; }
 
-.icon-member:before {
-  content: "\e603";
-}
+.icon-addtosc:before { content: "\e63e"; }
 
-.icon-share-weixin:before {
-  content: "\e669";
-}
+.icon-member:before { content: "\e603"; }
 
-.icon-warn:before {
-  content: "\e68b";
-}
+.icon-food:before { content: "\e64a"; }
 
-.icon-purchase-imedi:before {
-  content: "\e649";
-}
+.icon-asset:before { content: "\e62b"; }
 
-.icon-share-sinaweibo:before {
-  content: "\e60c";
-}
+.icon-share-weixin:before { content: "\e669"; }
 
-.icon-search:before {
-  content: "\e604";
-}
+.icon-warn:before { content: "\e68b"; }
 
-.icon-backward-white-copy:before {
-  content: "\e893";
-}
+.icon-purchase-imedi:before { content: "\e649"; }
 
-.icon-star-white-copy:before {
-  content: "\e894";
-}
+.icon-appliance:before { content: "\e62d"; }
 
-.icon-star-yellow-copy:before {
-  content: "\e895";
-}
+.icon-new:before { content: "\e615"; }
 
-.icon-share-white-copy:before {
-  content: "\e896";
-}
+.icon-furniture:before { content: "\e63f"; }
+
+.icon-symbol-new:before { content: "\e608"; }
+
+.icon-share-sinaweibo:before { content: "\e60c"; }
+
+.icon-search:before { content: "\e604"; }
+
+.icon-backward-white-copy:before { content: "\e893"; }
+
+.icon-star-white-copy:before { content: "\e894"; }
+
+.icon-star-yellow-copy:before { content: "\e895"; }
+
+.icon-share-white-copy:before { content: "\e896"; }
+
