@@ -58,7 +58,6 @@ export default {
   methods: {
     selectSpec(index) {
       this.currentSpecIndex = index;
-      // this.$emit('selectSpec', this.specificationDetail.spec[index]);
     },
     closeAndConfirmSelectSpec() {
       this.$emit('closeAndConfirmSelectSpec', {
