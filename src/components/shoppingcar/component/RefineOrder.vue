@@ -50,7 +50,7 @@
           <label for="pay-password"><span v-for="i in password"></span></label>
         </p>
         <p>
-          <button class="pay-cancal" @click="payCancal">取消</button> 
+          <button class="pay-cancal" @click="payCancal">取消</button>
           <button class="pay-refine" @click="paySuccess">付款</button>
         </p>
       </div>
@@ -139,7 +139,7 @@ export default {
     totalMoney: {
       get() {
         var total = 0;
-        this.goodsItems.map(function(item) {
+        this.goodsItems.map(function (item) {
           total += item.price * item.amount;
         })
         return (total + this.fare).toFixed(2)
@@ -171,7 +171,7 @@ export default {
   text-align: center;
   top: 0;
   width: .20rem;
-  z-index: 100; 
+  z-index: 100;
 }
 .icon-in-header {
   font-size: .3rem;
@@ -254,7 +254,7 @@ export default {
 }
 .order-detail .fare p span{
   float: right;
-  padding-right: .05rem; 
+  padding-right: .05rem;
 }
 .order-detail>li:last-child p{
   border: none;
@@ -462,6 +462,6 @@ export default {
 }
 #testid{
   height: 100%;
-  overflow-y:scroll; 
+  overflow-y:scroll;
 }
 </style>
