@@ -117,6 +117,8 @@ export default {
     return {
       contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
+      uservip: false,
+      viponly: '',
       orderDetail: {
         id: '',
         imgsrc: '',
@@ -126,8 +128,6 @@ export default {
         amount: 0
       },
       goodDetail: {
-        uservip: false,
-        viponly: false,
         imgsrc: require('./images/goods1.jpg'),
         id: 9061,
         name: 'Huawei/华为 荣耀7 全网通4G手机',
@@ -199,7 +199,8 @@ export default {
       preloadY: 0,
       goodMainContent: '',
       preloader: '',
-      loadingMore: false
+      loadingMore: false,
+      buyRouteName: ''
     }
   },
   methods: {
@@ -224,7 +225,7 @@ export default {
       }
     },
     buy() {
-      if (!this.goodDetail.uservip && this.goodDetail.viponly) {
+      if (!this.uservip && this.viponly) {
         this.rechargeContentStatus = true;
       } else if (this.orderDetail.amount > 0) {
         this.orderDetail.id = this.goodDetail.id;
@@ -233,7 +234,7 @@ export default {
         let orderArr = [];
         orderArr.push(this.orderDetail);
         router.push({
-          name: 'good-buy-imedi',
+          name: this.buyRouteName,
           params: {
             goodsOrder: orderArr,
             addressRoute: 'buy-imedi-config-address'
@@ -283,6 +284,12 @@ export default {
   },
   created() {
     console.log('created detail');
+    if (this.$route.params.viponly !== undefined) {
+      this.viponly = this.$route.params.viponly;
+    }
+    if (this.$route.params.buyRouteName !== undefined) {
+      this.buyRouteName = this.$route.params.buyRouteName
+    }
   },
   mounted() {
     console.log('mounted detail');
