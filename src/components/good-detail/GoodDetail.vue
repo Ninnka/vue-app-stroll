@@ -96,7 +96,7 @@
 
     </div>
     <transition name="slide-fade">
-      <router-view name="goodBuyImedi"></router-view>
+      <router-view></router-view>
     </transition>
   </div>
 </template>
