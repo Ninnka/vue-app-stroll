@@ -1,3 +1,5 @@
+$maintheme: #d81e06;
+
 .merchant-info-list {
   background: white;
   min-height: 100%;
@@ -21,15 +23,23 @@
     .merchant-name {
       color: #353535;
       font-size: .17rem;
+      max-height: .33rem;
       max-width: 1.4rem;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     .merchant-price {
       font-size: .15rem;
-      margin-top: .05rem;
+      margin-top: .15rem;
+
+      .discount-price {
+        color: $maintheme;
+        font-size: .18rem;
+      }
     }
   }
+}
+
+.line-through {
+  text-decoration: line-through;
 }
