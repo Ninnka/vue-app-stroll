@@ -96,7 +96,7 @@
 
     </div>
     <transition name="slide-fade">
-      <router-view name="goodBuyImedi"></router-view>
+      <router-view></router-view>
     </transition>
   </div>
 </template>
@@ -233,11 +233,12 @@ export default {
         this.orderDetail.imgsrc = this.goodDetail.imgsrc;
         let orderArr = [];
         orderArr.push(this.orderDetail);
+        console.log(this.buyRouteName);
         router.push({
           name: this.buyRouteName,
           params: {
             goodsOrder: orderArr,
-            addressRoute: 'buy-imedi-config-address'
+            addressRoute: 'buy-imedi-config-address1'
           }
         })
       } else {

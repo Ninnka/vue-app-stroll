@@ -14,14 +14,12 @@ export default {
         {
           path: 'good-buy-imedi1',
           name: 'good-buy-imedi1',
-          components: {
-            goodBuyImedi1: RefineOrder
-          },
+          component: RefineOrder,
           children: [
             {
               path: 'buy-imedi-config-address1',
               name: 'buy-imedi-config-address1',
-              component1: MyAddress
+              component: MyAddress
             }
           ]
         }
