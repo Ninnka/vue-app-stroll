@@ -3,6 +3,7 @@ import Locate from 'components/locate/Locate';
 import Search from 'components/search/Search';
 import Merchant from 'components/merchant/Merchant';
 import Asset from 'components/asset/Asset';
+import RefineOrder from 'components/shoppingcar/component/RefineOrder';
 
 export default {
   routes: [
@@ -11,7 +12,16 @@ export default {
       name: 'good-detail',
       components: {
         gooddetailcontent: GoodDetail
-      }
+      },
+      children: [
+        {
+          path: 'good-buy-imedi',
+          name: 'good-buy-imedi',
+          components: {
+            goodBuyImedi: RefineOrder
+          }
+        }
+      ]
     },
     {
       path: 'locate',
