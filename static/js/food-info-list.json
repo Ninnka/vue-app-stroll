@@ -4,57 +4,57 @@
       "id": 1,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     },
     {
       "id": 2,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     },
     {
       "id": 3,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     },
     {
       "id": 4,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     },
     {
       "id": 5,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     },
     {
       "id": 6,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     },
     {
       "id": 7,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     },
     {
       "id": 8,
       "avatar": "/static/images/good-thumbnail.jpg",
       "name": "薯条点心面休闲零食五 味园  小包装500g",
-      "price": "11.5",
-      "discountType": "12.8"
+      "discountPrice": "11.5",
+      "price": "12.8"
     }
   ]
 }
