@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="fullpage main-theme-background search-main-content content-hasheader normal-fontsize border-box overscroll">
       <head-bar title="搜索" :custombg="headbarbg">
-        <i slot="backward-icon" class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
+        <backward slot="backward-icon" v-on:backward="backward"></backward>
       </head-bar>
 
       <search-bar v-on:searchContent="searchContent" callbackEvent="searchContent"></search-bar>
@@ -41,10 +41,11 @@
 <script>
 import router from 'src/router';
 
-import Header from 'components/common/header/Header.vue';
-import Mask from 'components/common/mask/Mask.vue';
-import LeaveMessage from 'components/common/leave-message/LeaveMessage.vue';
-import SearchBar from 'components/common/search-bar/SearchBar.vue';
+import Header from 'components/common/header/Header';
+import Mask from 'components/common/mask/Mask';
+import LeaveMessage from 'components/common/leave-message/LeaveMessage';
+import SearchBar from 'components/common/search-bar/SearchBar';
+import Backward from 'components/common/icon-backward/IconBackward';
 
 export default {
   data() {
@@ -109,7 +110,8 @@ export default {
     headBar: Header,
     maskBg: Mask,
     leaveMessage: LeaveMessage,
-    searchBar: SearchBar
+    searchBar: SearchBar,
+    backward: Backward
   }
 }
 </script>

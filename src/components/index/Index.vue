@@ -27,7 +27,7 @@
 </template>
 
 <script type="text/javascript">
-import router from '../../router';
+import router from 'src/router';
 export default {
   data() {
     return {

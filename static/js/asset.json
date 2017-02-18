@@ -1,0 +1,14 @@
+{
+  "navList": [
+    {
+      "id": 1,
+      "name": "银行信息",
+      "api": "../../../static/js/asset-bank-info-list.json"
+    },
+    {
+      "id": 2,
+      "name": "房产信息",
+      "api": "../../../static/js/asset-build-info-list.json"
+    }
+  ]
+}

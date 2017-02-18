@@ -1,6 +1,8 @@
-import GoodDetail from 'components/good-detail/GoodDetail.vue';
-import Locate from 'components/locate/Locate.vue';
-import Search from 'components/search/Search.vue';
+import GoodDetail from 'components/good-detail/GoodDetail';
+import Locate from 'components/locate/Locate';
+import Search from 'components/search/Search';
+import Merchant from 'components/merchant/Merchant';
+import Asset from 'components/asset/Asset';
 
 export default {
   routes: [
@@ -12,10 +14,10 @@ export default {
       }
     },
     {
-      path: 'select-city',
-      name: 'select-city',
+      path: 'locate',
+      name: 'locate',
       components: {
-        selectcitycontent: Locate
+        locatecontent: Locate
       }
     },
     {
@@ -24,6 +26,22 @@ export default {
       components: {
         search: Search
       }
+    },
+    {
+      path: 'merchant',
+      name: 'merchant',
+      components: {
+        merchant: Merchant
+      },
+      children: [
+        {
+          path: 'asset-detail',
+          name: 'asset-detail',
+          components: {
+            assetDetail: Asset
+          }
+        }
+      ]
     }
   ]
 };

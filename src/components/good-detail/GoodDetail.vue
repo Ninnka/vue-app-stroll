@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="fullpage main-theme-background good-main-content normal-fontsize hasfootbar border-box overscroll" @scroll="scrolling">
     <head-bar :custombg="headbarbg">
-      <i slot="backward-icon" class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click.stop="backward"></i>
+      <backward slot="backward-icon" v-on:backward="backward"></backward>
       <i slot="share-icon" class="icon iconfont icon-share-white-copy fixed icon-in-header share-good" @click.stop="shareContent"></i>
       <i slot="star-icon" class="icon iconfont icon-star-white-copy fixed icon-in-header star-good" :class="goodDetail.starStatus === '1' ? active : ''" @click.stop="star"></i>
     </head-bar>
@@ -97,14 +97,15 @@
 </template>
 
 <script>
-import router from '../../router';
+import router from 'src/router';
 
-import Header from '../common/header/Header.vue';
-import Mask from 'components/common/mask/Mask.vue';
-import SelectSpecification from 'components/common/select-specification/SelectSpecification.vue';
-import Share from 'components/common/share/share.vue';
-import Recharge from 'components/common/recharge/Recharge.vue';
-import IconLoader from 'components/common/icon-loader/IconLoader.vue';
+import Header from 'components/common/header/Header';
+import Mask from 'components/common/mask/Mask';
+import SelectSpecification from 'components/common/select-specification/SelectSpecification';
+import Share from 'components/common/share/share';
+import Recharge from 'components/common/recharge/Recharge';
+import IconLoader from 'components/common/icon-loader/IconLoader';
+import Backward from 'components/common/icon-backward/IconBackward';
 
 export default {
   data() {
@@ -266,7 +267,8 @@ export default {
     selectSpecification: SelectSpecification,
     share: Share,
     recharge: Recharge,
-    iconLoader: IconLoader
+    iconLoader: IconLoader,
+    backward: Backward
   }
 }
 </script>
