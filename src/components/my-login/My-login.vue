@@ -20,7 +20,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import Logo from '../my/assets/login-logo.png';
 import Toast from '../common/toast/Toast.vue';

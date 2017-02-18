@@ -26,7 +26,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import HelpCenterImg from '../my/assets/help-center.png';
 
