@@ -11,8 +11,9 @@
         </ul>
       </div>
 
-      <div class="merchant-infolist-wrapper overscroll">
-        <asset-item :infoList="infoList" v-on:viewDetail="viewDetail"></asset-item>
+      <div class="merchant-infolist-wrapper overscroll" @scroll="scrolling">
+        <asset-info-list :infoList="infoList" v-on:viewDetail="viewDetail" v-if="listType === 'asset'"></asset-info-list>
+        <good-info-list :infoList="infoList" v-on:viewDetail="viewDetail" v-if="listType === 'good'"></good-info-list>
         <icon-loader></icon-loader>
       </div>
     </div>
@@ -29,7 +30,8 @@ import router from 'src/router';
 
 import Header from 'components/common/header/Header';
 import Backward from 'components/common/icon-backward/IconBackward';
-import AssetItem from 'components/common/merchant-infoitem/asset/Asset';
+import AssetInfoList from 'components/common/merchant-infoitem/asset/Asset';
+import GoodInfoList from 'components/common/merchant-infoitem/good/Good';
 import IconLoader from 'components/common/icon-loader/IconLoader';
 
 export default {
@@ -43,10 +45,11 @@ export default {
       navList: {
 
       },
-      infoList: {
-
-      },
-      infoListWrapper: ''
+      infoList: [],
+      infoListWrapper: '',
+      preloader: '',
+      loadingMore: false,
+      listType: ''
     }
   },
   methods: {
@@ -73,6 +76,32 @@ export default {
           id_asset: id
         }
       });
+    },
+    scrolling() {
+      let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      let actualTop = this.preloader.offsetTop;
+      let current = this.preloader.offsetParent;
+      while (current !== null) {
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+      }
+      let elementScrollTop = this.infoListWrapper.scrollTop;
+      if ((actualTop - elementScrollTop < documentHeight) && !this.loadingMore) {
+        this.loadingMore = true;
+        // 这里调用加载数据的方法
+        // 模拟加载数据
+        this.$http.get(this.navList[this.currentNav].api)
+          .then(function (res) {
+            this.infoList = this.infoList.concat(res.body.infoList);
+            this.loadingMore = false;
+          }, function (err) {
+            console.log('err:', err);
+          });
+        // 模拟结束数据加载后的动作，需要将标识设为false
+        // setTimeout(function () {
+        //   this.loadingMore = false;
+        // }.bind(this), 1500);
+      }
     }
   },
   created() {
@@ -81,9 +110,11 @@ export default {
     switch (this.$route.params.merchantType) {
       case 'asset':
         navApi = '../../../static/js/asset.json';
+        this.listType = 'asset';
         break;
       case 'food':
         navApi = '../../../static/js/food.json';
+        this.listType = 'good';
         break;
       default:
         console.log('api not found');
@@ -94,15 +125,17 @@ export default {
   },
   mounted() {
     this.infoListWrapper = document.querySelector('.merchant-infolist-wrapper');
+    this.preloader = document.querySelector('.infinite-scroll-preloader');
     this.navPromise
       .then(function (res) {
         this.navList = res.body.navList;
         this.$http.get(this.navList[0].api)
           .then(function (res) {
-            this.infoList = res.body.infoList;
+            console.log('res:', res.body);
+            this.infoList = this.infoList.concat(res.body.infoList);
           }, function (err) {
             console.log('err:', err);
-          })
+          });
       }, function (err) {
         console.log('err:', err);
       });
@@ -110,7 +143,8 @@ export default {
   components: {
     headBar: Header,
     backward: Backward,
-    assetItem: AssetItem,
+    assetInfoList: AssetInfoList,
+    goodInfoList: GoodInfoList,
     iconLoader: IconLoader
   }
 }
