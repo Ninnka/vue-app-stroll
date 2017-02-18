@@ -2,7 +2,7 @@
   <div class="goodsContent">
 		<ul class="goodsItems">
 		  <li class="goodsItem" v-for="gItem in goodsItems">
-        <router-link :to="{name: tag,params: {goodsid: gItem.goodsID}}">
+        <router-link :to="{name: tag,params: {goodsid: gItem.goodsID, viponly: true}}">
 		      <img :src="gItem.imgsrc" alt="">
 		      <h2>{{gItem.title}}</h2>
 		      <p>

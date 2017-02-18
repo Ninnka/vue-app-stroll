@@ -76,29 +76,8 @@ export default {
       pwd_wrong_bol: false,
       pick: 'my',
       fare: 10,
-<<<<<<< HEAD
-      goodsItems: [
-        {
-          id: '1',
-          imgsrc: require('../images/goods2.jpg'),
-          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-          spec: '一盒6片',
-          price: '29.5',
-          amount: 2
-        },
-        {
-          id: '2',
-          imgsrc: require('../images/goods2.jpg'),
-          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-          spec: '一盒6片',
-          price: '29.5',
-          amount: 2
-        }
-      ]
-=======
       goodsItems: [],
       addressRoute: ''
->>>>>>> 574b24f26d342b36239b93803de26897e58b5924
     }
   },
   methods: {
