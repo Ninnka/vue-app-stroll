@@ -124,6 +124,7 @@ export default {
 
 .fixed {
   position: fixed;
+  z-index: 200;
 }
 
 .fixed-bottom {

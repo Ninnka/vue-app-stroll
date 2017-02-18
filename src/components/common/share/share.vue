@@ -1,15 +1,13 @@
 <template lang="html">
-  <div class="transclubg fixed fullpage border-box" @click.stop.prevent="closeShare($event)">
-    <div class="share-content fixed" @click.stop.prevent="">
-      <p class="title">分享到</p>
-      <div class="share-icon-list flex-box">
-        <div v-for="iconItem in shareIconList">
-          <img :src="iconItem.icon" alt="">
-          <p>{{iconItem.title}}</p>
-        </div>
+  <div class="share-content fixed" @click.stop.prevent="">
+    <p class="title">分享到</p>
+    <div class="share-icon-list flex-box">
+      <div v-for="iconItem in shareIconList">
+        <img :src="iconItem.icon" alt="">
+        <p>{{iconItem.title}}</p>
       </div>
-      <div class="button button-cancel button-closeshare" @click="closeShare($event)">取消</div>
     </div>
+    <div class="button button-cancel button-closeshare" @click="closeShare($event)">取消</div>
   </div>
 </template>
 

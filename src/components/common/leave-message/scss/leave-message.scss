@@ -1,0 +1,63 @@
+$maintheme: #d81e06;
+
+.leave-message-content {
+  background: white;
+  border: 1px solid rgba(100, 100, 100, .7);
+  border-radius: .2rem;
+  height: 3.4rem;
+  left: 50%;
+  margin-left: -1.675rem;
+  margin-top: -1.7rem;
+  overflow: hidden;
+  top: 50%;
+  width: 3.35rem;
+
+  .title-wrapper {
+    background: #F5F5F5;
+
+    > p {
+      color: $maintheme;
+      display: inline-block;
+      font-size: .18rem;
+      margin-left: .2rem;
+      padding: .1rem 0;
+      text-indent: .05rem;
+      letter-spacing: .05rem;
+    }
+  }
+
+  .icon-close {
+    color: $maintheme;
+    margin-right: .15rem;
+    margin-top: .1rem;
+  }
+
+  .textinput-wrapper {
+    .textinput {
+      padding: .06rem;
+      background: #FAFAFA;
+      border: 1px solid rgba(190, 190, 190, .3);
+      display: block;
+      height: 2.15rem;
+      margin: .12rem auto;
+      outline: none;
+      width: 3rem;
+
+      &:focus {
+        box-shadow: 1px 1px 2px 0 rgba(100, 100, 100, .6);
+      }
+    }
+  }
+
+  .button-submit {
+    background: $maintheme;
+    border-radius: .05rem;
+    color: white;
+    height: .37rem;
+    letter-spacing: .05rem;
+    line-height: .37rem;
+    margin: .12rem auto 0;
+    text-indent: .05rem;
+    width: .9rem;
+  }
+}
