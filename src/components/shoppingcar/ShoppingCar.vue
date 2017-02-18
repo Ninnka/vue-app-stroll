@@ -60,52 +60,52 @@ export default {
       edit_bol: true,
       goodsOrder: [],
       goodsItems: [{
-        id: '1',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
+          id: '1',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
       },
-      {
-        id: '2',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
+        {
+          id: '2',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
       },
-      {
-        id: '3',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
+        {
+          id: '3',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
       },
-      {
-        id: '4',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
+        {
+          id: '4',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
       },
-      {
-        id: '5',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
+        {
+          id: '5',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
       },
-      {
-        id: '6',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
+        {
+          id: '6',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
       }]
     }
   },
@@ -177,19 +177,25 @@ export default {
               }
             }
           }
-          return { 'totalMoney': totalMoney.toFixed(2), 'totalCount': totalCount }
+          return {
+            'totalMoney': totalMoney.toFixed(2),
+            'totalCount': totalCount
+          }
         } else {
-          return { 'totalMoney': (0).toFixed(2), 'totalCount': 0 }
+          return {
+            'totalMoney': (0).toFixed(2),
+            'totalCount': 0
+          }
         }
       }
     },
     allChecked: {
-      get: function() {
+      get: function () {
         return this.checkedCount === this.goodsItems.length
       },
-      set: function(value) {
+      set: function (value) {
         if (value) {
-          this.checked = this.goodsItems.map(function(item) {
+          this.checked = this.goodsItems.map(function (item) {
             return item.id
           })
         } else {
@@ -198,7 +204,7 @@ export default {
       }
     },
     checkedCount: {
-      get: function() {
+      get: function () {
         return this.checked.length;
       }
     }
