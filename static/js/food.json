@@ -1,0 +1,34 @@
+{
+  "navList": [
+    {
+      "id": 1,
+      "name": "传统糕点",
+      "api": "../../../static/js/food-info-list.json"
+    },
+    {
+      "id": 2,
+      "name": "膨化食品",
+      "api": "../../../static/js/food-info-list.json"
+    },
+    {
+      "id": 3,
+      "name": "无糖食品",
+      "api": "../../../static/js/food-info-list.json"
+    },
+    {
+      "id": 4,
+      "name": "休闲食品",
+      "api": "../../../static/js/food-info-list.json"
+    },
+    {
+      "id": 5,
+      "name": "燕麦食品",
+      "api": "../../../static/js/food-info-list.json"
+    },
+    {
+      "id": 6,
+      "name": "坚果炒货",
+      "api": "../../../static/js/food-info-list.json"
+    }
+  ]
+}

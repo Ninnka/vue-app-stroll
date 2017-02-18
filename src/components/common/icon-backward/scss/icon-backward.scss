@@ -1,0 +1,14 @@
+.backward {
+  color: white;
+  height: .44rem;
+  left: .1rem;
+  line-height: .44rem;
+  text-align: center;
+  top: 0;
+  width: .44rem;
+  z-index: 100;
+
+  &.icon-in-header {
+    font-size: .3rem;
+  }
+}
