@@ -59,14 +59,15 @@ export default {
       buyData: [],
       edit_bol: true,
       goodsOrder: [],
-      goodsItems: [{
+      goodsItems: [
+        {
           id: '1',
           imgsrc: require('./images/goods2.jpg'),
           title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
           spec: '一盒6片',
           price: '29.5',
           amount: 2
-      },
+        },
         {
           id: '2',
           imgsrc: require('./images/goods2.jpg'),
@@ -74,7 +75,7 @@ export default {
           spec: '一盒6片',
           price: '29.5',
           amount: 2
-      },
+        },
         {
           id: '3',
           imgsrc: require('./images/goods2.jpg'),
@@ -82,7 +83,7 @@ export default {
           spec: '一盒6片',
           price: '29.5',
           amount: 2
-      },
+        },
         {
           id: '4',
           imgsrc: require('./images/goods2.jpg'),
@@ -90,7 +91,7 @@ export default {
           spec: '一盒6片',
           price: '29.5',
           amount: 2
-      },
+        },
         {
           id: '5',
           imgsrc: require('./images/goods2.jpg'),
@@ -98,7 +99,7 @@ export default {
           spec: '一盒6片',
           price: '29.5',
           amount: 2
-      },
+        },
         {
           id: '6',
           imgsrc: require('./images/goods2.jpg'),
@@ -106,7 +107,8 @@ export default {
           spec: '一盒6片',
           price: '29.5',
           amount: 2
-      }]
+        }
+      ]
     }
   },
   methods: {
@@ -128,7 +130,9 @@ export default {
         // console.log('传递的个数=> ' + this.goodsOrder);
         router.push({
           name: 'refine-order',
-          params: this.goodsOrder
+          params: {
+            goodsOrder: this.goodsOrder
+          }
         })
       }
     },
