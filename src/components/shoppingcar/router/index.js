@@ -33,11 +33,6 @@ export default {
             addaddresscontent1: AddAddress
           }
         }]
-      },
-      {
-        path: 'order-good-detail',
-        name: 'order-good-detail',
-        component: Goodsdetail
       }]
     },
     {
