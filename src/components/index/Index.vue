@@ -73,12 +73,12 @@ export default {
   methods: {
     getData() {
       // 获取数据
-      // this.$http.get('http://localhost/sportman/activity_home.php')
-      //   .then(function (res) {
-      //     console.log('res:', res);
-      //   }, function (err) {
-      //     console.log('err:', err);
-      //   });
+      this.$http.get('static/json.json')
+        .then(function (res) {
+          console.log('res:', res);
+        }, function (err) {
+          console.log('err:', err);
+        });
     },
     getPosition(navItem, index) {
       console.log('index:', index);
@@ -97,7 +97,7 @@ export default {
   },
   created() {
     // 测试获取数据
-    // this.getData();
+    this.getData();
   }
 }
 </script>
@@ -106,7 +106,6 @@ export default {
 .icon.iconfont {
   font-size: .21rem;
 }
-
 .flex-box {
   display: flex;
 }
@@ -125,6 +124,7 @@ export default {
 
 .fixed {
   position: fixed;
+  z-index: 200;
 }
 
 .fixed-bottom {
