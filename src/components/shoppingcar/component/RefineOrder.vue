@@ -76,22 +76,24 @@ export default {
       pwd_wrong_bol: false,
       pick: 'my',
       fare: 10,
-      goodsItems: [{
-        id: '1',
-        imgsrc: require('../images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '2',
-        imgsrc: require('../images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      }]
+      goodsItems: [
+        {
+          id: '1',
+          imgsrc: require('../images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        },
+        {
+          id: '2',
+          imgsrc: require('../images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        }
+      ]
     }
   },
   methods: {
@@ -127,9 +129,9 @@ export default {
   created() {
     // console.log('获取的个数=> ' + this.$route.params)
     // console.log('在列表中有得个数=> ' + this.goodsItems)
-    if (this.$route.params) {
+    if (this.$route.params.goodsOrder) {
       this.goodsItems = [];
-      this.goodsItems = this.$route.params;
+      this.goodsItems = this.$route.params.goodsOrder;
     }
   },
   components: {
