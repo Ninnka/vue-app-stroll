@@ -8,14 +8,6 @@ import Classify from '../components/classify/Classify.vue';
 import ShoppingCar from '../components/shoppingcar/ShoppingCar.vue';
 import My from '../components/my/My.vue';
 
-// <<<<<<< HEAD
-// import GoodDetail from '../components/home-good-detail/GoodDetail.vue';
-// import MemberGoodsDetail from '../components/member/component/MemberGoodsDetail.vue';
-// import RefineOrder from '../components/shoppingcar/component/RefineOrder.vue';
-// import AddAddress from '../components/shoppingcar/component/AddAddress.vue';
-
-// =======
-// >>>>>>> origin/lzx
 Vue.use(Router);
 
 // const scrollBehavior = (to, from, savedPosition) => {
