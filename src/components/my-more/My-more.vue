@@ -28,7 +28,7 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
+import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import Toast from '../common/toast/Toast.vue';
 
@@ -63,7 +63,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/index/My');
+      router.go(-1);
     },
     update() {
       this.isUpdate = true;

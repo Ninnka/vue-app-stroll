@@ -25,8 +25,6 @@
   </div>
 </template>
 <script type="text/javascript">
-import Header from '../common/header/header.vue';
-import router from '../../router/index.js';
 import GoodsListItem from '../common/goods-list-item/Goods-list-item.vue';
 
 export default {
