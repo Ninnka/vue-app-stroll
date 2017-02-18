@@ -2,43 +2,47 @@
   <div class="fullpage order-content">
     <head-bar title="确认下单" :custombg="custombg"></head-bar>
     <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
-    <div class="address">
-      <p><span>刘晓心</span><span>135620212541</span></p>
-      <p><span class="default">[默认]</span><span>广州市天河区东圃时代TIT广场</span></p>
-      <span></span>
-    </div>
-    <ul class="order-detail list">
-      <li>购买商品</li>
-      <li v-for="data in goodsItems" class="carList orderList">
-        <div>
-          <img :src="data.imgsrc" alt="">
+    <div class="order-main">
+      <div class="address" @click="toaddress">
+        <p><span>刘晓心</span><span>135620212541</span></p>
+        <p><span class="default">[默认]</span><span>广州市天河区东圃时代TIT广场</span></p>
+        <span></span>
+      </div>
+      <ul class="order-detail list">
+        <li>购买商品</li>
+        <li v-for="data in goodsItems" class="carItem orderList">
           <div>
-            <p>{{data.title}}</p>
-            <p>规格：{{data.spec}}</p>
-            <p>
-              <span>￥{{data.price}}</span>
-              <span>x {{data.amount}}</span>
-            </p>
+            <img :src="data.imgsrc" alt="">
+            <div>
+              <p>{{data.title}}</p>
+              <p>规格：{{data.spec}}</p>
+              <p>
+                <span>￥{{data.price}}</span>
+                <span>x {{data.amount}}</span>
+              </p>
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="fare"><p>运费: <span>￥10</span></p></li>
-      <li><p>备注: <input type="text"></p></li>
-    </ul>
-    <ul class="pay-type list">
-      <li>支付方式</li>
-      <li><span></span>我的钱包 <input type="radio" name="payType"/></li>
-      <li><span></span>支付宝 <input type="radio" name="payType"/></li>
-      <li><span></span>微信支付 <input type="radio" name="payType"/></li>
-    </ul>
+        </li>
+        <li class="fare"><p>运费: <span>￥10</span></p></li>
+        <li><p>备注: <input type="text"></p></li>
+      </ul>
+      <ul class="pay-type list">
+        <li>支付方式</li>
+        <li><span></span>我的钱包 <input type="radio" v-model="pick" value="my" name="payType" id="mypackage"/><label for="mypackage" :class="pick=='my'?'selectedType':''"></label></li>
+        <li><span></span>支付宝 <input type="radio" name="payType" id="zfb" v-model="pick" value="zfb"/><label for="zfb" :class="pick=='zfb'?'selectedType':''"></label></li>
+        <li><span></span>微信支付 <input type="radio" name="payType" id="wx" v-model="pick" value="wx"/><label for="wx" :class="pick=='wx'?'selectedType':''"></label></li>
+      </ul>
+    </div>
+    
     <div class="order-foot">
-      <span>合计: <span>￥50</span></span>
+      <span>合计: <span>￥{{totalMoney}}</span></span>
       <button @click="payNow">立即支付</button>
     </div>
+    <transition name="fade">
     <div class="pay-mask" v-if="mask_bol" @touchmove="show">
       <div class="pay-wrap">
         <p>钱包密码</p>
-        <p>￥50.00</p>
+        <p>￥{{totalMoney}}</p>
         <p>
           <input id="pay-password" type="password" class="pay-password" maxlength="6" v-model="password">
           <label for="pay-password"><span v-for="i in password"></span></label>
@@ -49,6 +53,10 @@
         </p>
       </div>
     </div>
+    </transition>
+    <transition name="slide-fade">
+      <router-view name="addaddresscontent" class="content-router-view position-absolute" id="testid"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -63,6 +71,8 @@ export default {
       custombg: 'order-headbar-bg',
       mask_bol: false,
       password: '',
+      pick: '',
+      fare: 10,
       goodsItems: [{
         id: '1',
         imgsrc: require('../images/goods2.jpg'),
@@ -72,7 +82,7 @@ export default {
         amount: 2
       },
       {
-        id: '2',
+        id: '1',
         imgsrc: require('../images/goods2.jpg'),
         title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
         spec: '一盒6片',
@@ -94,6 +104,11 @@ export default {
     payCancal() {
       this.password = '';
       this.mask_bol = false;
+    },
+    toaddress() {
+      router.push({
+        name: 'add-address'
+      })
     }
   },
   created() {
@@ -101,22 +116,31 @@ export default {
   },
   components: {
     headBar: Header
+  },
+  computed: {
+    totalMoney: {
+      get() {
+        var total = 0;
+        this.goodsItems.map(function(item) {
+          total += item.price * item.amount;
+        })
+        return (total + this.fare).toFixed(2)
+      }
+    }
   }
 }
 </script>
 
 <style lang="css">
-html,body{
-  height: 100%;
-}
 .order-content{
-  height: 100%;
   font-size: .16rem;
+  z-index: 201;
+  box-sizing: border-box;
   padding-top: .44rem;
-  background: #f1f1f1;
+  padding-bottom: .55rem;
 }
 .order-headbar-bg{
-  background: #228733;
+  background: #d81e06;
 }
 .backward {
   color: white;
@@ -130,6 +154,11 @@ html,body{
 }
 .icon-in-header {
   font-size: .3rem;
+}
+.order-main{
+  background: #f1f1f1;
+  overflow: scroll;
+  height: 100%;
 }
 .address{
   position: relative;
@@ -165,13 +194,12 @@ html,body{
 .address>span{
   position: absolute;
   width: .1rem;
-  height: .84rem;
-  top: 0;
+  height: .3rem;
+  top: .3rem;
   right: .1rem;
   color: #bbb;
   background-image: url(../images/forward.png);
   background-size: 100%;
-  background-position-y: .27rem;
   background-repeat: no-repeat;
 }
 .list{
@@ -221,10 +249,7 @@ html,body{
   text-overflow: ellipsis;
 }
 .orderList>div>div{
-  width: 2.75rem;
-}
-.pay-type{
-  margin-bottom: .54rem;
+  width: 2.65rem;
 }
 .pay-type li{
   padding: .11rem 0;
@@ -237,8 +262,21 @@ html,body{
   font-size: .14rem;
 }
 .pay-type li input{
+  display: none;
+}
+.pay-type li label{
+  width: .15rem;
+  height: .15rem;
+  display: inline-block;
+  border: 1px solid #ddd;
   float: right;
-  margin-top: .1rem;
+  margin-top: .07rem;
+  border-radius: 100%;
+}
+.pay-type li .selectedType{
+  background: url(../images/selected.png);
+  background-size: 100% 100%;
+  border: none;
 }
 .pay-type li>span{
   display: inline-block;
@@ -297,11 +335,11 @@ html,body{
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.3);
-  z-index: 150;
+  z-index: 202;
 }
 .pay-wrap{
   position: absolute;
-  top: 2.05rem;
+  top: 1.8rem;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -379,5 +417,9 @@ html,body{
   background: #f29004;
   border: none;
   color: white;
+}
+#testid{
+  height: 100%;
+  overflow-y:scroll; 
 }
 </style>

@@ -1,38 +1,40 @@
 <template lang="html">
-  <div class="fullpage">
+  <div class="fullpage overscroll">
     <div class="header">
       <headbar title="购物车" :custombg="custombg"></headbar>
       <span class="edit" @click="edit">{{edit_bol?"编辑":"完成"}}</span>
     </div>
     <div class="shoppingCar-content">
       <ul>
-        <li v-for="data in goodsItems" class="carList">
-          <div>
-            <input type="checkbox" v-model="checked" :value="data.id"/>
-            <img :src="data.imgsrc" alt="">
+        <transition-group name="add_del">
+          <li v-for="(data,index) in goodsItems" class="carItem" :key="data">
             <div>
-              <p>{{data.title}}</p>
-              <p>规格：{{data.spec}}</p>
-              <p>
-                <span>￥{{data.price}}</span>
-                <span v-if="!edit_bol" class="edit-amount">
-                  <span>-</span>
-                  <span>{{data.amount}}</span>
-                  <span>+</span>
-                </span>
-                <span v-if="edit_bol">x {{data.amount}}</span>
-              </p>
+              <input type="checkbox" v-model="checked" :value="data.id"/>
+              <img :src="data.imgsrc" alt="">
+              <div>
+                <p>{{data.title}}</p>
+                <p>规格：{{data.spec}}</p>
+                <p>
+                  <span>￥{{data.price}}</span>
+                  <span v-if="!edit_bol" class="edit-amount">
+                    <span @click="reduceCount(index)" :class="data.amount>1?'canReduce':''">-</span>
+                    <span>{{data.amount}}</span>
+                    <span @click="addCount(index)">+</span>
+                  </span>
+                  <span v-if="edit_bol">x {{data.amount}}</span>
+                </p>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        </transition-group>
       </ul>
       <div class="pay-bar">
         <div><input type="checkbox" v-model="allChecked">全选</div>
         <div v-if="edit_bol">
-          <div>合计: <span>￥123.00</span></div>
+          <div>合计: <span>￥{{totalMoney}}</span></div>
         </div>
-        <button v-if="edit_bol" @click="refine">结算 <span>(1)</span></button>
-        <button v-else="edit_bol">删除</button>
+        <button v-if="edit_bol" @click="refine">结算 <span>({{totalCount}})</span></button>
+        <button v-else="edit_bol" @click="removeGoods">删除</button>
       </div>
     </div>
     <transition name="slide-fade">
@@ -51,7 +53,6 @@ export default {
     return {
       custombg: 'shoppingCar-headbar-bg',
       all: false,
-      totalMoney: 0,
       checked: [],
       buyData: [],
       edit_bol: true,
@@ -70,26 +71,126 @@ export default {
         spec: '一盒6片',
         price: '29.5',
         amount: 2
+      },
+      {
+        id: '3',
+        imgsrc: require('./images/goods2.jpg'),
+        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+        spec: '一盒6片',
+        price: '29.5',
+        amount: 2
+      },
+      {
+        id: '4',
+        imgsrc: require('./images/goods2.jpg'),
+        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+        spec: '一盒6片',
+        price: '29.5',
+        amount: 2
+      },
+      {
+        id: '5',
+        imgsrc: require('./images/goods2.jpg'),
+        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+        spec: '一盒6片',
+        price: '29.5',
+        amount: 2
+      },
+      {
+        id: '6',
+        imgsrc: require('./images/goods2.jpg'),
+        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+        spec: '一盒6片',
+        price: '29.5',
+        amount: 2
       }]
     }
   },
   methods: {
+    getData() {
+      // 获取数据
+      // this.$http.get('static/json.json')
+      //   .then(function (res) {
+      //     this.goodsItems = res.body;
+      //     console.log(this.goodsItems);
+      //   }, function (err) {
+      //     console.log('err:', err);
+      //   });
+    },
     edit() {
       this.edit_bol = !this.edit_bol;
+      this.checked = [];
     },
     refine() {
       router.push({
         name: 'refine-order'
       })
+    },
+    reduceCount(index) {
+      if (this.goodsItems[index].amount > 1) {
+        this.goodsItems[index].amount -= 1;
+      }
+    },
+    addCount(index) {
+      this.goodsItems[index].amount += 1;
+    },
+    removeGoods() {
+      for (var i = 0; i < this.checked.length; i++) {
+        for (var j = 0; j < this.goodsItems.length; j++) {
+          if (this.checked[i] === this.goodsItems[j].id) {
+            this.goodsItems.splice(j, 1);
+          }
+        }
+      }
+      this.checked = [];
     }
   },
   components: {
     headbar: header
   },
+  created() {
+    this.getData();
+  },
   computed: {
+    totalMoney: {
+      get() {
+        var total = 0;
+        if (this.checked.length > 0) {
+          for (var i = 0; i < this.checked.length; i++) {
+            for (var j = 0; j < this.goodsItems.length; j++) {
+              console.log(this.checked[i], this.goodsItems[j].id, this.goodsItems.length);
+              if (this.checked[i] === this.goodsItems[j].id) {
+                total += this.goodsItems[j].price * this.goodsItems[j].amount;
+              }
+            }
+          }
+          return total.toFixed(2)
+        } else {
+          return (0).toFixed(2)
+        }
+      }
+    },
+    totalCount: {
+      get() {
+        var total = 0;
+        if (this.checked.length > 0) {
+          for (var i = 0; i < this.checked.length; i++) {
+            for (var j = 0; j < this.goodsItems.length; j++) {
+              console.log(this.checked[i], this.goodsItems[j].id, this.goodsItems.length);
+              if (this.checked[i] === this.goodsItems[j].id) {
+                total += this.goodsItems[j].amount
+              }
+            }
+          }
+          return total
+        } else {
+          return 0
+        }
+      }
+    },
     allChecked: {
       get: function() {
-        return this.checkedCount === this.goodsItems.length;
+        return this.checkedCount === this.goodsItems.length
       },
       set: function(value) {
         if (value) {
@@ -113,12 +214,23 @@ export default {
 <style lang="css" type="text/css">
 .fullpage{
   min-height: 100%;
+  background: white;
 }
 .shoppingCar-headbar-bg {
-  background: #228733;
+  background: #d81e06;
 }
 .shoppingCar-content{
   font-size: .16rem;
+  background: white;
+}
+input[type="checkbox"]{
+  width: .15rem;
+  height: .15rem;
+  border: none;
+  outline: none;
+}
+.shoppingCar-content>ul{
+  margin-bottom: .59rem;
 }
 .edit{
   font-size: .16rem;
@@ -181,63 +293,95 @@ export default {
   border: none;
   border-radius: 5px;
 }
-.carList{
+.carItem{
   padding: .14rem .1rem;
   border-bottom: 1px solid #e1e1e1;
+  position: relative;
 }
-.carList>div img{
+input[type="checkbox"]{
+  border-radius: 100%;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  vertical-align: middle;
+}
+input[type="checkbox"]:checked{
+  border: none;
+  background: url(images/selected.png) no-repeat;
+  background-size: 100% 100%;
+}
+.carItem>div img{
   width: .69rem;
   height: .68.5rem;
   vertical-align: middle;
 }
-.carList>div{
+.carItem>div{
   vertical-align: middle;
 }
-.carList>div>div{
+.carItem>div>div{
   display: inline-block;
-  width: 2.56rem;
+  width: 2.4rem;
   vertical-align: middle;
 }
-.carList>div>div p:nth-child(1){
+.carItem>div>div p:nth-child(1){
   width: 2rem;
   color: #1a1a1a;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.carList>div>div p:nth-child(2){
+.carItem>div>div p:nth-child(2){
   color: #757575;
   font-size: .13rem;
   padding: .11rem 0;
 }
-.carList>div>div p:nth-child(3)>span:first-child{
+.carItem>div>div p:nth-child(3)>span:first-child{
   color: #de0000;
   font-size: .13rem;
   font-weight: bolder;
 }
-.carList>div>div p:nth-child(3)>span:last-child{
-  float: right;
+.carItem>div>div p:nth-child(3)>span:last-child{
+  position: absolute;
   font-size: .17rem;
   color: #404040;
+  right: .1rem;
+  top: .65rem;
 }
-.carList>div>div p:nth-child(3) .edit-amount>span:first-child{
+.carItem>div>div p:nth-child(3) .edit-amount{
+  position: absolute;
+  right: .1rem;
+  top: .6rem !important;
+}
+.carItem>div>div p:nth-child(3) .edit-amount>span:first-child{
   display: inline-block;
-  width: .16rem;
-  height: .16rem;
-  font-size: .17rem;
-  line-height: .16rem;
+  width: .2rem;
+  height: .2rem;
+  font-size: .2rem;
+  line-height: .2rem;
   text-align: center;
   border-radius: 100%;
-  border: 1px solid #eee;
+  border: 1px solid #e1e1e1;
 }
-.carList>div>div p:nth-child(3) .edit-amount>span:last-child{
+.carItem>div>div p:nth-child(3) .edit-amount>span:last-child{
   display: inline-block;
-  width: .16rem;
-  height: .16rem;
-  font-size: .17rem;
-  line-height: .16rem;
+  width: .2rem;
+  height: .2rem;
+  font-size: .2rem;
+  color: #f29004;
+  line-height: .2rem;
   text-align: center;
   border-radius: 100%;
-  border: 1px solid #eee;
+  border: 1px solid #e1e1e1;
+}
+.canReduce{
+  color: #f29004;
+}
+.add_del-enter-active {
+  transition: all .3s ease;
+}
+.add_del-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.add_del-leave-to,.add_del-enter,.add_del-leave{
+  transform: translateX(100%);
 }
 </style>

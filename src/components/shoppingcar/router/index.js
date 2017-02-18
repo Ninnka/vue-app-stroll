@@ -8,14 +8,15 @@ export default {
       name: 'refine-order',
       components: {
         refineordercontent: RefineOrder
+      },
+      children: [{
+        path: 'add-address',
+        name: 'add-address',
+        components: {
+          addaddresscontent: AddAddress
+        }
       }
-    },
-    {
-      path: 'add-address',
-      name: 'add-address',
-      components: {
-        addaddresscontent: AddAddress
-      }
+      ]
     }
   ]
 };

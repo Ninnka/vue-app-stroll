@@ -3,10 +3,10 @@ import GoodDetail from 'components/good-detail/GoodDetail.vue';
 export default {
   routes: [
     {
-      path: 'good-detail',
-      name: 'good-detail',
+      path: 'goods-detail',
+      name: 'goods-detail',
       components: {
-        gooddetailcontent: GoodDetail
+        goodsdetailcontent: GoodDetail
       }
     }
   ]

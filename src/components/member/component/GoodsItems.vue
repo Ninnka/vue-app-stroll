@@ -2,23 +2,24 @@
   <div class="goodsContent">
 		<ul class="goodsItems">
 		  <li class="goodsItem" v-for="gItem in goodsData">
-		    <a @click="toGoodetail(gItem.goodsID)">
+        <router-link :to="{name: tag,params: {goodsid: gItem.goodsID}}">
 		      <img :src="gItem.imgsrc" alt="">
 		      <h2>{{gItem.title}}</h2>
 		      <p>
 		        <span>{{gItem.vipPrice}}</span>
 		        <span>{{gItem.originPrice}}</span>
 		      </p>
-		    </a>
+        </router-link>
 		  </li>
 		</ul>
 	</div>
 </template>
 
 <script type="text/javascript">
-import router from '../../../router';
+// import router from '../../../router';
 
 export default {
+  props: ['tag'],
   data() {
     return {
       goodsData: [{
@@ -59,14 +60,14 @@ export default {
     }
   },
   methods: {
-    toGoodetail(id) {
-      router.push({
-        name: 'good-detail',
-        params: {
-          goodsId: id
-        }
-      });
-    }
+    // toGoodetail(id) {
+    //   router.push({
+    //     name: this.tag,
+    //     params: {
+    //       goodsId: id
+    //     }
+    //   });
+    // }
   }
 }
 </script>
@@ -76,14 +77,17 @@ export default {
   background: #f1f1f1;
 }
 .goodsItems{
-  padding: 0.09rem;
+  padding: 0.08rem;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-between;
 }
 .goodsItem{
   display: inline-block;
-  width: 1.75rem;
+  flex-basis: 48%;
+  flex-shrink: 1;
+  /*width: 1.72rem;*/
   height: 2.465rem;
   background: white;
   margin-bottom: 0.08rem;

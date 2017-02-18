@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage">
+  <div class="fullpage overscroll">
     <headbar title="会员" :custombg="custombg"></headbar>
     <div class="member-content">
       <!-- 轮播图 -->
@@ -11,30 +11,16 @@
         <div class="swiper-pagination"></div>
       </div>
       <!-- 商品列表 -->
-      <!-- <div class="goodsContent">
-        <ul class="goodsItems">
-          <li class="goodsItem" v-for="gItem in goodsData">
-            <a @click="toGoodetail(gItem.goodsID)">
-              <img :src="gItem.imgsrc" alt="">
-              <h2>{{gItem.title}}</h2>
-              <p>
-                <span>{{gItem.vipPrice}}</span>
-                <span>{{gItem.originPrice}}</span>
-              </p>
-            </a>
-          </li>
-        </ul>
-      </div> -->
-      <goodsitems></goodsitems>
+      <goodsitems tag='goods-detail'></goodsitems>
     </div>
-    <!-- <transition name="slide-fade">
-      <router-view name="gooddetailcontent" class="content-router-view position-absolute"></router-view>
-    </transition> -->
+    <transition name="slide-fade">
+      <router-view name="goodsdetailcontent" class="content-router-view position-absolute"></router-view>
+    </transition>
   </div>
 </template>
 
 <script type="text/javascript">
-// import router from '../../router';
+import router from '../../router';
 
 import header from '../common/header/Header.vue';
 
@@ -61,39 +47,47 @@ export default {
     }
   },
   methods: {
-    // toGoodetail(id) {
-    //   router.push({
-    //     name: 'member-good-detail',
-    //     params: {
-    //       goodsId: id
-    //     }
-    //   });
-    // }
+    toGoodetail(id) {
+      router.push({
+        name: 'goods-detail',
+        params: {
+          goodsId: id
+        }
+      });
+    }
   },
   components: {
     headbar: header,
     goodsitems: GoodsItems
   },
   mounted() {
-    var mySwiper = new Swiper('.swiper-container', {
+    this.mySwiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
-      autoplay: 3000,
+      autoplay: 2500,
       pagination: '.swiper-pagination',
       paginationClickable: true,
-      autoplayDisableOnInteraction: false
+      autoplayDisableOnInteraction: false,
+      observer: true,
+      observeParents: true
     })
-    console.log(mySwiper)
+  },
+  updated() {
+    console.log('swiper updated');
+    this.mySwiper.update();
+    this.mySwiper.stopAutoplay();
+    this.mySwiper.startAutoplay();
   }
 }
 </script>
 
 <style lang="css" type="text/css" scoped>
 .member-headbar-bg {
-  background: #228733;
+  background: #d81e06;
 }
 .member-content{
   font-size: .16rem;
+  /*padding-bottom: .49rem;*/
 }
 .swiper-wrapper{
   height: 1.51rem;
