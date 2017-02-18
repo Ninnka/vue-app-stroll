@@ -29,4 +29,7 @@ module.exports = {
     'space-before-function-paren': 0,
     'brace-style': 0
   }
+  // globals:{
+  //   "Swiper": true
+  // }
 }
