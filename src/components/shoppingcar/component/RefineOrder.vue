@@ -41,7 +41,7 @@
       <button @click="payNow">立即支付</button>
     </div>
     <transition name="fade">
-    <div class="pay-mask" v-if="mask_bol" @touchmove="show">
+    <!-- <div class="pay-mask" v-if="mask_bol" @touchmove="show">
       <div class="pay-wrap">
         <p>钱包密码</p>
         <p>￥{{totalMoney}}</p>
@@ -54,7 +54,8 @@
           <button class="pay-refine" @click="paySuccess">付款</button>
         </p>
       </div>
-    </div>
+    </div> -->
+    <paybox :money="totalMoney" :showPay="mask_bol" @success="paySuccess" @paycancel="payCancal"></paybox>
     </transition>
     <transition name="slide-fade">
       <router-view class="content-router-view position-absolute my-address border-box"></router-view>
@@ -66,6 +67,8 @@
 import router from '../../../router';
 
 import Header from '../../common/header/Header.vue';
+
+import PayBox from 'components/common/pay-box/Pay-box.vue';
 
 export default {
   data() {
@@ -104,16 +107,8 @@ export default {
       })
     },
     paySuccess() {
-      if (this.password === '666666') {
-        router.push({
-          name: 'pay-success'
-        })
-      } else {
-        this.pwd_wrong_bol = true;
-        setTimeout(() => {
-          this.pwd_wrong_bol = false;
-        }, 2000)
-      }
+      this.mask_bol = false;
+      router.go(-1);
     }
   },
   created() {
@@ -126,7 +121,8 @@ export default {
     this.addressRoute = this.$route.params.addressRoute;
   },
   components: {
-    headBar: Header
+    headBar: Header,
+    paybox: PayBox
   },
   computed: {
     totalMoney: {

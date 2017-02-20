@@ -3,7 +3,7 @@ import RefineOrder from 'components/shoppingcar/component/RefineOrder';
 // import MyAddress from 'components/my-address/My-address';
 import MyAddress from 'components/member/component/MemberAddress.vue';
 import MyAddAddress from 'components/shoppingcar/component/AddAddress.vue';
-import MemberUpGrade from 'components/member/component/MemberUpGrade.vue';
+// import MemberUpGrade from 'components/member/component/MemberUpGrade.vue';
 import MemberVipRecharge from 'components/my-recharge/My-recharge.vue'
 
 export default {

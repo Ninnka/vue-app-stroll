@@ -96,8 +96,7 @@
 
     </div>
     <transition name="slide-fade">
-      <router-view></router-view>
-      <!-- <router-view style="position: fixed;top: 0;left: 0;width: 100%;z-index: 150"></router-view> -->
+      <router-view style="position: fixed;top: 0;left: 0;width: 100%;z-index: 150"></router-view>
     </transition>
   </div>
 </template>
