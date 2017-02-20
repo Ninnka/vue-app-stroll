@@ -40,6 +40,7 @@ $maintheme: #d81e06;
       }
 
       > div {
+        box-sizing: border-box;
         display: inline-block;
         height: 100%;
         line-height: .3rem;

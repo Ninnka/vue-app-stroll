@@ -14,7 +14,7 @@
 
       <p class="">省市列表</p>
       <ul class="city-all">
-        <li v-for="city in cityList">{{city}}</li>
+        <li v-for="city in cityList" :ket="city" @click="confirmCity(city)">{{city}}</li>
       </ul>
     </div>
   </div>
@@ -58,6 +58,10 @@ export default {
     },
     searchCity(s) {
       alert('search city: ' + s);
+    },
+    confirmCity(city) {
+      window.localStorage.setItem('city', city);
+      router.go(-1)
     }
   },
   created() {
