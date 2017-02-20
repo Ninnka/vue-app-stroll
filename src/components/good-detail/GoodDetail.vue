@@ -112,6 +112,8 @@ import Recharge from 'components/common/recharge/Recharge';
 import IconLoader from 'components/common/icon-loader/IconLoader';
 import Backward from 'components/common/icon-backward/IconBackward';
 
+import routeNameHook from 'src/Hook/routeNameHook';
+
 export default {
   data() {
     return {
@@ -200,7 +202,7 @@ export default {
       goodMainContent: '',
       preloader: '',
       loadingMore: false,
-      buyRouteName: ''
+      nextRouteNameList: []
     }
   },
   methods: {
@@ -233,12 +235,10 @@ export default {
         this.orderDetail.imgsrc = this.goodDetail.imgsrc;
         let orderArr = [];
         orderArr.push(this.orderDetail);
-        console.log(this.buyRouteName);
         router.push({
-          name: this.buyRouteName,
+          name: this.nextRouteNameList[0] ? this.nextRouteNameList[0] : '',
           params: {
-            goodsOrder: orderArr,
-            addressRoute: 'buy-imedi-config-address'
+            goodsOrder: orderArr
           }
         })
       } else {
@@ -291,6 +291,7 @@ export default {
     if (this.$route.params.buyRouteName !== undefined) {
       this.buyRouteName = this.$route.params.buyRouteName
     }
+    routeNameHook.setRouteNameByMeta.apply(this);
   },
   mounted() {
     console.log('mounted detail');
