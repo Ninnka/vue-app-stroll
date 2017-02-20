@@ -1,5 +1,7 @@
 <template>
   <div id="myrecharge">
+    <pay-box money="100" :showPay="showPay" @success="paySuccess" @paycancel="cancelPay">
+    </pay-box>
     <transition name="childtranslate">
       <router-view class="my-recharge-childview"></router-view>
     </transition>
@@ -24,14 +26,17 @@
 <script type="text/javascript">
 import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
+import PayBox from '../common/pay-box/Pay-box.vue';
 
 export default {
   data() {
     return {
+      showPay: false
     }
   },
   components: {
-    headbar: Header
+    headbar: Header,
+    'pay-box': PayBox
   },
   methods: {
     // 返回上一页
@@ -40,7 +45,13 @@ export default {
     },
     // 支付
     toPay() {
-      router.push('/upgrade/recharge/paySuccess');
+      this.showPay = true;
+    },
+    cancelPay() {
+      this.showPay = false;
+    },
+    paySuccess() {
+      this.showPay = false;
     }
   }
 }

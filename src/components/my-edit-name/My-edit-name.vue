@@ -80,5 +80,6 @@ a{
   font-size: .16rem;
   border:none;
   border-radius: .1rem;
+  outline: none;
 }
 </style>
