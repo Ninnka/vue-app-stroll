@@ -33,7 +33,12 @@ export default {
             {
               path: 'buy-imedi-config-address',
               name: 'buy-imedi-config-address',
-              component: MyAddress
+              component: MyAddress,
+              meta: {
+                nextRouteNameList: [
+                  'edit-address'
+                ]
+              }
             }
           ]
         }
