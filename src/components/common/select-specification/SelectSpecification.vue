@@ -63,7 +63,8 @@ export default {
       this.$emit('closeAndConfirmSelectSpec', {
         amount: this.amount,
         price: this.specificationDetail.pricediscount !== '' ? this.specificationDetail.pricediscount : this.specificationDetail.pricenormal,
-        spec: this.specificationDetail.spec[this.currentSpecIndex]
+        spec: this.specificationDetail.spec[this.currentSpecIndex],
+        buyImedi: true
       });
     },
     closeSelectSpec(e) {

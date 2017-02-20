@@ -19,12 +19,12 @@
       </div>
       <!-- 主页导航分类 -->
       <div class="home-classify flex-box border-box">
-        <div class="item">
+        <div class="item" @click="viewMerchant('food')">
           <!-- 最新 -->
           <i class="icon iconfont icon-new"></i>
           <p>最新热门</p>
         </div>
-        <div class="item">
+        <div class="item" @click="viewMerchant('food')">
           <!-- 用品 -->
           <i class="icon iconfont icon-appliance"></i>
           <p>生活用具</p>
@@ -34,12 +34,12 @@
           <i class="icon iconfont icon-food"></i>
           <p>食品</p>
         </div>
-        <div class="item">
+        <div class="item" @click="viewMerchant('food')">
           <!-- 客服 -->
           <i class="icon iconfont icon-customer-service"></i>
           <p>客服服务</p>
         </div>
-        <div class="item">
+        <div class="item" @click="viewMerchant('food')">
           <!-- 家居 -->
           <i class="icon iconfont icon-furniture"></i>
           <p>家居用品</p>
@@ -94,7 +94,7 @@ export default {
       scrollWrapper: '',
       swiper: '',
       custombg: 'home-headbar-bg',
-      currentcity: '广州市',
+      currentcity: '',
       slideImgList: [
         {
           src: require('./images/slide-img1.jpg'),
@@ -165,7 +165,12 @@ export default {
   components: {
     headBar: Header
   },
-  created() {},
+  created() {
+    let city = window.localStorage.getItem('city');
+    if (city) {
+      this.currentcity = city;
+    }
+  },
   mounted() {
     console.log('mounted');
     this.scrollWrapper = document.querySelector('#tab-main-content');
@@ -182,6 +187,10 @@ export default {
   },
   beforeUpdate() {
     console.log('before update in home');
+    let city = window.localStorage.getItem('city');
+    if (city) {
+      this.currentcity = city;
+    }
   },
   updated() {
     console.log('updated in home');
