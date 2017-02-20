@@ -14,16 +14,31 @@ export default {
       components: {
         goodsdetailcontent: GoodDetail
       },
+      meta: {
+        nextRouteNameList: [
+          'good-buy-imedi1'
+        ]
+      },
       children: [
         {
           path: 'good-buy-imedi1',
           name: 'good-buy-imedi1',
           component: RefineOrder,
+          meta: {
+            nextRouteNameList: [
+              'buy-imedi-config-address1'
+            ]
+          },
           children: [
             {
               path: 'buy-imedi-config-address1',
               name: 'buy-imedi-config-address1',
               component: MyAddress,
+              meta: {
+                nextRouteNameList: [
+                  'member-add-address'
+                ]
+              },
               children: [
                 {
                   path: 'member-add-address',

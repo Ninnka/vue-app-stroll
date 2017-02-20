@@ -8,8 +8,7 @@
 		      <h2>{{gItem.title}}</h2>
 		      <p>
 		        <span>{{gItem.vipPrice}}</span>
-		        <span>{{gItem.originPrice}}
-              {{vip}}</span>
+		        <span>{{gItem.originPrice}}</span>
 		      </p>
         </router-link>
 		  </li>
@@ -72,11 +71,11 @@ export default {
   text-overflow: ellipsis;
 }
 .goodsItem a p{
-  padding: 0 0.05rem;
+  padding: 0 .04rem;
 }
 .goodsItem a p span{
   display: inline-block;
-  max-width: 100px;
+  max-width: 0.73rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -86,19 +85,22 @@ export default {
   font-size: 0.16rem;
   font-weight: bolder;
   vertical-align: top;
-  margin-right: 0.10rem;
+  margin-right: .05rem;
 }
 .goodsItem a p span:nth-child(1):before{
   content: "￥";
+  font-size: 0.14rem;
   display: inline-block;
 }
 .goodsItem a p span:nth-child(2){
   color: #888;
   font-size: 0.14rem;
+  max-width: 0.8rem;
   text-decoration: line-through;
 }
 .goodsItem a p span:nth-child(2):before{
   content: "原价:￥";
+  font-size: 0.13rem;
   display: inline-block;
 }
 </style>

@@ -4,8 +4,8 @@
     <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
     <div class="order-main">
       <div class="address" @click="toaddress">
-        <p><span>刘晓心</span><span>135620212541</span></p>
-        <p><span class="default">[默认]</span><span>广州市天河区东圃时代TIT广场</span></p>
+        <p><span>{{selAddress.name}}</span><span>{{selAddress.phone}}</span></p>
+        <p><span class="default" v-if="selAddress.isDefault">[默认]</span><span>{{selAddress.address}}</span></p>
         <span></span>
       </div>
       <ul class="order-detail list">
@@ -18,9 +18,11 @@
               <p>规格：{{data.spec}}</p>
               <p>
                 <span>￥{{data.price}}</span>
-                <span>x {{data.amount}}</span>
               </p>
             </div>
+          </div>
+          <div>
+            <span>x {{data.amount}}</span>
           </div>
         </li>
         <li class="fare"><p>运费: <span>￥10</span></p></li>
@@ -41,21 +43,7 @@
       <button @click="payNow">立即支付</button>
     </div>
     <transition name="fade">
-    <!-- <div class="pay-mask" v-if="mask_bol" @touchmove="show">
-      <div class="pay-wrap">
-        <p>钱包密码</p>
-        <p>￥{{totalMoney}}</p>
-        <p>
-          <input id="pay-password" type="password" class="pay-password" maxlength="6" v-model="password">
-          <label for="pay-password"><span v-for="i in password"></span></label>
-        </p>
-        <p>
-          <button class="pay-cancal" @click="payCancal">取消</button>
-          <button class="pay-refine" @click="paySuccess">付款</button>
-        </p>
-      </div>
-    </div> -->
-    <paybox :money="totalMoney" :showPay="mask_bol" @success="paySuccess" @paycancel="payCancal"></paybox>
+      <paybox :money="totalMoney" :showPay="mask_bol" @success="paySuccess" @paycancel="payCancal"></paybox>
     </transition>
     <transition name="slide-fade">
       <router-view class="content-router-view position-absolute my-address border-box"></router-view>
@@ -70,6 +58,8 @@ import Header from '../../common/header/Header.vue';
 
 import PayBox from 'components/common/pay-box/Pay-box.vue';
 
+import routeNameHook from 'src/Hook/routeNameHook';
+
 export default {
   data() {
     return {
@@ -79,8 +69,30 @@ export default {
       pwd_wrong_bol: false,
       pick: 'my',
       fare: 10,
+      selAddress: [],
+      list: [{
+        addressId: '123123123',
+        name: '小明',
+        phone: '13562021254',
+        address: '广州市天河区TIT广场',
+        isDefault: true,
+        province: '广东',
+        city: '广州',
+        area: '天河'
+      },
+      {
+        addressId: '456456456',
+        name: '小A',
+        phone: '13562021254',
+        address: '广州市天河区TIT广场2',
+        isDefault: false,
+        province: '广东',
+        city: '广州',
+        area: '天河'
+      }],
       goodsItems: [],
-      addressRoute: ''
+      addressRoute: '',
+      nextRouteNameList: []
     }
   },
   methods: {
@@ -98,27 +110,31 @@ export default {
       this.mask_bol = false;
     },
     toaddress() {
+      localStorage.setItem('seled', false);
       router.push({
-        name: this.addressRoute,
+        name: this.nextRouteNameList[0] ? this.nextRouteNameList[0] : '',
         params: {
-          from: 'choose',
-          addaddressRoute: 'add-address'
+          from: 'choose'
         }
       })
     },
     paySuccess() {
       this.mask_bol = false;
+      localStorage.setItem('seled', false);
       router.go(-1);
     }
   },
   created() {
-    // console.log('获取的个数=> ' + this.$route.params)
-    // console.log('在列表中有得个数=> ' + this.goodsItems)
     if (this.$route.params.goodsOrder) {
       this.goodsItems = [];
       this.goodsItems = this.$route.params.goodsOrder;
     }
-    this.addressRoute = this.$route.params.addressRoute;
+    routeNameHook.setRouteNameByMeta.apply(this);
+    for (var i = 0; i < this.list.length; i++) {
+      if (this.list[i].isDefault === true) {
+        this.selAddress = this.list[i];
+      }
+    };
   },
   components: {
     headBar: Header,
@@ -133,6 +149,20 @@ export default {
         })
         return (total + this.fare).toFixed(2)
       }
+    }
+  },
+  beforeUpdate() {
+    var seled = localStorage.getItem('seled');
+    var seledid = localStorage.getItem('seledid');
+    console.log(seledid);
+    console.log(seled === 'true');
+    if (seled === 'true') {
+      for (var i = 0; i < this.list.length; i++) {
+        console.log(this.list[i].addressid, seledid);
+        if (this.list[i].addressId === seledid) {
+          this.selAddress = this.list[i];
+        }
+      };
     }
   }
 }
@@ -262,6 +292,10 @@ export default {
   margin-left: .1rem;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.orderList>div>span{
+  font-size: .14rem;
+  top: .71rem;
 }
 .orderList>div>div{
   width: 2.65rem;

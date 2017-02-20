@@ -11,10 +11,20 @@ export default {
       path: 'refine-order',
       name: 'refine-order',
       component: RefineOrder,
+      meta: {
+        nextRouteNameList: [
+          'sc-address'
+        ]
+      },
       children: [{
-        path: 'my-address',
-        name: 'my-address',
+        path: 'sc-address',
+        name: 'sc-address',
         component: Myaddress,
+        meta: {
+          nextRouteNameList: [
+            'add-address'
+          ]
+        },
         children: [{
           path: 'add-address',
           name: 'add-address',
@@ -33,16 +43,31 @@ export default {
       path: 'car-good-detail',
       name: 'car-good-detail',
       component: Goodsdetail,
+      meta: {
+        nextRouteNameList: [
+          'car-good-buy-imedi'
+        ]
+      },
       children: [
         {
           path: 'car-good-buy-imedi',
           name: 'car-good-buy-imedi',
           component: RefineOrder,
+          meta: {
+            nextRouteNameList: [
+              'car-buy-imedi-config-address'
+            ]
+          },
           children: [
             {
               path: 'car-buy-imedi-config-address',
               name: 'car-buy-imedi-config-address',
               component: Myaddress,
+              meta: {
+                nextRouteNameList: [
+                  'car-add-address'
+                ]
+              },
               children: [
                 {
                   path: 'car-add-address',
