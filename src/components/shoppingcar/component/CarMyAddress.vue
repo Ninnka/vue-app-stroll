@@ -19,11 +19,14 @@ import Header from 'components/common/header/Header.vue';
 
 import Myaddress from 'components/my-address/My-address.vue';
 
+import routeNameHook from 'src/Hook/routeNameHook';
+
 export default {
   data() {
     return {
       addText: '添加',
-      addaddressRoute: ''
+      addaddressRoute: '',
+      nextRouteNameList: []
     }
   },
   components: {
@@ -36,12 +39,12 @@ export default {
     },
     addAddress() {
       router.push({
-        name: this.addaddressRoute
+        name: this.nextRouteNameList[0] ? this.nextRouteNameList[0] : ''
       })
     }
   },
   created() {
-    this.addaddressRoute = this.$route.params.addaddressRoute;
+    routeNameHook.setRouteNameByMeta.apply(this);
   }
 }
 </script>

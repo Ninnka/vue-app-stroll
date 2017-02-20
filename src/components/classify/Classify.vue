@@ -20,7 +20,7 @@
       <ul class="sortList" v-if="sort_bol">
         <li v-for="sData in sortData"><span @click="sortSelected">{{sData.title}}</span></li>
       </ul>
-      <goodsitems tag="class-good-detail" :goodsItems="goodsItems" RouteName="class-good-buy-imedi" :vip="vip"></goodsitems>
+      <goodsitems tag="class-good-detail" :goodsItems="goodsItems" :vip="vip"></goodsitems>
     </div>
     
     <icon-loader></icon-loader>
