@@ -14,11 +14,21 @@ export default {
       components: {
         gooddetailcontent: GoodDetail
       },
+      meta: {
+        nextRouteNameList: [
+          'good-buy-imedi'
+        ]
+      },
       children: [
         {
           path: 'good-buy-imedi',
           name: 'good-buy-imedi',
           component: RefineOrder,
+          meta: {
+            nextRouteNameList: [
+              'buy-imedi-config-address'
+            ]
+          },
           children: [
             {
               path: 'buy-imedi-config-address',
