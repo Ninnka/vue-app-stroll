@@ -35,7 +35,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
     }
   }
 }
@@ -90,7 +90,6 @@ a{
   position: absolute;
 }
 .energy-content>div:nth-child(3) textarea{
-  /*background: red;*/
   width: 100%;
   height: 100%;
   text-indent: .35rem;
@@ -113,8 +112,8 @@ a{
   opacity: 0;
 }
 .energy-content button{
-  position: fixed;
-  bottom: .3rem;
+  position: absolute;
+  bottom: .8rem;
   left: 10%;
   width: 80%;
   line-height: .4rem;

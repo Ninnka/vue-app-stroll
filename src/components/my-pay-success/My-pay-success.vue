@@ -2,10 +2,10 @@
   <div id="pay">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="支付成功"  custombg="header-bg"></headbar>
+      <headbar title="支付成功"  custombg="header-bg"></headbar>
     </div>
     <div class="pay-content">
-    	<div>恭喜您成为VIP会员</div>
+      <div>恭喜您成为VIP会员</div>
       <button>继续购物</button>
     </div>
   </div>
@@ -13,7 +13,6 @@
 <script type="text/javascript">
 import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
-
 export default {
   data() {
     return {
@@ -35,21 +34,21 @@ export default {
   background:#D00009
 }
 #pay {
-	padding-top: .45rem;
-	font-size: .16rem;
-	height: 100%;
-	background: #f1f1f1;
+  padding-top: .45rem;
+  font-size: .16rem;
+  height: 100%;
+  background: #f1f1f1;
 }
 a{
-	color: #a3a3a3
+  color: #a3a3a3
 }
 .back {
-	position: fixed;
-	z-index: 100;
-	top: .13rem;
-	left: .1rem;
-	width: .1rem;
-	height: .18rem;
+  position: fixed;
+  z-index: 100;
+  top: .13rem;
+  left: .1rem;
+  width: .1rem;
+  height: .18rem;
 }
 .pay-content div{
   padding: 1.95rem 0 0;

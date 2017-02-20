@@ -54,7 +54,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/wallet');
+      router.go(-1);
     }
   }
 }
