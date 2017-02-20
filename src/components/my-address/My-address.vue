@@ -121,10 +121,10 @@ ul li{
   border-top: 1px solid #E2E4E5;
   line-height: .3rem;
 }
-li a p:first-child span{
+li p:first-child span{
   margin-right: .13rem;
 }
-li a p:last-child span{
+li p:last-child span{
   color: #E76A00;
 }
 </style>
