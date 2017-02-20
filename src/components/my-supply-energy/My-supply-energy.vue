@@ -2,7 +2,7 @@
   <div id="energy">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="关于我们"  custombg="header-bg"></headbar>
+    	<headbar title="我能供应"  custombg="header-bg"></headbar>
     </div>
     <div class="energy-content">
       <div>行业类型：<input type="text" v-model="kind"></div>
@@ -122,5 +122,6 @@ a{
   font-size: .16rem;
   border:none;
   border-radius: .1rem;
+  outline: none;
 }
 </style>
