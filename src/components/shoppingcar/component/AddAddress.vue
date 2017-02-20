@@ -6,27 +6,27 @@
     <div class="fullpage address-content">
       <ul>
         <li>
-          <input type="text" placeholder="收货人姓名">
+          <input type="text" placeholder="收货人姓名" v-model="ads.name" :readonly="!editaddress_bol">
         </li>
         <li>
-          <input type="text" placeholder="联系电话">
+          <input type="text" placeholder="联系电话" v-model="ads.phone" :readonly="!editaddress_bol">
         </li>
         <li>
           城市: 
           <ul class='address_city' @click="seclectCity">
-            <li>选择</li>
+            <li>{{ads.province}}</li>
             <li>{{addressData[0].province}} <img :src="downLog" alt=""></li>
-            <li>选择</li>
+            <li>{{ads.city}}</li>
             <li>{{addressData[0].city}} <img :src="downLog" alt=""></li>
-            <li>选择</li>
+            <li>{{ads.area}}</li>
             <li>{{addressData[0].area}} <img :src="downLog" alt=""></li>
           </ul>
         </li>
         <li>
-          <input type="text" placeholder="小区、街道、门牌等详细信息">
+          <input type="text" placeholder="小区、街道、门牌等详细信息" v-model="ads.address" :readonly="!editaddress_bol">
         </li>
         <li>
-          设为默认地址 <input type="checkbox">
+          设为默认地址 <input type="checkbox" v-model="ads.isDefault" :disabled="!editaddress_bol">
         </li>
       </ul>
       <button class="sure_btn" v-if="editaddress_bol" @click="sureEdit">确认</button>
@@ -73,10 +73,21 @@ import router from '../../../router';
 import Header from 'components/common/header/Header.vue';
 
 export default {
+  props: [],
   data() {
     return {
+      ads: {
+        name: '',
+        phone: '',
+        province: '选择',
+        city: '选择',
+        area: '选择',
+        address: '',
+        isDefault: false
+      },
+      isReadonly: true,
       custombg: 'order-headbar-bg',
-      editaddress_bol: true,
+      editaddress_bol: false,
       downLog: require('../images/down.png'),
       city_bol: false,
       addressData: [{
@@ -92,20 +103,10 @@ export default {
       router.go(-1);
     },
     sureEdit() {
-      var input = document.querySelectorAll('.address-content ul li input');
-      for (var i = 0; i < input.length; i++) {
-        input[i].setAttribute('disabled', 'disabled');
-      }
       this.editaddress_bol = !this.editaddress_bol;
-      this.disabled1 = 'disabled';
     },
     toEdit() {
-      var input = document.querySelectorAll('.address-content ul li input');
-      for (var i = 0; i < input.length; i++) {
-        input[i].removeAttribute('disabled');
-      }
       this.editaddress_bol = !this.editaddress_bol;
-      this.disabled1 = '';
     },
     seclectCity() {
       if (this.editaddress_bol === true) {
@@ -143,6 +144,14 @@ export default {
   },
   components: {
     headbar: Header
+  },
+  mounted() {
+    if (this.$route.params.ads) {
+      this.ads = this.$route.params.ads;
+      this.editaddress_bol = false;
+    } else {
+      this.editaddress_bol = true;
+    }
   }
 }
 </script>

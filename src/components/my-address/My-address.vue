@@ -10,7 +10,7 @@
     </div>
     <div class="address-content">
       <ul>
-        <li v-for="item in list" @click="listClick(item.addressId)"> 
+        <li v-for="(item,index) in list" @click="listClick(item.addressId, index)"> 
             <p><span>{{item.name}}</span>{{item.phone}}</p>
             <p><span v-if="item.isDefault">[默认]</span>{{item.address}}</p>
         </li>
@@ -33,14 +33,20 @@ export default {
         name: '小明',
         phone: '13562021254',
         address: '广州市天河区TIT广场',
-        isDefault: true
+        isDefault: true,
+        province: '广东',
+        city: '广州',
+        area: '天河'
       },
       {
         addressId: '456456456',
-        name: '小明',
+        name: '小A',
         phone: '13562021254',
-        address: '广州市天河区TIT广场',
-        isDefault: false
+        address: '广州市天河区TIT广场2',
+        isDefault: false,
+        province: '广东',
+        city: '广州',
+        area: '天河'
       }]
     }
   },
@@ -56,11 +62,16 @@ export default {
     addAddress() {
       router.push('/addAddress');
     },
-    listClick(addressId) {
+    listClick(addressId, index) {
       if (this.from === 'choose') {
         router.go(-1);
       } else if (this.from === 'my') {
-        router.push('/addAddress');
+        router.push({
+          name: 'myAddAddress',
+          params: {
+            'ads': this.list[index]
+          }
+        });
       }
     }
   }
