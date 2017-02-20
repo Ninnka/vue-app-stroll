@@ -202,7 +202,9 @@ export default {
       goodMainContent: '',
       preloader: '',
       loadingMore: false,
-      nextRouteNameList: []
+      nextRouteNameList: [],
+      buyImedi: false,
+      setImedi: false
     }
   },
   methods: {
@@ -242,7 +244,8 @@ export default {
           }
         })
       } else {
-        alert('商品数量不能为0');
+        this.setImedi = true;
+        this.selectSpecStatus = 'true';
       }
     },
     closeAndConfirmSelectSpec(spec) {
@@ -250,7 +253,12 @@ export default {
       this.orderDetail.spec = spec.spec;
       this.orderDetail.price = spec.price;
       this.selectSpecStatus = false;
+      this.buyImedi = spec.buyImedi;
       console.log('orderdetail:', this.orderDetail);
+      if (this.buyImedi && this.setImedi) {
+        this.buy();
+      }
+      this.setImedi = false;
     },
     closeSelectSpec() {
       console.log('closeSelectSpec in detail');
