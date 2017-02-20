@@ -96,7 +96,11 @@ export default {
     },
     toaddress() {
       router.push({
-        name: this.addressRoute
+        name: this.addressRoute,
+        params: {
+          from: 'choose',
+          addaddressRoute: 'add-address'
+        }
       })
     },
     paySuccess() {

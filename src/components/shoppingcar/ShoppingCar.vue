@@ -159,7 +159,8 @@ export default {
       router.push({
         name: 'car-good-detail',
         params: {
-          goodsid: id
+          goodsid: id,
+          buyRouteName: 'car-good-buy-imedi'
         }
       })
     }

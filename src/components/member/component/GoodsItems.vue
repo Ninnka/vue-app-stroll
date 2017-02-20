@@ -2,13 +2,14 @@
   <div class="goodsContent">
 		<ul class="goodsItems">
 		  <li class="goodsItem" v-for="gItem in goodsItems">
-        <router-link :to="{name: tag,params: {goodsid: gItem.goodsID, viponly: false,
-        buyRouteName: 'good-buy-imedi1'}}">
+        <router-link :to="{name: tag,params: {goodsid: gItem.goodsID, viponly: vip,
+        buyRouteName: RouteName}}">
 		      <img :src="gItem.imgsrc" alt="">
 		      <h2>{{gItem.title}}</h2>
 		      <p>
 		        <span>{{gItem.vipPrice}}</span>
-		        <span>{{gItem.originPrice}}</span>
+		        <span>{{gItem.originPrice}}
+              {{vip}}</span>
 		      </p>
         </router-link>
 		  </li>
@@ -20,7 +21,7 @@
 // import router from '../../../router';
 
 export default {
-  props: ['tag', 'goodsItems'],
+  props: ['tag', 'goodsItems', 'RouteName', 'vip'],
   data() {
     return {
       //
