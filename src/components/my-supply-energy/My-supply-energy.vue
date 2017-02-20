@@ -2,7 +2,7 @@
   <div id="energy">
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
-    	<headbar title="关于我们"  custombg="header-bg"></headbar>
+    	<headbar title="我能供应"  custombg="header-bg"></headbar>
     </div>
     <div class="energy-content">
       <div>行业类型：<input type="text" v-model="kind"></div>
@@ -35,7 +35,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
     }
   }
 }
@@ -90,7 +90,6 @@ a{
   position: absolute;
 }
 .energy-content>div:nth-child(3) textarea{
-  /*background: red;*/
   width: 100%;
   height: 100%;
   text-indent: .35rem;
@@ -113,8 +112,8 @@ a{
   opacity: 0;
 }
 .energy-content button{
-  position: fixed;
-  bottom: .3rem;
+  position: absolute;
+  bottom: .8rem;
   left: 10%;
   width: 80%;
   line-height: .4rem;
@@ -123,5 +122,6 @@ a{
   font-size: .16rem;
   border:none;
   border-radius: .1rem;
+  outline: none;
 }
 </style>

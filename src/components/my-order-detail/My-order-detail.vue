@@ -90,7 +90,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/orders');
+      router.go(-1);
     },
     toComment() {
       router.push('/comment/12');

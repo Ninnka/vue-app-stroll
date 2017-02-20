@@ -22,6 +22,7 @@ import MySupplyEnergy from '../../my-supply-energy/My-supply-energy.vue';
 import MyEditName from '../../my-edit-name/My-edit-name.vue';
 import MyEditPhone from '../../my-edit-phone/My-edit-phone.vue';
 import MyComment from '../../my-comment/My-comment.vue';
+import MyAddAddress from '../../shoppingcar/component/AddAddress.vue';
 
 export default {
   routes: [{
@@ -125,9 +126,14 @@ export default {
     }]
   },
   {
-    path: '/address',
+    path: '/address/:from',
     name: 'myAddress',
-    component: MyAddress
+    component: MyAddress,
+    children: [{
+      path: '/addAddress',
+      name: 'myAddAddress',
+      component: MyAddAddress
+    }]
   },
   {
     path: '/wallet',

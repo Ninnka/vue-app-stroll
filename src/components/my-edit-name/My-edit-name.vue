@@ -26,7 +26,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
     }
   }
 }
@@ -80,5 +80,6 @@ a{
   font-size: .16rem;
   border:none;
   border-radius: .1rem;
+  outline: none;
 }
 </style>

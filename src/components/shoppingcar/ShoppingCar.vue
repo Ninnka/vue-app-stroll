@@ -131,7 +131,8 @@ export default {
         router.push({
           name: 'refine-order',
           params: {
-            goodsOrder: this.goodsOrder
+            goodsOrder: this.goodsOrder,
+            addressRoute: 'my-address'
           }
         })
       }
@@ -158,7 +159,8 @@ export default {
       router.push({
         name: 'car-good-detail',
         params: {
-          goodsid: id
+          goodsid: id,
+          buyRouteName: 'car-good-buy-imedi'
         }
       })
     }
