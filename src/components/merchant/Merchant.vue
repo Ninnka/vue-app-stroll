@@ -7,11 +7,27 @@
     <div class="merchant-list flex-box">
       <div class="merchant-nav-wrapper overscroll">
         <ul class="merchant-nav-list border-box">
-          <li v-for="(navItem, index) in navList" :class="index === currentNav ? active : ''" @click="changeNav(index)">{{navItem.name}}</li>
+          <li v-for="(navItem, index) in navList" :class="index === currentNav ? active : ''" @click="changeNav(index)">
+            <div :class="index === currentNav ? active : ''">{{navItem.name}}</div>
+          </li>
         </ul>
       </div>
 
       <div class="merchant-infolist-wrapper overscroll" @scroll="scrolling">
+        <p>为你推荐</p>
+        <div class="merchant-infolist-recommend flex-box">
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+          <div><i class="icon iconfont icon-asset"></i><p>推荐</p></div>
+        </div>
+        <p>所有商品</p>
         <asset-info-list :infoList="infoList" v-on:viewDetail="viewDetail" v-if="listType === 'asset'"></asset-info-list>
         <good-info-list :infoList="infoList" v-on:viewDetail="viewDetail" v-if="listType === 'good'"></good-info-list>
         <icon-loader></icon-loader>

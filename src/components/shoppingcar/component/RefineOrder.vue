@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage order-content">
+  <div class="fullpage order-content position-absolute">
     <head-bar title="确认下单" :custombg="custombg"></head-bar>
     <i class="icon iconfont icon-backward-white-copy fixed icon-in-header backward" @click="backward"></i>
     <div class="order-main">
@@ -33,7 +33,9 @@
         <li><span></span>微信支付 <input type="radio" name="payType" id="wx" v-model="pick" value="wx"/><label for="wx" :class="pick=='wx'?'selectedType':''"></label></li>
       </ul>
     </div>
-    
+    <transition name="fade">
+      <div class="pwd-wrong" v-if="pwd_wrong_bol">密码错误</div>
+    </transition>
     <div class="order-foot">
       <span>合计: <span>￥{{totalMoney}}</span></span>
       <button @click="payNow">立即支付</button>
@@ -48,14 +50,14 @@
           <label for="pay-password"><span v-for="i in password"></span></label>
         </p>
         <p>
-          <button class="pay-cancal" @click="payCancal">取消</button> 
-          <button class="pay-refine">付款</button>
+          <button class="pay-cancal" @click="payCancal">取消</button>
+          <button class="pay-refine" @click="paySuccess">付款</button>
         </p>
       </div>
     </div>
     </transition>
     <transition name="slide-fade">
-      <router-view name="addaddresscontent" class="content-router-view position-absolute" id="testid"></router-view>
+      <router-view class="content-router-view position-absolute my-address border-box"></router-view>
     </transition>
   </div>
 </template>
@@ -71,24 +73,11 @@ export default {
       custombg: 'order-headbar-bg',
       mask_bol: false,
       password: '',
-      pick: '',
+      pwd_wrong_bol: false,
+      pick: 'my',
       fare: 10,
-      goodsItems: [{
-        id: '1',
-        imgsrc: require('../images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '1',
-        imgsrc: require('../images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      }]
+      goodsItems: [],
+      addressRoute: ''
     }
   },
   methods: {
@@ -107,12 +96,30 @@ export default {
     },
     toaddress() {
       router.push({
-        name: 'add-address'
+        name: this.addressRoute
       })
+    },
+    paySuccess() {
+      if (this.password === '666666') {
+        router.push({
+          name: 'pay-success'
+        })
+      } else {
+        this.pwd_wrong_bol = true;
+        setTimeout(() => {
+          this.pwd_wrong_bol = false;
+        }, 2000)
+      }
     }
   },
   created() {
-    this.id = this.$route.params.goodsId
+    // console.log('获取的个数=> ' + this.$route.params)
+    // console.log('在列表中有得个数=> ' + this.goodsItems)
+    if (this.$route.params.goodsOrder) {
+      this.goodsItems = [];
+      this.goodsItems = this.$route.params.goodsOrder;
+    }
+    this.addressRoute = this.$route.params.addressRoute;
   },
   components: {
     headBar: Header
@@ -121,7 +128,7 @@ export default {
     totalMoney: {
       get() {
         var total = 0;
-        this.goodsItems.map(function(item) {
+        this.goodsItems.map(function (item) {
           total += item.price * item.amount;
         })
         return (total + this.fare).toFixed(2)
@@ -133,6 +140,9 @@ export default {
 
 <style lang="css">
 .order-content{
+  top: 0;
+  left: 0;
+  width: 100%;
   font-size: .16rem;
   z-index: 201;
   box-sizing: border-box;
@@ -150,10 +160,15 @@ export default {
   text-align: center;
   top: 0;
   width: .20rem;
-  z-index: 100; 
+  z-index: 100;
 }
 .icon-in-header {
   font-size: .3rem;
+}
+.my-address{
+  z-index: 205;
+  height: 100%;
+  overflow: scroll;
 }
 .order-main{
   background: #f1f1f1;
@@ -228,7 +243,7 @@ export default {
 }
 .order-detail .fare p span{
   float: right;
-  padding-right: .05rem; 
+  padding-right: .05rem;
 }
 .order-detail>li:last-child p{
   border: none;
@@ -418,8 +433,24 @@ export default {
   border: none;
   color: white;
 }
+.pwd-wrong{
+  width: 1.3rem;
+  height: .5rem;
+  position: absolute;
+  top: 2.2rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  font-size: .17rem;
+  line-height: .5rem;
+  text-align: center;
+  z-index: 203;
+  border-radius: 10px;
+}
 #testid{
   height: 100%;
-  overflow-y:scroll; 
+  overflow-y:scroll;
 }
 </style>

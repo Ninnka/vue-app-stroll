@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage overscroll normal-fontsize">
+  <div class="fullpage overscroll normal-fontsize" id="home-content-scrollwrapper">
     <head-bar title="首页" :custombg="custombg"></head-bar>
     <div class="location fixed" @click="locate">
       <i class="icon iconfont icon-location"></i>
@@ -86,9 +86,12 @@ import Header from 'components/common/header/Header';
 
 import Swiper from '../../../static/js/swiper-3.4.1.min.js';
 
+import indexNavHook from 'src/Hook/indexNavHook';
+
 export default {
   data() {
     return {
+      scrollWrapper: '',
       swiper: '',
       custombg: 'home-headbar-bg',
       currentcity: '广州市',
@@ -134,7 +137,9 @@ export default {
       router.push({
         name: 'good-detail',
         params: {
-          id
+          id,
+          viponly: false,
+          buyRouteName: 'good-buy-imedi'
         }
       });
     },
@@ -160,11 +165,10 @@ export default {
   components: {
     headBar: Header
   },
-  created() {
-
-  },
+  created() {},
   mounted() {
     console.log('mounted');
+    this.scrollWrapper = document.querySelector('#tab-main-content');
     this.swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
@@ -176,12 +180,17 @@ export default {
       pagination: '.swiper-pagination'
     })
   },
+  beforeUpdate() {
+    console.log('before update in home');
+  },
   updated() {
     console.log('updated in home');
   },
   beforeDestroy() {
     console.log('beforeDestroy');
-  }
+  },
+  beforeRouteEnter: indexNavHook.beforeRouteEnter,
+  beforeRouteLeave: indexNavHook.beforeRouteLeave
 }
 </script>
 

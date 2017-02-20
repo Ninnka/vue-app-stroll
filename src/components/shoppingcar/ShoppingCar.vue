@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fullpage overscroll">
+  <div class="fullpage overscroll shoppingcar-page">
     <div class="header">
       <headbar title="购物车" :custombg="custombg"></headbar>
       <span class="edit" @click="edit">{{edit_bol?"编辑":"完成"}}</span>
@@ -8,8 +8,8 @@
       <ul>
         <transition-group name="add_del">
           <li v-for="(data,index) in goodsItems" class="carItem" :key="data">
-            <div>
-              <input type="checkbox" v-model="checked" :value="data.id"/>
+            <input type="checkbox" v-model="checked" :value="data.id"/>
+            <div @click="togoodsDetail(data.id)">
               <img :src="data.imgsrc" alt="">
               <div>
                 <p>{{data.title}}</p>
@@ -31,14 +31,14 @@
       <div class="pay-bar">
         <div><input type="checkbox" v-model="allChecked">全选</div>
         <div v-if="edit_bol">
-          <div>合计: <span>￥{{totalMoney}}</span></div>
+          <div>合计: <span>￥{{total.totalMoney}}</span></div>
         </div>
-        <button v-if="edit_bol" @click="refine">结算 <span>({{totalCount}})</span></button>
+        <button v-if="edit_bol" @click="refine">结算 <span>({{total.totalCount}})</span></button>
         <button v-else="edit_bol" @click="removeGoods">删除</button>
       </div>
     </div>
     <transition name="slide-fade">
-      <router-view name="refineordercontent" class="content-router-view position-absolute"></router-view>
+      <router-view class="content-router-view position-absolute"></router-view>
     </transition>
   </div>
 </template>
@@ -48,6 +48,8 @@ import router from '../../router';
 
 import header from '../common/header/Header.vue';
 
+import indexNavHook from 'src/Hook/indexNavHook';
+
 export default {
   data() {
     return {
@@ -56,75 +58,83 @@ export default {
       checked: [],
       buyData: [],
       edit_bol: true,
-      goodsItems: [{
-        id: '1',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '2',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '3',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '4',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '5',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      },
-      {
-        id: '6',
-        imgsrc: require('./images/goods2.jpg'),
-        title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
-        spec: '一盒6片',
-        price: '29.5',
-        amount: 2
-      }]
+      goodsOrder: [],
+      goodsItems: [
+        {
+          id: '1',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        },
+        {
+          id: '2',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        },
+        {
+          id: '3',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        },
+        {
+          id: '4',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        },
+        {
+          id: '5',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        },
+        {
+          id: '6',
+          imgsrc: require('./images/goods2.jpg'),
+          title: '坚果特产山核桃奶油味碧根坚果特产山核桃奶油味碧根',
+          spec: '一盒6片',
+          price: '29.5',
+          amount: 2
+        }
+      ]
     }
   },
   methods: {
-    getData() {
-      // 获取数据
-      // this.$http.get('static/json.json')
-      //   .then(function (res) {
-      //     this.goodsItems = res.body;
-      //     console.log(this.goodsItems);
-      //   }, function (err) {
-      //     console.log('err:', err);
-      //   });
-    },
     edit() {
       this.edit_bol = !this.edit_bol;
       this.checked = [];
     },
     refine() {
-      router.push({
-        name: 'refine-order'
-      })
+      console.log(this.checked.length)
+      if (this.checked.length) {
+        this.goodsOrder = [];
+        for (var i = 0; i < this.checked.length; i++) {
+          for (var j = 0; j < this.goodsItems.length; j++) {
+            if (this.checked[i] === this.goodsItems[j].id) {
+              this.goodsOrder.push(this.goodsItems[j]);
+            }
+          }
+        }
+        // console.log('传递的个数=> ' + this.goodsOrder);
+        router.push({
+          name: 'refine-order',
+          params: {
+            goodsOrder: this.goodsOrder
+          }
+        })
+      }
     },
     reduceCount(index) {
       if (this.goodsItems[index].amount > 1) {
@@ -143,58 +153,53 @@ export default {
         }
       }
       this.checked = [];
+    },
+    togoodsDetail(id) {
+      router.push({
+        name: 'car-good-detail',
+        params: {
+          goodsid: id
+        }
+      })
     }
   },
   components: {
     headbar: header
   },
-  created() {
-    this.getData();
-  },
   computed: {
-    totalMoney: {
+    total: {
       get() {
-        var total = 0;
+        var totalMoney = 0;
+        var totalCount = 0;
         if (this.checked.length > 0) {
           for (var i = 0; i < this.checked.length; i++) {
             for (var j = 0; j < this.goodsItems.length; j++) {
-              console.log(this.checked[i], this.goodsItems[j].id, this.goodsItems.length);
+              // console.log(this.checked, this.goodsItems);
               if (this.checked[i] === this.goodsItems[j].id) {
-                total += this.goodsItems[j].price * this.goodsItems[j].amount;
+                totalCount += this.goodsItems[j].amount
+                totalMoney += this.goodsItems[j].price * this.goodsItems[j].amount;
               }
             }
           }
-          return total.toFixed(2)
-        } else {
-          return (0).toFixed(2)
-        }
-      }
-    },
-    totalCount: {
-      get() {
-        var total = 0;
-        if (this.checked.length > 0) {
-          for (var i = 0; i < this.checked.length; i++) {
-            for (var j = 0; j < this.goodsItems.length; j++) {
-              console.log(this.checked[i], this.goodsItems[j].id, this.goodsItems.length);
-              if (this.checked[i] === this.goodsItems[j].id) {
-                total += this.goodsItems[j].amount
-              }
-            }
+          return {
+            'totalMoney': totalMoney.toFixed(2),
+            'totalCount': totalCount
           }
-          return total
         } else {
-          return 0
+          return {
+            'totalMoney': (0).toFixed(2),
+            'totalCount': 0
+          }
         }
       }
     },
     allChecked: {
-      get: function() {
+      get: function () {
         return this.checkedCount === this.goodsItems.length
       },
-      set: function(value) {
+      set: function (value) {
         if (value) {
-          this.checked = this.goodsItems.map(function(item) {
+          this.checked = this.goodsItems.map(function (item) {
             return item.id
           })
         } else {
@@ -203,11 +208,16 @@ export default {
       }
     },
     checkedCount: {
-      get: function() {
+      get: function () {
         return this.checked.length;
       }
     }
-  }
+  },
+  mounted() {
+    this.scrollWrapper = document.querySelector('.shoppingcar-page');
+  },
+  beforeRouteEnter: indexNavHook.beforeRouteEnter,
+  beforeRouteLeave: indexNavHook.beforeRouteLeave
 }
 </script>
 
@@ -309,13 +319,16 @@ input[type="checkbox"]:checked{
   background: url(images/selected.png) no-repeat;
   background-size: 100% 100%;
 }
-.carItem>div img{
+.carItem img{
   width: .69rem;
   height: .68.5rem;
   vertical-align: middle;
 }
-.carItem>div{
+.carItem{
   vertical-align: middle;
+}
+.carItem>div{
+  display: inline-block;
 }
 .carItem>div>div{
   display: inline-block;
