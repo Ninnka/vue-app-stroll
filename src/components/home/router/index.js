@@ -4,7 +4,8 @@ import Search from 'components/search/Search';
 import Merchant from 'components/merchant/Merchant';
 import Asset from 'components/asset/Asset';
 import RefineOrder from 'components/shoppingcar/component/RefineOrder';
-import MyAddress from 'components/my-address/My-address'
+import CarMyAddress from 'components/shoppingcar/component/CarMyAddress';
+import AddAddress from 'components/shoppingcar/component/AddAddress.vue';
 
 export default {
   routes: [
@@ -33,12 +34,21 @@ export default {
             {
               path: 'buy-imedi-config-address',
               name: 'buy-imedi-config-address',
-              component: MyAddress,
+              component: CarMyAddress,
               meta: {
                 nextRouteNameList: [
                   'edit-address'
                 ]
-              }
+              },
+              children: [
+                {
+                  path: 'edit-address',
+                  name: 'edit-address',
+                  components: {
+                    addaddresscontent: AddAddress
+                  }
+                }
+              ]
             }
           ]
         }
