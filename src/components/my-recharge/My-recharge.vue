@@ -52,6 +52,8 @@ export default {
     },
     paySuccess() {
       this.showPay = false;
+      localStorage.setItem('grade', 'VIP会员');
+      router.go(-1);
     }
   }
 }
