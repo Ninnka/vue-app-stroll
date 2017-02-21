@@ -17,9 +17,10 @@ export default {
   },
   methods: {
     recharge() {
+      this.closeRecharge();
       router.push({
         name: 'member-upgrade'
-      })
+      });
     },
     closeRecharge() {
       this.$emit('closeRecharge');

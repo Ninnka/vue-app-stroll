@@ -2,8 +2,8 @@
   <div class="search-bar transition-box">
     <label for="search-input" class="search-input-wrapper flex-box">
       <i class="icon iconfont icon-search"></i>
-      <input class="search-input" type="text" id="search-input" v-model="searchinput" @focus="focusSearchBar" @blur="lostfocus" @input="searchBarStatus">
-      <div class="button button-search" v-show="hasfocus" @click="emitSearchContent(searchinput)">{{buttonText}}</div>
+      <input class="search-input" type="text" id="search-input" v-model="searchinput" @focus="focusSearchBar" @input="searchBarStatus">
+      <div class="button button-search" v-show="hasfocus" @click.stop="emitSearchContent(searchinput)">{{buttonText}}</div>
     </label>
   </div>
 </template>
@@ -24,19 +24,14 @@ export default {
     focusSearchBar() {
       this.hasfocus = true;
     },
-    lostfocus() {
-      if (this.searchinput === '') {
-        this.hasfocus = false;
-      }
-    },
     searchBarStatus() {
       this.buttonText = this.searchinput !== '' ? '搜索' : '取消';
     },
     emitSearchContent() {
+      console.log('not empty');
       this.$emit(this.callbackEvent, this.searchinput);
       this.searchinput = '';
       this.buttonText = '取消';
-      this.lostfocus();
     }
   },
   created() {
