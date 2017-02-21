@@ -229,6 +229,7 @@ export default {
       }
     },
     buy() {
+      this.uservip = !(window.localStorage.getItem('grade') === '普通会员');
       if (!this.uservip && this.viponly) {
         this.rechargeContentStatus = true;
       } else if (this.orderDetail.amount > 0) {
