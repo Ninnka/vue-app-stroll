@@ -90,7 +90,7 @@
 
       <transition name="fade">
         <mask-bg callback="closeRecharge" v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge">
-          <recharge></recharge>
+          <recharge v-on:closeRecharge="closeRecharge"></recharge>
         </mask-bg>
       </transition>
 
@@ -119,7 +119,7 @@ export default {
     return {
       contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
-      uservip: false,
+      uservip: '',
       viponly: '',
       orderDetail: {
         id: '',
@@ -300,6 +300,7 @@ export default {
       this.buyRouteName = this.$route.params.buyRouteName
     }
     routeNameHook.setRouteNameByMeta.apply(this);
+    this.uservip = !(window.localStorage.getItem('grade') === '普通会员');
   },
   mounted() {
     console.log('mounted detail');
