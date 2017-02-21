@@ -96,7 +96,7 @@
 
     </div>
     <transition name="slide-fade">
-      <router-view></router-view>
+      <router-view style="position: fixed;top: 0;left: 0;width: 100%;z-index: 150"></router-view>
     </transition>
   </div>
 </template>
@@ -111,6 +111,8 @@ import Share from 'components/common/share/share';
 import Recharge from 'components/common/recharge/Recharge';
 import IconLoader from 'components/common/icon-loader/IconLoader';
 import Backward from 'components/common/icon-backward/IconBackward';
+
+import routeNameHook from 'src/Hook/routeNameHook';
 
 export default {
   data() {
@@ -200,7 +202,9 @@ export default {
       goodMainContent: '',
       preloader: '',
       loadingMore: false,
-      buyRouteName: ''
+      nextRouteNameList: [],
+      buyImedi: false,
+      setImedi: false
     }
   },
   methods: {
@@ -234,14 +238,14 @@ export default {
         let orderArr = [];
         orderArr.push(this.orderDetail);
         router.push({
-          name: this.buyRouteName,
+          name: this.nextRouteNameList[0] ? this.nextRouteNameList[0] : '',
           params: {
-            goodsOrder: orderArr,
-            addressRoute: 'buy-imedi-config-address'
+            goodsOrder: orderArr
           }
         })
       } else {
-        alert('商品数量不能为0');
+        this.setImedi = true;
+        this.selectSpecStatus = 'true';
       }
     },
     closeAndConfirmSelectSpec(spec) {
@@ -249,7 +253,12 @@ export default {
       this.orderDetail.spec = spec.spec;
       this.orderDetail.price = spec.price;
       this.selectSpecStatus = false;
+      this.buyImedi = spec.buyImedi;
       console.log('orderdetail:', this.orderDetail);
+      if (this.buyImedi && this.setImedi) {
+        this.buy();
+      }
+      this.setImedi = false;
     },
     closeSelectSpec() {
       console.log('closeSelectSpec in detail');
@@ -290,6 +299,7 @@ export default {
     if (this.$route.params.buyRouteName !== undefined) {
       this.buyRouteName = this.$route.params.buyRouteName
     }
+    routeNameHook.setRouteNameByMeta.apply(this);
   },
   mounted() {
     console.log('mounted detail');

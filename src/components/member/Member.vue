@@ -11,7 +11,7 @@
         <div class="swiper-pagination"></div>
       </div>
       <!-- 商品列表 -->
-      <goodsitems tag='goods-detail' :goodsItems="goodsItems"></goodsitems>
+      <goodsitems tag='goods-detail' :goodsItems="goodsItems" :vip="vip"></goodsitems>
     </div>
 
     <icon-loader></icon-loader>
@@ -42,6 +42,7 @@ export default {
       goodMainContent: '',
       preloader: '',
       swiper: '',
+      vip: true,
       loadingMore: false,
       swiperItems: [{
         id: '1',

@@ -20,7 +20,7 @@
       <ul class="sortList" v-if="sort_bol">
         <li v-for="sData in sortData"><span @click="sortSelected">{{sData.title}}</span></li>
       </ul>
-      <goodsitems tag="class-good-detail" :goodsItems="goodsItems"></goodsitems>
+      <goodsitems tag="class-good-detail" :goodsItems="goodsItems" :vip="vip"></goodsitems>
     </div>
     
     <icon-loader></icon-loader>
@@ -45,6 +45,7 @@ export default {
     return {
       custombg: 'classify-headbar-bg',
       hight: false,
+      vip: false,
       price_bol: false,
       sales_bol: false,
       sort_bol: false,

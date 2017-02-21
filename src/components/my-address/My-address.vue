@@ -64,6 +64,8 @@ export default {
     },
     listClick(addressId, index) {
       if (this.from === 'choose') {
+        localStorage.setItem('seled', true);
+        localStorage.setItem('seledid', this.list[index].addressId);
         router.go(-1);
       } else if (this.from === 'my') {
         router.push({

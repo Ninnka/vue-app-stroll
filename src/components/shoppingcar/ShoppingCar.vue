@@ -16,14 +16,22 @@
                 <p>规格：{{data.spec}}</p>
                 <p>
                   <span>￥{{data.price}}</span>
-                  <span v-if="!edit_bol" class="edit-amount">
+                  <!-- <span v-if="!edit_bol" class="edit-amount">
                     <span @click="reduceCount(index)" :class="data.amount>1?'canReduce':''">-</span>
                     <span>{{data.amount}}</span>
                     <span @click="addCount(index)">+</span>
                   </span>
-                  <span v-if="edit_bol">x {{data.amount}}</span>
+                  <span v-if="edit_bol">x {{data.amount}}</span> -->
                 </p>
               </div>
+            </div>
+            <div>
+              <span v-if="!edit_bol" class="edit-amount">
+                <span @click="reduceCount(index)" :class="data.amount>1?'canReduce':''">-</span>
+                <span>{{data.amount}}</span>
+                <span @click="addCount(index)">+</span>
+              </span>
+              <span v-if="edit_bol">x {{data.amount}}</span>
             </div>
           </li>
         </transition-group>
@@ -131,7 +139,8 @@ export default {
         router.push({
           name: 'refine-order',
           params: {
-            goodsOrder: this.goodsOrder
+            goodsOrder: this.goodsOrder,
+            addressRoute: 'my-address'
           }
         })
       }
@@ -158,7 +167,8 @@ export default {
       router.push({
         name: 'car-good-detail',
         params: {
-          goodsid: id
+          goodsid: id,
+          buyRouteName: 'car-good-buy-imedi'
         }
       })
     }
@@ -347,24 +357,22 @@ input[type="checkbox"]:checked{
   font-size: .13rem;
   padding: .11rem 0;
 }
-.carItem>div>div p:nth-child(3)>span:first-child{
+.carItem>div>div p:nth-child(3)>span{
   color: #de0000;
   font-size: .13rem;
   font-weight: bolder;
 }
-.carItem>div>div p:nth-child(3)>span:last-child{
+.carItem>div>span{
   position: absolute;
-  font-size: .17rem;
-  color: #404040;
   right: .1rem;
-  top: .65rem;
+  top: .68rem;
 }
-.carItem>div>div p:nth-child(3) .edit-amount{
+.carItem>div .edit-amount{
   position: absolute;
   right: .1rem;
   top: .6rem !important;
 }
-.carItem>div>div p:nth-child(3) .edit-amount>span:first-child{
+.carItem>div .edit-amount>span:first-child{
   display: inline-block;
   width: .2rem;
   height: .2rem;
@@ -374,7 +382,7 @@ input[type="checkbox"]:checked{
   border-radius: 100%;
   border: 1px solid #e1e1e1;
 }
-.carItem>div>div p:nth-child(3) .edit-amount>span:last-child{
+.carItem>div .edit-amount>span:last-child{
   display: inline-block;
   width: .2rem;
   height: .2rem;
