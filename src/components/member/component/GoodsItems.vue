@@ -65,8 +65,7 @@ export default {
   font-size: 0.16rem;
   margin: 0.08rem;
   color: #5a5a5a;
-  max-height: 0.34rem;
-  line-height: 0.17rem;
+  max-height: 0.32rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
