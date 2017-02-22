@@ -1,5 +1,10 @@
 <template>
   <div id="orderdetail" @touchmove.stop="">
+    <pay-box :money="totalMoney" :showPay="showPay" @success="paySuccess" @paycancel="cancelPay">
+    </pay-box>
+    <alert-box content="确定收货" v-if="showCancelBox" class="cancel-box">
+      <button slot="btn1" @click="cancelRecived">取消</button><button slot="btn2" @click.stop.prevent="recivedGood">确定</button>
+    </alert-box>
     <transition name="childtranslate">
       <router-view class="orderdetail-childview"></router-view>
     </transition>
@@ -35,8 +40,8 @@
     <div class="orderdetail-content">
       <detailcontent :kind="tag" :orderDatas="orderDatas">
         <p slot="rejectGoods" class="reject-goods" v-if="tag=='已完成'" @click="showRejectBox=!showRejectBox">申请退货</p>
-        <button slot="btn" v-if="tag=='待付款'" class="common-btn">立即支付</button>
-        <button slot="btn" v-if="tag=='待收货'" class="common-btn">确认收货</button>
+        <button slot="btn" v-if="tag=='待付款'" class="common-btn" @click="toPay">立即支付</button>
+        <button slot="btn" v-if="tag=='待收货'" class="common-btn" @click="sureRecived">确认收货</button>
         <button slot="btn" v-if="tag=='已完成'" class="common-btn" @click="toComment">{{orderDatas.commented?'我的评价':'去评价'}}</button>
       </detailcontent>
     </div>
@@ -46,11 +51,16 @@
 import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import ContentComponent from './My-order-detail-component.vue';
+import Alert from '../common/alert/Alert.vue';
+import PayBox from '../common/pay-box/Pay-box.vue';
 
 export default {
   data() {
     return {
+      showPay: false,
+      showCancelBox: false,
       showRejectBox: false,
+      totalMoney: 0,
       reason: ['请选择退货原因', '收到商品破损', '商品错发/漏发', '收到商品描述不符', '商品质量问题'],
       tag: this.$route.params.tag,
       orderDatas: {
@@ -85,7 +95,9 @@ export default {
   },
   components: {
     headbar: Header,
-    detailcontent: ContentComponent
+    detailcontent: ContentComponent,
+    'alert-box': Alert,
+    'pay-box': PayBox
   },
   methods: {
     // 返回上一页
@@ -94,6 +106,29 @@ export default {
     },
     toComment() {
       router.push('/comment/12');
+    },
+    cancelPay() {
+      this.showPay = false;
+    },
+    paySuccess() {
+      this.showPay = true;
+    },
+    cancelRecived() {
+      this.showCancelBox = false;
+    },
+    recivedGood() {
+      this.showCancelBox = false;
+    },
+    sureRecived() {
+      this.showCancelBox = true;
+    },
+    toPay() {
+      for (let i = 0; i < this.orderDatas.goods.length; i++) {
+        this.totalMoney = this.totalMoney + this.orderDatas.goods[i].price * this.orderDatas.goods[i].num;
+      }
+      this.totalMoney += this.orderDatas.fare;
+      this.showPay = true;
+      router.go(-1);
     }
   }
 }
@@ -152,6 +187,7 @@ a{
   border-radius: .05rem;
   color: #fff;
   font-size: .16rem;
+  outline: none;
 }
 .orderdetail-content{
   overflow-y: scroll;
@@ -255,5 +291,17 @@ a{
   border-radius: .05rem;
   color: #fff;
   letter-spacing: .05rem;
+}
+.cancel-box button{
+  background: rgba(0,0,0,.3);
+  padding: .1rem .15rem;
+  width: 40%;
+  border: none;
+  border-radius: .05rem;
+  color: #fff;
+  outline: none;
+}
+.cancel-box button:last-child{
+  background: #FF5636;
 }
 </style>
