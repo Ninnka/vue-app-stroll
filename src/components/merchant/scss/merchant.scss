@@ -40,6 +40,7 @@ $maintheme: #d81e06;
       }
 
       > div {
+        box-sizing: border-box;
         display: inline-block;
         height: 100%;
         line-height: .3rem;
@@ -86,15 +87,15 @@ $maintheme: #d81e06;
     margin: 2.3%;
     text-align: center;
 
+    > .icon.iconfont {
+      color: pink;
+      font-size: .35rem;
+    }
+
     > p {
       font-size: .14rem;
       margin-top: .08rem;
       text-align: center;
     }
-  }
-
-  .icon.iconfont {
-    color: pink;
-    font-size: .5rem;
   }
 }

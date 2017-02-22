@@ -4,7 +4,7 @@
     <div class="classify-content">
       <!-- 类别筛选 -->
       <ul class="classify-nav">
-        <li @click="listShow"><span>{{sortType}}</span><img src="./images/color-down.png" alt=""></li>
+        <li @click="listShow"><span>{{sortType.title}}</span><img src="./images/color-down.png" alt=""></li>
         <li @click="priceSort" :class="price_bol?'active':'none'">
           <span>{{hight?"价格从低到高":"价格从高到低"}}</span>
           <img src="./images/gray-down.png" alt="" v-if="!price_bol">
@@ -18,12 +18,14 @@
         </li>
       </ul>
       <ul class="sortList" v-if="sort_bol">
-        <li v-for="sData in sortData"><span @click="sortSelected">{{sData.title}}</span></li>
+        <li v-for="sData in sortList"><span @click="sortSelected" :value="sData.type">{{sData.title}}</span></li>
       </ul>
-      <goodsitems tag="class-good-detail" :goodsItems="goodsItems"></goodsitems>
+      <goodsitems tag="class-good-detail" :goodsItems="sortData" :vip="vip"></goodsitems>
     </div>
     
-    <icon-loader></icon-loader>
+    <!-- <div v-if="loadingMore"> -->
+      <icon-loader></icon-loader>
+    <!-- </div> -->
 
     <transition name="slide-fade">
       <router-view name="classgooddetailcontent" class="content-router-view position-absolute"></router-view>
@@ -45,14 +47,16 @@ export default {
     return {
       custombg: 'classify-headbar-bg',
       hight: false,
+      vip: false,
       price_bol: false,
       sales_bol: false,
       sort_bol: false,
       goodMainContent: '',
       preloader: '',
       loadingMore: false,
-      sortType: '生活食品',
-      sortData: [{
+      sortType: {type: 'food', title: '生活食品'},
+      sortData: [],
+      sortList: [{
         type: 'food',
         title: '生活食品'
       },
@@ -85,46 +89,108 @@ export default {
         title: '珠宝'
       }],
       goodsItems: [{
+        goodsID: '10',
+        type: 'food',
+        title: '皇冠丹麦曲奇饼干原味休闲印尼进口零食品200g*3铁盒装',
+        vipPrice: '58.80',
+        originPrice: '88.00',
+        imgsrc: require('components/member/images/cookies.jpg')
+      },
+      {
         goodsID: '1',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('components/member/images/goods2.jpg')
+        type: 'food',
+        title: '亏本促销盐焗鸡翅膀5斤批发 真生活温州卤味鸡肉中翅熟零食品',
+        vipPrice: '120.80',
+        originPrice: '130.00',
+        imgsrc: require('components/member/images/jichi.jpg')
       },
       {
-        goodsID: '2',
-        title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        imgsrc: require('components/member/images/goods1.jpg')
+        goodsID: '11',
+        type: 'food',
+        title: '乐事薯片乐事大波浪卷薯片145g*4包烤鸡翅味鱿鱼味辛辣味多口味组',
+        vipPrice: '49.90',
+        originPrice: '55.00',
+        imgsrc: require('components/member/images/shupian.jpg')
       },
       {
-        goodsID: '3',
-        title: '休闲零食五味园pk脆 独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        imgsrc: require('components/member/images/goods1.jpg')
+        goodsID: '12',
+        type: 'food',
+        title: '葡记蒸蛋糕点心甜面包早餐鲜奶食品整箱零食小吃大礼包口袋三明治',
+        vipPrice: '25.90',
+        originPrice: '32.00',
+        imgsrc: require('components/member/images/mianbao.jpg')
       },
       {
-        goodsID: '4',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('components/member/images/goods2.jpg')
-      },
-      {
-        goodsID: '6',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('components/member/images/goods2.jpg')
+        goodsID: '13',
+        type: 'food',
+        title: '赖毛 大别山精品原味香瓜子495克 好吃休闲食品生活好伙伴',
+        vipPrice: '14.40',
+        originPrice: '18.00',
+        imgsrc: require('components/member/images/guazi.jpg')
       },
       {
         goodsID: '5',
-        title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        imgsrc: require('components/member/images/goods1.jpg')
+        type: 'commodity',
+        title: '家庭创意日常居家居生活日用品卫生间小百货收纳寝室宿舍必备神器',
+        vipPrice: '19.00',
+        originPrice: '25.00',
+        imgsrc: require('components/member/images/shounahe.jpg')
+      },
+      {
+        goodsID: '6',
+        type: 'electric',
+        title: 'Midea/美的 MB75-eco131WD 7.5公斤智能变频波轮全自动洗衣机',
+        vipPrice: '1158.00',
+        originPrice: '1698.00',
+        imgsrc: require('components/member/images/xiyiji.jpg')
+      },
+      {
+        goodsID: '2',
+        type: 'food',
+        title: '【混合30袋】创食人小吃休闲食品香辣鸭脖藕片熟食卤味零食大礼包',
+        vipPrice: '49.00',
+        originPrice: '65.00',
+        imgsrc: require('components/member/images/luwei.jpg')
+      },
+      {
+        goodsID: '3',
+        type: 'lifeuse',
+        title: '大学生宿舍神器收纳实用创意居家居生活日常小日用品厨房奇葩百货',
+        vipPrice: '11.90',
+        originPrice: '25.00',
+        imgsrc: require('components/member/images/yijia.jpg')
+      },
+      {
+        goodsID: '4',
+        type: 'furniture',
+        title: '创意实用生活家居小商品办公室商务礼品送男女生朋友同事生日礼物',
+        vipPrice: '69.00',
+        originPrice: '88.00',
+        imgsrc: require('components/member/images/chazuo.jpg')
+      },
+      {
+        goodsID: '7',
+        type: 'car',
+        title: '副刹车装置家用陪练免打孔副制动器辅助通用副驾驶教练车专用付刹',
+        vipPrice: '260.00',
+        originPrice: '372.00',
+        imgsrc: require('components/member/images/qiche.jpg')
+      },
+      {
+        goodsID: '8',
+        type: 'package',
+        title: 'ULDUM拉杆箱万向轮旅行箱子密码登机箱硬20 22 24寸男女行李箱包',
+        vipPrice: '98.00',
+        originPrice: '398.00',
+        imgsrc: require('components/member/images/xiang.jpg')
+      },
+      {
+        goodsID: '9',
+        type: 'jewel',
+        title: 'Darry Ring戴瑞一克拉钻石戒指DR专柜正品定制六爪求婚结婚钻戒女',
+        vipPrice: '2580.00',
+        originPrice: '3120.00',
+        imgsrc: require('components/member/images/zhubao.jpg')
       }]
     }
   },
@@ -152,16 +218,19 @@ export default {
       }
     },
     sortSelected(event) {
-      var selected = document.querySelectorAll('.sortList li span');
-      for (var i = 0; i < selected.length; i++) {
-        if (this.sortType === selected[i].innerText) {
-          selected[i].className = 'type-selected';
+      this.sortType.title = event.target.innerText;
+      this.sortType.type = event.target.getAttribute('value');
+      this.preloader.style.display = 'none';
+      this.sortData = [];
+      for (var n = 0; n < this.goodsItems.length; n++) {
+        if (this.sortType.type === this.goodsItems[n].type) {
+          this.sortData.push(this.goodsItems[n]);
         }
       }
-      this.sortType = event.target.innerText;
       this.sort_bol = false;
     },
     scrolling() {
+      console.log('scrolling')
       let documentHeight = document.documentElement.clientHeight || document.body.clientHeight;
       let actualTop = this.preloader.offsetTop;
       let current = this.preloader.offsetParent;
@@ -172,9 +241,10 @@ export default {
       let elementScrollTop = this.goodMainContent.scrollTop;
       if ((actualTop - elementScrollTop < documentHeight - documentHeight / 667 * (this.preloader.clientHeight * 2)) && !this.loadingMore) {
         this.loadingMore = true;
+        this.preloader.style.display = 'block';
         // 这里调用加载数据的方法
         // 模拟加载数据
-        this.goodsItems = this.goodsItems.concat(this.goodsItems);
+        this.sortData = this.sortData.concat(this.sortData);
         // 模拟结束数据加载后的动作，需要将标识设为false
         setTimeout(function () {
           this.loadingMore = false;
@@ -188,9 +258,16 @@ export default {
     iconLoader: IconLoader
   },
   mounted() {
+    this.sortData = [];
+    for (var n = 0; n < this.goodsItems.length; n++) {
+      if (this.sortType.type === this.goodsItems[n].type) {
+        this.sortData.push(this.goodsItems[n]);
+      }
+    }
     this.scrollWrapper = document.querySelector('.classify-page');
     let goodMainContent = document.querySelector('.classify-page');
     let preloader = document.querySelector('.infinite-scroll-preloader');
+    preloader.style.display = 'none';
     this.goodMainContent = goodMainContent;
     this.preloader = preloader;
   },
@@ -198,7 +275,8 @@ export default {
     this.sort_bol = false;
     var selected = document.querySelectorAll('.sortList li span');
     for (var i = 0; i < selected.length; i++) {
-      if (this.sortType === selected[i].innerText) {
+      console.log(this.sortType.title, selected[i].innerText);
+      if (this.sortType.title === selected[i].innerText) {
         selected[i].className = 'type-selected';
       }
     }

@@ -14,7 +14,7 @@
 
       <p class="">省市列表</p>
       <ul class="city-all">
-        <li v-for="city in cityList">{{city}}</li>
+        <li v-for="city in cityList" :ket="city" @click="confirmCity(city)">{{city}}</li>
       </ul>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       headbarbg: 'selectcity-headbar-bg',
-      currentcity: '广州市',
+      currentcity: '',
       cityList: [
         '上海',
         '上海郊区',
@@ -49,7 +49,8 @@ export default {
         '北京',
         '天津',
         '河南'
-      ]
+      ],
+      cityListBackup: []
     }
   },
   methods: {
@@ -57,10 +58,22 @@ export default {
       router.go(-1);
     },
     searchCity(s) {
-      alert('search city: ' + s);
+      if (s) {
+        this.cityListBackup = this.cityList.slice(0, this.cityList.length);
+        this.cityList = this.cityList.filter(function (value, index, arr) {
+          return value.match(s) !== null ? value : false;
+        });
+      } else {
+        this.cityList = this.cityListBackup.slice(0, this.cityListBackup.length);
+      }
+    },
+    confirmCity(city) {
+      window.localStorage.setItem('city', city);
+      router.go(-1)
     }
   },
   created() {
+    this.currentcity = window.localStorage.getItem('city');
     this.$http.get('../../../static/js/city_code.json')
       .then(function (res) {
         console.log('res:', res);

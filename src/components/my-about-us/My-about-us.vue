@@ -24,7 +24,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/more');
+      router.go(-1);
     }
   }
 }

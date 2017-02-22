@@ -8,7 +8,7 @@
       <div>新密码 <input type="password" placeholder="6-20字符" v-model="newpsw1"></div>
       <div>确认密码 <input type="password" placeholder="6-20字符" v-model="newpsw2"></div>
       <div>手机号码 <input type="text" v-model="phone"></div>
-      <div>验证码 <input type="text" v-model="identify" > <span>获得验证码</span></div>
+      <div>验证码 <input type="text" v-model="identify"><span @click="getIdentify">{{identifyText}}</span></div>
       <p>注意：密码不得填空格，可由英文字母和数字组成</p>
       <button>确认</button>
     </div>
@@ -24,7 +24,8 @@ export default {
       newpsw1: '',
       newpsw2: '',
       phone: '',
-      identify: ''
+      identify: '',
+      identifyText: '获得验证码'
     }
   },
   components: {
@@ -33,7 +34,21 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
+    },
+    getIdentify() {
+      let _this = this;
+      if (this.identifyText === '获得验证码') {
+        this.identifyText = '60s';
+        let t = 59;
+        let timeId = setInterval(function() {
+          _this.identifyText = t <= 0 ? '获得验证码' : t + 's';
+          if (t <= 0) {
+            clearInterval(timeId);
+          }
+          t--;
+        }, 1000);
+      }
     }
   }
 }
@@ -110,12 +125,13 @@ a{
   border-bottom-right-radius: .05rem;
 }
 .wallet-psw-content>div:nth-child(4) span{
-  padding:0 .1rem;
   background: #25B877;
   color: #fff;
-  font-size: .12rem;
+  width: 1rem;
+  font-size: .16rem;
   border-radius: .05rem;
   box-sizing: border-box;
+  text-align: center;
 }
 .wallet-psw-content p{
   margin-top: .2rem;
@@ -123,8 +139,8 @@ a{
   color: #7C7D7E;
 }
 .wallet-psw-content button{
-  position: fixed;
-  bottom: .3rem;
+  position: absolute;
+  bottom: .8rem;
   left: 10%;
   width: 80%;
   line-height: .4rem;
@@ -133,5 +149,6 @@ a{
   font-size: .16rem;
   border:none;
   border-radius: .1rem;
+  outline: none;
 }
 </style>

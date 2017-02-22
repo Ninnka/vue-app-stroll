@@ -11,9 +11,9 @@
         <div class="swiper-pagination"></div>
       </div>
       <!-- 商品列表 -->
-      <goodsitems tag='goods-detail' :goodsItems="goodsItems"></goodsitems>
+      <goodsitems tag='goods-detail' :goodsItems="goodsItems" :vip="vip"></goodsitems>
     </div>
-
+    
     <icon-loader></icon-loader>
 
     <transition name="slide-fade">
@@ -42,6 +42,7 @@ export default {
       goodMainContent: '',
       preloader: '',
       swiper: '',
+      vip: false,
       loadingMore: false,
       swiperItems: [{
         id: '1',
@@ -60,42 +61,63 @@ export default {
         title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
         vipPrice: '10.9',
         originPrice: '12.8',
-        imgsrc: require('./images/goods1.jpg')
+        imgsrc: require('components/member/images/goods1.jpg')
+      },
+      {
+        goodsID: '5',
+        title: '家庭创意日常居家居生活日用品卫生间小百货收纳寝室宿舍必备神器',
+        vipPrice: '19.00',
+        originPrice: '85.00',
+        imgsrc: require('components/member/images/shounahe.jpg')
+      },
+      {
+        goodsID: '6',
+        title: 'Midea/美的 MB75-eco131WD 7.5公斤智能变频波轮全自动洗衣机',
+        vipPrice: '1158.00',
+        originPrice: '1698.00',
+        imgsrc: require('components/member/images/xiyiji.jpg')
       },
       {
         goodsID: '2',
         title: '坚果特产山核桃奶油味 碧根果210gx2袋',
         vipPrice: '29.5',
         originPrice: '42.5',
-        imgsrc: require('./images/goods2.jpg')
+        imgsrc: require('components/member/images/goods2.jpg')
       },
       {
         goodsID: '3',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('./images/goods2.jpg')
+        title: '大学生宿舍神器收纳实用创意居家居生活日常小日用品厨房奇葩百货',
+        vipPrice: '11.90',
+        originPrice: '35.00',
+        imgsrc: require('components/member/images/yijia.jpg')
       },
       {
         goodsID: '4',
-        title: '休闲零食五味园pk脆 独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        imgsrc: require('./images/goods1.jpg')
+        title: '创意实用生活家居小商品办公室商务礼品送男女生朋友同事生日礼物',
+        vipPrice: '69.00',
+        originPrice: '128.00',
+        imgsrc: require('components/member/images/chazuo.jpg')
       },
       {
-        goodsID: '5',
-        title: '休闲零食五味园pk脆 独立小包装500g独立小包装500g',
-        vipPrice: '10.9',
-        originPrice: '12.8',
-        imgsrc: require('./images/goods1.jpg')
+        goodsID: '7',
+        title: '副刹车装置家用陪练免打孔副制动器辅助通用副驾驶教练车专用付刹',
+        vipPrice: '260.00',
+        originPrice: '372.00',
+        imgsrc: require('components/member/images/qiche.jpg')
       },
       {
-        goodsID: '6',
-        title: '坚果特产山核桃奶油味 碧根果210gx2袋',
-        vipPrice: '29.5',
-        originPrice: '42.5',
-        imgsrc: require('./images/goods2.jpg')
+        goodsID: '8',
+        title: 'ULDUM拉杆箱万向轮旅行箱子密码登机箱硬20 22 24寸男女行李箱包',
+        vipPrice: '98.00',
+        originPrice: '398.00',
+        imgsrc: require('components/member/images/xiang.jpg')
+      },
+      {
+        goodsID: '9',
+        title: 'Darry Ring戴瑞一克拉钻石戒指DR专柜正品定制六爪求婚结婚钻戒女',
+        vipPrice: '2580.00',
+        originPrice: '3120.00',
+        imgsrc: require('components/member/images/zhubao.jpg')
       }]
     }
   },

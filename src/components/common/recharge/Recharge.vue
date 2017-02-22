@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import router from '../../../router'
 export default {
   data() {
     return {
@@ -16,7 +17,10 @@ export default {
   },
   methods: {
     recharge() {
-      alert('recharge');
+      this.closeRecharge();
+      router.push({
+        name: 'member-upgrade'
+      });
     },
     closeRecharge() {
       this.$emit('closeRecharge');

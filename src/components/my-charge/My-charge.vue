@@ -1,48 +1,58 @@
 <template>
   <div id="charge">
+    <toast :content="tip" :show="showToast"></toast>
+    <pay-box :money="money" :showPay="showPay" @success="hidePayBox" @paycancel="hidePayBox">
+    </pay-box>
     <div class="header">
       <img src="../my/assets/back.png" alt="" class="back" @click="back">
     	<headbar title="充值" custombg="header-bg"></headbar>
     </div>
     <div class="charge-content">
       <div>支付宝</div>
-      <div><span>金额</span><input type="text" placeholder="请输入充值金额"></div>
-      <button @click="next">下一步</button>
+      <div><span>金额</span><input type="text" placeholder="请输入充值金额" v-model="money"></div>
+      <button @click="next">立即充值</button>
     </div>
   </div>
 </template>
 <script type="text/javascript">
 import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
-import Wallet from '../my/assets/wallet.png';
+import PayBox from '../common/pay-box/Pay-box.vue';
+import Toast from '../common/toast/Toast.vue';
 
 export default {
   data() {
     return {
-      walletImg: Wallet,
-      accountText: '账单',
-      money: 88.50,
-      list: [{
-        text: '支付宝',
-        check: false
-      },
-      {
-        text: '微信支付',
-        check: false
-      }]
+      showPay: false,
+      money: '',
+      tip: '请输入金额',
+      showToast: false
     }
   },
   components: {
-    headbar: Header
+    headbar: Header,
+    'pay-box': PayBox,
+    toast: Toast
   },
   methods: {
     // 返回上一页
     back() {
-      router.push('/wallet');
+      router.go(-1);
     },
     // 下一步
     next() {
-
+      let _this = this;
+      if (this.money === '') {
+        this.showToast = true;
+        setTimeout(function() {
+          _this.showToast = false;
+        }, 1500);
+      } else {
+        this.showPay = true;
+      }
+    },
+    hidePayBox() {
+      this.showPay = false;
     }
   }
 }

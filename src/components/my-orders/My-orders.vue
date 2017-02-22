@@ -1,5 +1,7 @@
 <template>
   <div id="orders" @touchmove="load($event)">
+    <pay-box :money="totalMoney" :showPay="showPay" @success="paySuccess" @paycancel="cancelPay">
+    </pay-box>
     <transition name="childtranslate">
       <router-view class="orders-childview"></router-view>
     </transition>
@@ -28,7 +30,7 @@
             <item :itemdata="item" title="待付款">
               <div slot="btns" class="no-pay-btns">
                 <button @click.stop.prevent="cancelOrder(item.orderId)">取消订单</button>
-                <button @click.stop.prevent="toPay(item.orderId)">立即支付</button>
+                <button @click.stop.prevent="toPay(item.price)">立即支付</button>
               </div>
             </item>
           </router-link>
@@ -86,10 +88,13 @@ import router from '../../router/index.js';
 import ListItem from './order-item/Order-item.vue';
 import OrderImg from '../my/assets/order-img.png';
 import Alert from '../common/alert/Alert.vue';
+import PayBox from '../common/pay-box/Pay-box.vue';
 
 export default {
   data() {
     return {
+      showPay: false,
+      totalMoney: '123',
       alertText: '确定取消订单？',
       btnText1: '去意已决',
       btnText2: '再考虑一下',
@@ -176,12 +181,13 @@ export default {
   components: {
     headbar: Header,
     item: ListItem,
-    'alert-box': Alert
+    'alert-box': Alert,
+    'pay-box': PayBox
   },
   methods: {
     // 返回上一页
     back() {
-      router.push('/index/My');
+      router.go(-1);
     },
     navClick(navText) {
       this.avtiveNav = navText;
@@ -226,8 +232,9 @@ export default {
       this.showCancelBox = false;
     },
     // 立即支付
-    toPay(orderId) {
-      alert(orderId + ':pay');
+    toPay(money) {
+      this.totalMoney = money;
+      this.showPay = true;
     },
     // 删除订单
     delOrder(orderId) {
@@ -308,6 +315,12 @@ export default {
           _this.canLoad = true;
         }, 1000);
       }
+    },
+    cancelPay() {
+      this.showPay = false;
+    },
+    paySuccess() {
+      this.showPay = false;
     }
   }
 }
@@ -422,30 +435,24 @@ li{
   opacity: 0;
   width:0;
 }
-
+.cancel-box button{
+  background: rgba(0,0,0,.3);
+  padding: .1rem .15rem;
+  width: 40%;
+  border: none;
+  border-radius: .05rem;
+  color: #fff;
+  outline: none;
+}
+.cancel-box button:last-child{
+  background: #FF5636;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s
 }
 .fade-enter, .fade-leave-to{
   opacity: 0
 }
-/*取消订单的按钮*/
-.cancel-box button{
-  margin: .3rem .05rem 0;
-  padding: .05rem .2rem;
-  outline: none;
-  background: rgba(0,0,0,.4);
-  border:none;
-  line-height: .3rem;
-  border-radius: .05rem;
-  color: #f0f0f0;
-  font-size: .16rem;
-}
-.cancel-box button:last-child{
-  background: #DE1F33;
-}
-
-
 
 .spinningCircle {
      margin:.2rem auto;

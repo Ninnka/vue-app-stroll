@@ -6,7 +6,7 @@
     </div>
     <div class="phone-content">
       <div>手机号码 <input type="text" v-model="phone"></div>
-      <div>验证码 <input type="text" v-model="identify" > <span>获得验证码</span></div>
+      <div>验证码 <input type="text" v-model="identify"><span @click="getIdentify">{{identifyText}}</span></div>
       <button>确认</button>
     </div>
   </div>
@@ -18,6 +18,9 @@ import router from '../../router/index.js';
 export default {
   data() {
     return {
+      phone: '',
+      identify: '',
+      identifyText: '获得验证码'
     }
   },
   components: {
@@ -26,7 +29,21 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/basemsg');
+      router.go(-1);
+    },
+    getIdentify() {
+      let _this = this;
+      if (this.identifyText === '获得验证码') {
+        this.identifyText = '60s';
+        let t = 59;
+        let timeId = setInterval(function() {
+          _this.identifyText = t <= 0 ? '获得验证码' : t + 's';
+          if (t <= 0) {
+            clearInterval(timeId);
+          }
+          t--;
+        }, 1000);
+      }
     }
   }
 }
@@ -94,7 +111,9 @@ a{
   padding:0 .1rem;
   background: #25B877;
   color: #fff;
-  font-size: .12rem;
+  width: 1rem;
+  text-align: center;
+  font-size: .16rem;
   border-radius: .05rem;
 }
 .phone-content button{
@@ -107,5 +126,6 @@ a{
   font-size: .16rem;
   border:none;
   border-radius: .1rem;
+  outline: none;
 }
 </style>

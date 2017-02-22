@@ -90,13 +90,13 @@
 
       <transition name="fade">
         <mask-bg callback="closeRecharge" v-if="rechargeContentStatus" v-on:closeRecharge="closeRecharge">
-          <recharge></recharge>
+          <recharge v-on:closeRecharge="closeRecharge"></recharge>
         </mask-bg>
       </transition>
 
     </div>
     <transition name="slide-fade">
-      <router-view></router-view>
+      <router-view style="position: fixed;top: 0;left: 0;width: 100%;z-index: 150"></router-view>
     </transition>
   </div>
 </template>
@@ -112,12 +112,14 @@ import Recharge from 'components/common/recharge/Recharge';
 import IconLoader from 'components/common/icon-loader/IconLoader';
 import Backward from 'components/common/icon-backward/IconBackward';
 
+import routeNameHook from 'src/Hook/routeNameHook';
+
 export default {
   data() {
     return {
       contentScrollTop: 0,
       headbarbg: 'gooddetail-headbar-bg',
-      uservip: false,
+      uservip: '',
       viponly: '',
       orderDetail: {
         id: '',
@@ -200,7 +202,9 @@ export default {
       goodMainContent: '',
       preloader: '',
       loadingMore: false,
-      buyRouteName: ''
+      nextRouteNameList: [],
+      buyImedi: false,
+      setImedi: false
     }
   },
   methods: {
@@ -225,6 +229,7 @@ export default {
       }
     },
     buy() {
+      this.uservip = !(window.localStorage.getItem('grade') === '普通会员');
       if (!this.uservip && this.viponly) {
         this.rechargeContentStatus = true;
       } else if (this.orderDetail.amount > 0) {
@@ -234,14 +239,14 @@ export default {
         let orderArr = [];
         orderArr.push(this.orderDetail);
         router.push({
-          name: this.buyRouteName,
+          name: this.nextRouteNameList[0] ? this.nextRouteNameList[0] : '',
           params: {
-            goodsOrder: orderArr,
-            addressRoute: 'buy-imedi-config-address'
+            goodsOrder: orderArr
           }
         })
       } else {
-        alert('商品数量不能为0');
+        this.setImedi = true;
+        this.selectSpecStatus = 'true';
       }
     },
     closeAndConfirmSelectSpec(spec) {
@@ -249,7 +254,12 @@ export default {
       this.orderDetail.spec = spec.spec;
       this.orderDetail.price = spec.price;
       this.selectSpecStatus = false;
+      this.buyImedi = spec.buyImedi;
       console.log('orderdetail:', this.orderDetail);
+      if (this.buyImedi && this.setImedi) {
+        this.buy();
+      }
+      this.setImedi = false;
     },
     closeSelectSpec() {
       console.log('closeSelectSpec in detail');
@@ -290,6 +300,8 @@ export default {
     if (this.$route.params.buyRouteName !== undefined) {
       this.buyRouteName = this.$route.params.buyRouteName
     }
+    routeNameHook.setRouteNameByMeta.apply(this);
+    this.uservip = !(window.localStorage.getItem('grade') === '普通会员');
   },
   mounted() {
     console.log('mounted detail');

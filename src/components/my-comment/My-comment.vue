@@ -56,7 +56,7 @@ export default {
   methods: {
     // 返回上一页
     back() {
-      router.push('/orders/detail/12/12');
+      router.go(-1);
     }
   },
   mounted() {
