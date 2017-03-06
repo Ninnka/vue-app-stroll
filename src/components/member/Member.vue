@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import router from '../../router';
 
 import header from '../common/header/Header.vue';

@@ -21,7 +21,7 @@
     </div>
   </div>
 </template>
-<script type="text/javascript">
+<script>
 import Header from '../common/header/Header.vue';
 import router from '../../router/index.js';
 import Wallet from '../my/assets/wallet.png';

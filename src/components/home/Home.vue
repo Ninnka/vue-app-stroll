@@ -79,7 +79,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import router from 'src/router';
 
 import Header from 'components/common/header/Header';

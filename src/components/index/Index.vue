@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import router from 'src/router';
 export default {
   data() {

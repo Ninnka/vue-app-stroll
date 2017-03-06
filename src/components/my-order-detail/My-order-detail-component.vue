@@ -24,7 +24,7 @@
     <slot name="btn"></slot>
   </div>
 </template>
-<script type="text/javascript">
+<script>
 import GoodsListItem from '../common/goods-list-item/Goods-list-item.vue';
 
 export default {

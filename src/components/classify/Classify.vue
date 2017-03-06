@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import header from '../common/header/Header.vue';
 
 import GoodsItems from './../member/component/GoodsItems.vue';
