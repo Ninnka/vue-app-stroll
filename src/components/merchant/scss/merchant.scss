@@ -1,0 +1,101 @@
+$maintheme: #d81e06;
+
+.merchant-headbar-bg {
+  background: $maintheme;
+}
+
+.merchant-content {
+  z-index: 201;
+}
+
+.merchant-list {
+  height: 100%;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.merchant-nav-wrapper {
+  flex-grow: 0;
+  flex-shrink: 1;
+  height: 100%;
+  width: 1.05rem;
+
+  .merchant-nav-list {
+    background: #F1F1F1;
+    border-right: 1px solid rgba(180, 180, 180, .5);
+    min-height: 100%;
+    width: 100%;
+
+    > li {
+      border-bottom: 1px solid rgba(180, 180, 180, .5);
+      box-sizing: border-box;
+      color: #555;
+      font-size: .15rem;
+      height: .5rem;
+      padding: .1rem 0;
+      text-align: center;
+
+      &.active {
+        background: white;
+      }
+
+      > div {
+        box-sizing: border-box;
+        display: inline-block;
+        height: 100%;
+        line-height: .3rem;
+        transition: all .15s;
+        width: 100%;
+
+        &.active {
+          border-left: 5px solid $maintheme;
+          color: $maintheme;
+        }
+      }
+
+    }
+  }
+}
+
+.merchant-infolist-wrapper {
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 100%;
+  width: 2.7rem;
+
+  > p {
+    border-bottom: 1px solid rgba(180, 180, 180, .5);
+    color: #565656;
+    font-size: .15rem;
+    padding: .1rem 0;
+    text-indent: .12rem;
+  }
+}
+
+.merchant-infolist-recommend {
+  border-bottom: 1px solid rgba(180, 180, 180, .5);
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: .06rem;
+  padding: 0 .09rem .05rem;
+
+  > div {
+    flex-basis: 28%;
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 2.3%;
+    text-align: center;
+
+    > .icon.iconfont {
+      color: pink;
+      font-size: .35rem;
+    }
+
+    > p {
+      font-size: .14rem;
+      margin-top: .08rem;
+      text-align: center;
+    }
+  }
+}

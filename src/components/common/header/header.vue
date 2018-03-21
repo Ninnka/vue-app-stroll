@@ -1,5 +1,10 @@
 <template lang="html">
-  <div class="header-bar" :class="custombg">{{title}}</div>
+  <div class="header-bar" :class="custombg">
+    <span>{{title}}</span>
+    <slot name='backward-icon'></slot>
+    <slot name='star-icon'></slot>
+    <slot name='share-icon'></slot>
+  </div>
 </template>
 
 <script>
@@ -16,7 +21,6 @@ export default {
   font-size: .18rem;
   height: .44rem;
   line-height: .44rem;
-  /*background: #228733;*/
   color: white;
   text-align: center;
   position: fixed;

@@ -1,7 +1,30 @@
-$maintheme: #228733;
+$maintheme: #d81e06;
 
 .home-headbar-bg {
   background: $maintheme;
+}
+
+.location {
+  color: white;
+  height: .44rem;
+  left: .1rem;
+  line-height: .44rem;
+  top: 0;
+  z-index: 100;
+
+  > span {
+    font-size: .14rem;
+    vertical-align: top;
+  }
+}
+
+.search {
+  color: white;
+  height: .44rem;
+  line-height: .44rem;
+  right: .12rem;
+  top: 0;
+  z-index: 100;
 }
 
 .home-content {
@@ -58,49 +81,60 @@ $maintheme: #228733;
 }
 
 .home-classify {
-  margin-top: .06rem;
+  background: white;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: .06rem;
   padding: 0 .09rem;
 
   > .item {
-    box-shadow: 0 0 2px 0 #DADADA;
     color: white;
     flex-basis: 30%;
     flex-shrink: 1;
     font-size: .16rem;
-    height: .81rem;
+    height: .6rem;
     margin: .06rem 0;
+    text-align: center;
+
+    > .icon {
+      font-size: .3rem;
+    }
+
+    > p {
+      color: #454545;
+      font-size: .14rem;
+      margin-top: .12rem;
+    }
 
     &:nth-child(1) {
-      background-color: red;
+      color: red;
     }
 
     &:nth-child(2) {
-      background-color: green;
+      color: green;
     }
 
     &:nth-child(3) {
-      background-color: blue;
+      color: blue;
     }
 
     &:nth-child(4) {
-      background-color: purple;
+      color: purple;
     }
 
     &:nth-child(5) {
-      background: yellow;
+      color: yellow;
     }
 
     &:nth-child(6) {
-      background-color: pink;
+      color: pink;
     }
   }
 }
 
 .home-recommend {
-  margin: .15rem 0;
+  margin: 0 0 .15rem;
   padding: 0 .09rem;
 
   > .item {
@@ -113,7 +147,7 @@ $maintheme: #228733;
     overflow: hidden;
     width: 100%;
 
-    > .title {
+    > .item-title {
       font-size: .15rem;
       padding: .12rem .24rem .12rem .12rem;
     }

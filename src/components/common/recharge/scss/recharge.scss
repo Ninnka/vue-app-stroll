@@ -1,0 +1,54 @@
+.recharge-content {
+  background: #fef8cd;
+  border: .02rem solid #666;
+  border-radius: .11rem;
+  height: 2.06rem;
+  left: 50%;
+  margin-left: -1.475rem;
+  margin-top: -1.03rem;
+  overflow: hidden;
+  top: 50%;
+  width: 2.95rem;
+
+  > p {
+    color: #8e4e0e;
+    font-size: .16rem;
+    padding: .02rem 0;
+    text-align: center;
+    letter-spacing: .03rem;
+    line-height: 1.2;
+
+    span {
+      color: red;
+    }
+
+    &:nth-child(1) {
+      font-size: .2rem;
+      letter-spacing: .12rem;
+      padding: .1rem 0;
+      text-indent: .12rem;
+      margin: .12rem;
+    }
+  }
+
+}
+
+.button {
+  text-align: center;
+
+  &.button-recharge {
+    background: #a5da35;
+    color: white;
+  }
+
+  &.button-positive {
+    // border-radius: .05rem;
+    font-size: .17rem;
+    height: .325rem;
+    letter-spacing: .03rem;
+    line-height: .325rem;
+    margin: .2rem auto 0;
+    text-indent: .03rem;
+    width: 1.28rem;
+  }
+}

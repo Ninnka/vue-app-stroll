@@ -1,0 +1,55 @@
+.merchant-info-list {
+  background: white;
+  min-height: 100%;
+  width: 100%;
+
+  > li {
+    border-bottom: 1px solid rgba(180, 180, 180, .4);
+    color: #666;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    height: 1.1rem;
+    padding: .1rem;
+
+    > img {
+      height: .9rem;
+      margin-right: .1rem;
+      width: .9rem;
+    }
+
+    .merchant-name {
+      color: #353535;
+      font-size: .17rem;
+      max-width: 1.4rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .merchant-address {
+      font-size: .14rem;
+      margin-top: .12rem;
+
+      > span {
+        margin: 0 .03rem;
+      }
+    }
+
+    .merchant-assettype {
+      font-size: .14rem;
+      margin-top: .05rem;
+
+      > span {
+        border-right: 1px solid rgba(50, 50, 50, .6);
+        margin-right: .03rem;
+        padding-right: .03rem;
+      }
+    }
+
+    .merchant-price {
+      font-size: .15rem;
+      margin-top: .05rem;
+    }
+  }
+}
